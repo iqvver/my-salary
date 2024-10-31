@@ -1,0 +1,38 @@
+{
+    "Vue Functional component": {
+        "prefix": "rf",
+        "body": [
+            "<script setup lang=\"ts\">",
+            "const { $2 } = defineProps<{",
+            "\t$1"
+            "}>()"
+            "</script>",
+            "<template>",
+            "\t$3",
+            "</template>",
+            "<style scoped lang=\"scss\">",
+            "$4",
+            "</style>"
+        ]
+    },
+    "Import for our components": {
+        "prefix": "impc",
+        "body": [
+            "import Component from '~/components$1'"
+        ]
+    },
+    "Use ref": {
+        "prefix": "us",
+        "body": [
+            "const $1 = ref<$3>($2)"
+        ]
+    },
+    "Watch": {
+        "prefix": "wt",
+        "body": [
+            "watch(() => $1, (cur, prev) => {",
+            "\tconsole.log(cur)",
+            "})"
+        ]
+    }
+}
