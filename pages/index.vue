@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { useCounterStore } from '~/store/meta'
+import { useAuthStore } from '~/store/auth'
 import { ref } from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { Menu as IconMenu, Message, Setting, Plus } from '@element-plus/icons-vue'
+import { useMonthCatalogStore } from '~/store/catalog-month'
 
-const meta = useCounterStore()
+const auth = useAuthStore()
+
+const monthList = useMonthCatalogStore()
 
 definePageMeta({ layout: 'default' })
 
@@ -19,70 +22,44 @@ const tableData = ref(Array.from({ length: 10 }).fill(item))
     <el-container class="menu__container">
         <el-aside class="menu__aside">
             <el-scrollbar>
-                <el-menu :default-openeds="['1', '3']">
-                    <el-sub-menu index="1">
+                <el-menu :default-openeds="['1', '2']" class="menu__item">
+                    <el-sub-menu v-for="month in monthList.month" :index="month.id?.toString()">
                         <template #title>
-                            <el-icon><message /></el-icon>Navigator One
+                            <el-icon><message /></el-icon>{{ month.title }}
                         </template>
                         <el-menu-item-group>
-                            <template #title>Group 1</template>
-                            <el-menu-item index="1-1">Option 1</el-menu-item>
-                            <el-menu-item index="1-2">Option 2</el-menu-item>
+                            <el-menu-item index="1-1">Смена 1</el-menu-item>
+                            <el-menu-item index="1-2">Смена 2</el-menu-item>
                         </el-menu-item-group>
-                        <el-menu-item-group title="Group 2">
-                            <el-menu-item index="1-3">Option 3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-sub-menu index="1-4">
-                            <template #title>Option4</template>
-                            <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-                        </el-sub-menu>
-                    </el-sub-menu>
-
-                    <el-sub-menu index="2">
-                        <template #title>
-                            <el-icon><icon-menu /></el-icon>Navigator Two
-                        </template>
-                        <el-menu-item-group>
-                            <template #title>Group 1</template>
-                            <el-menu-item index="2-1">Option 1</el-menu-item>
-                            <el-menu-item index="2-2">Option 2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="Group 2">
-                            <el-menu-item index="2-3">Option 3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-sub-menu index="2-4">
-                            <template #title>Option 4</template>
-                            <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-                        </el-sub-menu>
+                        <el-button class="button__add_small" type="success" :icon="Plus" />
                     </el-sub-menu>
                 </el-menu>
+                <el-button @click="monthList.addMonth()" class="button__add" type="success" :icon="Plus" size="large" />
             </el-scrollbar>
         </el-aside>
 
         <el-container>
             <el-header class="menu__header">
-                <div class="toolbar">
+                <div class="menu__header__wrapper">
                     <el-dropdown>
-                        <el-icon style="margin-right: 8px; margin-top: 4px">
+                        <el-icon>
                             <setting />
                         </el-icon>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item>View</el-dropdown-item>
-                                <el-dropdown-item>Add</el-dropdown-item>
-                                <el-dropdown-item>Delete</el-dropdown-item>
+                                <el-dropdown-item>Выйти</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                    <span>Tom</span>
+                    <span>{{ auth.name }}</span>
                 </div>
             </el-header>
 
-            <el-main class="menu__main">
+            <el-main>
                 <el-scrollbar>
-                    <el-table :data="tableData">
-                        <el-table-column prop="date" label="Date" width="140" />
-                        <el-table-column prop="name" label="Name" width="120" />
+                    <el-table v-loading="!tableData" :data="tableData">
+                        <el-table-column prop="date" label="Дата" width="140" />
+                        <el-table-column prop="name" label="Имя" width="120" />
                         <el-table-column prop="address" label="Address" />
                     </el-table>
                 </el-scrollbar>
@@ -93,7 +70,6 @@ const tableData = ref(Array.from({ length: 10 }).fill(item))
 
 <style scoped lang="scss">
 @forward '../assets/scss/global/index.scss';
-
 .menu {
     &__container {
         width: 100%;
@@ -101,16 +77,30 @@ const tableData = ref(Array.from({ length: 10 }).fill(item))
         flex-direction: row-reverse;
     }
 
-    &__main {
-    }
-
     &__aside {
         width: 250px;
+        min-height: 250px;
+        -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+
+    &__item {
+        background-color: #a0aecd;
     }
 
     &__header {
         display: flex;
         align-items: center;
+        -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+        &__wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     }
 }
 </style>
