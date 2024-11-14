@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+    title: 'Моя З/П',
+})
+</script>
 
 <template>
     <slot />

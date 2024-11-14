@@ -1,18 +1,8 @@
-<script lang="ts" setup>
-import { useCounterStore } from './store/meta'
-
-const meta = useCounterStore()
-</script>
+<script lang="ts" setup></script>
 
 <template>
     <NuxtLayout>
-        <v-app class="app">
-            <NuxtPage />
-            {{ meta.name }}
-            <el-button type="success">Success</el-button>
-        </v-app>
+        <NuxtPage />
     </NuxtLayout>
 </template>
-<style lang="scss">
-@forward '~/assets/scss/global/index.scss';
-</style>
+<style lang="scss"></style>
