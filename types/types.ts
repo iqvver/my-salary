@@ -25,7 +25,7 @@ export type ExchangeModel = {
     /**
      * Номер месяца
      */
-    month: number
+    monthId: number
     /**
      * Название профиля
      */

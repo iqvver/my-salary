@@ -1,4 +1,4 @@
-﻿import type { MonthsModel } from '~/types'
+﻿import type { MonthsModel, MonthModel } from '~/types'
 
 const initialMonth: MonthsModel = [
     {
@@ -11,29 +11,40 @@ const initialMonth: MonthsModel = [
         title: 'Сентябрь',
         num: 9,
     },
+    {
+        id: 2,
+        title: 'Сентябрь',
+        num: 9,
+    },
 ]
 
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',
     state: () => {
         return {
-            month: { ...initialMonth },
+            month: [] as MonthModel[],
             isLoading: true,
         }
     },
+
+    getters: {
+        readMonth(state) {
+            return (state.month = initialMonth)
+        },
+    },
+
     actions: {
-        addMonth() {
+        async createMonth(payload: MonthModel) {
             try {
-                const response = useMonthCatalogStore
+                this.$state.month = [...this.$state.month, payload]
                 ElNotification({
-                    title: 'gg',
-                    message: 'bb',
+                    title: 'Успех',
+                    message: 'Месяц добавлен',
                     type: 'success',
                 })
-                return response
             } catch (error) {
                 ElNotification({
-                    title: 'Ошибка получения каталога',
+                    title: 'Ошибка Добавления',
                     message: 'Error',
                     type: 'error',
                 })

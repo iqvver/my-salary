@@ -1,40 +1,88 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/auth'
-import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting, Plus } from '@element-plus/icons-vue'
 import { useMonthCatalogStore } from '~/store/catalog-month'
-
+import type { MonthModel, ExchangeModel } from '~/types'
+import dayjs from 'dayjs'
 const auth = useAuthStore()
-
+const now = new Date()
 const monthList = useMonthCatalogStore()
-
 definePageMeta({ layout: 'default' })
 
-const item = {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+const tableData: ExchangeModel[] = [
+    {
+        id: 1,
+        date: '2016-04-01',
+        monthId: 5,
+        designation: 'bРама',
+        amount: 11,
+        sum: 37,
+    },
+    {
+        id: 25,
+        date: '2016-05-02',
+        monthId: 5,
+        designation: 'Рама',
+        amount: 11,
+        sum: 57,
+    },
+    {
+        id: 5,
+        date: '2016-010-01',
+        monthId: 5,
+        designation: 'aРама',
+        amount: 11,
+        sum: 7,
+    },
+]
+
+const template: MonthModel = {
+    id: 3,
+    title: 'rrrr',
+    num: 88,
 }
-const tableData = ref(Array.from({ length: 10 }).fill(item))
+
+watchEffect(() => {
+    monthList.readMonth
+})
+
+const deleteRow = (index: number) => {
+    alert('Удалить')
+}
+
+const onAddItem = () => {
+    now.setDate(now.getDate() + 1)
+    // tableData.value.push({
+    //     date: dayjs(now).format('YYYY-MM-DD'),
+    //     id: 5,
+    //     monthId: 5,
+    //     designation: 'aРама',
+    //     amount: 11,
+    //     sum: 7,
+    // })
+    alert('Добавить')
+}
 </script>
 
 <template>
     <el-container class="menu__container">
         <el-aside class="menu__aside">
             <el-scrollbar>
-                <el-menu :default-openeds="['1', '2']" class="menu__item">
-                    <el-sub-menu v-for="month in monthList.month" :index="month.id?.toString()">
+                <el-header class="menu__aside__header"
+                    ><el-button
+                        @click="monthList.createMonth(template)"
+                        class="button__add"
+                        type="success"
+                        :icon="Plus"
+                        size="large"
+                /></el-header>
+                <el-menu :default-openeds="['']" class="menu__item">
+                    <el-menu-item v-for="month in monthList.month" :index="month.id?.toString()">
                         <template #title>
                             <el-icon><message /></el-icon>{{ month.title }}
                         </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="1-1">Смена 1</el-menu-item>
-                            <el-menu-item index="1-2">Смена 2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-button class="button__add_small" type="success" :icon="Plus" />
-                    </el-sub-menu>
+                    </el-menu-item>
                 </el-menu>
-                <el-button @click="monthList.addMonth()" class="button__add" type="success" :icon="Plus" size="large" />
             </el-scrollbar>
         </el-aside>
 
@@ -56,13 +104,19 @@ const tableData = ref(Array.from({ length: 10 }).fill(item))
             </el-header>
 
             <el-main>
-                <el-scrollbar>
-                    <el-table v-loading="!tableData" :data="tableData">
-                        <el-table-column prop="date" label="Дата" width="140" />
-                        <el-table-column prop="name" label="Имя" width="120" />
-                        <el-table-column prop="address" label="Address" />
-                    </el-table>
-                </el-scrollbar>
+                <el-table :data="tableData" height="75vh" :default-sort="{ prop: 'date', order: 'descending' }">
+                    <el-table-column prop="id" label="id" width="140" sortable />
+                    <el-table-column prop="date" label="Дата" width="140" sortable />
+                    <el-table-column prop="designation" sortable label="Название" width="120" />
+                    <el-table-column prop="amount" sortable label="Кол-во" width="120" />
+                    <el-table-column prop="sum" label="Сумма" sortable width="120" />
+                    <el-table-column fixed="right" label="" min-width="120">
+                        <template #default="scope">
+                            <el-button size="small" type="danger" @click="deleteRow(scope.$index)"> Delete </el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-button style="width: 100%" @click="onAddItem"> Add Item </el-button>
             </el-main>
         </el-container>
     </el-container>
@@ -78,15 +132,26 @@ const tableData = ref(Array.from({ length: 10 }).fill(item))
     }
 
     &__aside {
-        width: 250px;
+        width: 200px;
         min-height: 250px;
+        max-height: 500px;
         -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
         -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
         box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+
+        &__header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9;
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-bottom: 1px dashed #aeaeae;
+        }
     }
 
     &__item {
-        background-color: #a0aecd;
     }
 
     &__header {
