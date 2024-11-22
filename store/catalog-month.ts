@@ -18,15 +18,17 @@ export const useMonthCatalogStore = defineStore({
     state: () => {
         return {
             month: [] as MonthModel[],
-            isLoading: true
+            selectedNumMonth: 0,
+            isLoading: true,
         }
     },
 
     getters: {
         readMonth(state) {
             return (
-                state.month = initialMonth,
-                state.isLoading = false
+                (state.month = initialMonth),
+                (state.isLoading = false),
+                (state.selectedNumMonth = state.month.at(-1)?.num!)
             )
         },
     },

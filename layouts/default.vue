@@ -1,11 +1,35 @@
 <script setup lang="ts">
+import { useMonthCatalogStore } from '~/store/catalog-month'
+import { useAuthStore } from '~/store/auth'
+
+const router = useRouter()
+const auth = useAuthStore()
+const monthList = useMonthCatalogStore()
+
+watchEffect(() => {
+    monthList.readMonth
+    router.push(monthList.selectedNumMonth.toString())
+})
+
 useHead({
     title: 'Моя З/П',
 })
 </script>
 
 <template>
-    <slot />
+    <PrimitivesHeader :name="auth.name" />
+    <el-container class="container">
+        <PrimitivesAside :monthList="monthList" />
+        <el-main>
+            <slot />
+        </el-main>
+    </el-container>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+</style>

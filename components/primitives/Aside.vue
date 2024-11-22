@@ -1,31 +1,42 @@
 <script setup lang="ts">
 import { Message, Plus } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
+
 const { monthList } = defineProps<{
     monthList: any
 }>()
+
+const router = useRouter()
 
 const template: MonthModel = {
     id: 3,
     title: 'rrrr',
     num: 88,
 }
+
+const selectMonth = (month: number) => {
+    router.push(`${month}`)
+    monthList.selectedNumMonth = month
+}
 </script>
 <template>
+    {{ monthList.selectedNumMonth }}
     <el-aside class="aside">
         <el-scrollbar>
-            <el-header class="aside__header"
-                ><el-button
+            <el-header class="aside__header">
+                <el-button
                     @click="monthList.createMonth(template)"
                     class="button__add"
                     type="success"
                     :icon="Plus"
-                    size="large"
-            /></el-header>
+                    size="large" />
+            </el-header>
             <el-menu :default-openeds="['']" class="menu__item">
                 <el-menu-item v-for="month in monthList.month" :index="month.id?.toString()">
                     <template #title>
-                        <el-icon><message /></el-icon>{{ month.title }}
+                        <NuxtLink @click="selectMonth(month.num)">
+                            <el-icon><message /></el-icon>{{ month.title }}
+                        </NuxtLink>
                     </template>
                 </el-menu-item>
             </el-menu>
