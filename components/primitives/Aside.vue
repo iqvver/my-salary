@@ -6,6 +6,10 @@ const { monthList } = defineProps<{
     monthList: any
 }>()
 
+watchEffect(() => {
+    monthList.readMonth
+})
+
 const router = useRouter()
 
 const template: MonthModel = {
@@ -20,7 +24,6 @@ const selectMonth = (month: number) => {
 }
 </script>
 <template>
-    {{ monthList.selectedNumMonth }}
     <el-aside class="aside">
         <el-scrollbar>
             <el-header class="aside__header">

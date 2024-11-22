@@ -2,14 +2,8 @@
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
 
-const router = useRouter()
 const auth = useAuthStore()
 const monthList = useMonthCatalogStore()
-
-watchEffect(() => {
-    monthList.readMonth
-    router.push(monthList.selectedNumMonth.toString())
-})
 
 useHead({
     title: 'Моя З/П',

@@ -1,10 +1,10 @@
-﻿import type { ExchangesModel } from '~/types'
+﻿import type { ExchangeModel, ExchangesModel } from '~/types'
 
-const initialExchages: ExchangesModel = [
+const initialExchanges: ExchangesModel = [
     {
         id: 1,
         date: '2016-05-02',
-        monthId: 5,
+        monthId: 8,
         designation: 'Рама',
         amount: 11,
         sum: 357,
@@ -18,7 +18,7 @@ const initialExchages: ExchangesModel = [
         /**
          * К какому месяцу привязана смена
          */
-        monthId: 6,
+        monthId: 9,
         /**
          * Название профиля
          */
@@ -34,19 +34,28 @@ const initialExchages: ExchangesModel = [
     },
 ]
 
-export const useExchagesStore = defineStore({
-    id: 'monthCatalog',
+export const useExchangesStore = defineStore({
+    id: 'exchangesCatalog',
     state: () => {
         return {
-            month: { ...initialExchages },
+            exchanges: [] as ExchangeModel[],
             isLoading: true,
         }
     },
+    getters: {
+        readExchanges(state) {
+            return (state.exchanges = initialExchanges), (state.isLoading = false)
+        },
+    },
     actions: {
-        addMonth() {
+        addExchanges(payload: ExchangeModel) {
             try {
-                const response = useExchagesStore
-                return response
+                this.$state.exchanges = [...this.$state.exchanges, payload]
+                ElNotification({
+                    title: 'Успех',
+                    message: 'Смена добавлена',
+                    type: 'success',
+                })
             } catch (error) {
                 ElNotification({
                     title: 'Ошибка получения каталога',

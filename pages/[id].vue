@@ -1,53 +1,28 @@
 <script setup lang="ts">
+import { useExchangesStore } from '~/store/catalog-exchange'
+import { useMonthCatalogStore } from '~/store/catalog-month'
 import type { ExchangeModel } from '~/types'
+import dayjs from 'dayjs'
+const now = new Date()
 
-const {} = defineProps<{}>()
+const exchangesList = useExchangesStore()
+const monthList = useMonthCatalogStore()
 
 definePageMeta({ layout: 'default' })
-const tableData: ExchangeModel[] = [
-    {
-        id: 1,
-        date: '2016-08-01',
-        monthId: 8,
-        designation: 'bРама',
-        amount: 11,
-        sum: 37,
-    },
-    {
-        id: 25,
-        date: '2016-09-02',
-        monthId: 9,
-        designation: 'Рама',
-        amount: 11,
-        sum: 57,
-    },
-    {
-        id: 5,
-        date: '2016-08-01',
-        monthId: 8,
-        designation: 'aРама',
-        amount: 11,
-        sum: 7,
-    },
-]
-const deleteRow = (index: number) => {
-    alert('Удалить')
-}
 
-const onAddItem = () => {
-    //now.setDate(now.getDate() + 1)
-    // tableData.value.push({
-    //     date: dayjs(now).format('YYYY-MM-DD'),
-    //     id: 5,
-    //     monthId: 5,
-    //     designation: 'aРама',
-    //     amount: 11,
-    //     sum: 7,
-    // })
-    alert('Добавить')
-}
+const resultTable = exchangesList.exchanges?.filter(
+    (item: { monthId: number }) => item.monthId === monthList.selectedNumMonth
+)
+
+watchEffect(() => {
+    console.log('click2')
+    exchangesList.readExchanges
+    const arr = [...resultTable]
+    console.log(arr)
+
+})
 </script>
 <template>
-    <primitives-table :tableData="tableData" :deleteRow="deleteRow" :onAddItem="onAddItem" />
+    <primitives-table :addExchange="exchangesList.addExchanges" :resultTable="resultTable" />
 </template>
 <style scoped lang="scss"></style>

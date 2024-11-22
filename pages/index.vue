@@ -22,7 +22,7 @@ const onAddItem = () => {
 }
 </script>
 
-<template>Выберите месяц</template>
+<template></template>
 
 <style scoped lang="scss">
 @forward '../assets/scss/global/index.scss';

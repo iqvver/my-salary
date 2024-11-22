@@ -18,7 +18,7 @@ export const useMonthCatalogStore = defineStore({
     state: () => {
         return {
             month: [] as MonthModel[],
-            selectedNumMonth: 0,
+            selectedNumMonth: 9,
             isLoading: true,
         }
     },
@@ -26,9 +26,8 @@ export const useMonthCatalogStore = defineStore({
     getters: {
         readMonth(state) {
             return (
-                (state.month = initialMonth),
-                (state.isLoading = false),
-                (state.selectedNumMonth = state.month.at(-1)?.num!)
+                (state.month = initialMonth), (state.isLoading = false)
+                //(state.selectedNumMonth = state.month.at(-1)?.num!)
             )
         },
     },
@@ -36,12 +35,12 @@ export const useMonthCatalogStore = defineStore({
     actions: {
         async createMonth(payload: MonthModel) {
             try {
-                this.$state.month = [...this.$state.month, payload]
-                ElNotification({
-                    title: 'Успех',
-                    message: 'Месяц добавлен',
-                    type: 'success',
-                })
+                ;(this.$state.month = [...this.$state.month, payload]),
+                    ElNotification({
+                        title: 'Успех',
+                        message: 'Месяц добавлен',
+                        type: 'success',
+                    })
             } catch (error) {
                 ElNotification({
                     title: 'Ошибка Добавления',
