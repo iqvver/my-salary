@@ -1,24 +1,29 @@
 <script setup lang="ts">
 import type { ExchangeModel } from '~/types'
 import dayjs from 'dayjs'
-const now = new Date()
 
-const { resultTable, addExchange } = defineProps<{
-    addExchange: any
-    resultTable: any
+const { exchangesList } = defineProps<{
+    exchangesList: any
 }>()
+
+const myDate = ref()
+
+onMounted(() => {
+    myDate.value = Date.now()
+})
 
 const template: ExchangeModel = {
     id: 1,
-    date: dayjs(now).format('YYYY-MM-DD'),
+    date: dayjs(myDate.value).format('YYYY-MM-DD'),
     monthId: 8,
     designation: 'Рrrereама',
     amount: 11,
     sum: 357,
 }
+
 </script>
 <template>
-    <el-table :data="resultTable" height="75vh" :default-sort="{ prop: 'date', order: 'descending' }">
+    <el-table :data="exchangesList.filterExchanges" height="75vh" :default-sort="{ prop: 'date', order: 'descending' }">
         <el-table-column prop="id" label="id" width="100" sortable />
         <el-table-column prop="date" label="Дата" width="180" sortable />
         <el-table-column prop="designation" sortable label="Название" width="150" />
@@ -30,6 +35,6 @@ const template: ExchangeModel = {
             </template>
         </el-table-column>
     </el-table>
-    <el-button style="width: 100%" @click="addExchange(template)"> Add Item </el-button>
+    <el-button style="width: 100%" @click="exchangesList.addExchanges(template)"> Add Item </el-button>
 </template>
 <style scoped lang="scss"></style>

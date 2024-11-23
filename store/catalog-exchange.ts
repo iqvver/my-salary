@@ -39,6 +39,7 @@ export const useExchangesStore = defineStore({
     state: () => {
         return {
             exchanges: [] as ExchangeModel[],
+            filterExchanges: [] as ExchangeModel[],
             isLoading: true,
         }
     },
@@ -65,6 +66,34 @@ export const useExchangesStore = defineStore({
             } finally {
                 this.isLoading = false
             }
+        },
+
+        deleteExchange(payload: ExchangeModel) {
+            // try {
+            //     this.$state.exchanges = this.$state.exchanges.filter(
+            //         (exchange) => exchange.id!== payload.id
+            //     )
+            //     ElNotification({
+            //         title: 'Успех',
+            //         message: 'Смена удалена',
+            //         type:'success',
+            //     })
+            // } catch (error) {
+            //     ElNotification({
+            //         title: 'Ошибка получения каталога',
+            //         message: 'Error',
+            //         type: 'error',
+            //     })
+            // } finally {
+            //     this.isLoading = false
+            // }
+        },
+
+        filterExchange(payload: number) {
+            this.$state.filterExchanges = this.$state.exchanges?.filter(
+                (item: { monthId: number }) => item.monthId === payload
+            )
+            return this.$state.filterExchanges
         },
     },
 })

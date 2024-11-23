@@ -34,7 +34,7 @@ const selectMonth = (month: number) => {
                     :icon="Plus"
                     size="large" />
             </el-header>
-            <el-menu :default-openeds="['']" class="menu__item">
+            <el-menu default-active="1" class="menu__item">
                 <el-menu-item v-for="month in monthList.month" :index="month.id?.toString()">
                     <template #title>
                         <NuxtLink @click="selectMonth(month.num)">
