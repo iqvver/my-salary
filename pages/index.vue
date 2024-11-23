@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-const now = new Date()
+import { useExchangesStore } from '~/store/catalog-exchange'
+import { useMonthCatalogStore } from '~/store/catalog-month'
+
+const exchangesList = useExchangesStore()
+const monthList = useMonthCatalogStore()
 
 definePageMeta({ layout: 'default' })
 
-const deleteRow = (index: number) => {
-    alert('Удалить')
-}
-
-const onAddItem = () => {
-    //now.setDate(now.getDate() + 1)
-    // tableData.value.push({
-    //     date: dayjs(now).format('YYYY-MM-DD'),
-    //     id: 5,
-    //     monthId: 5,
-    //     designation: 'aРама',
-    //     amount: 11,
-    //     sum: 7,
-    // })
-    alert('Добавить')
-}
+watchEffect(() => {
+    exchangesList.filterExchange(monthList.selectedNumMonth), exchangesList.addExchanges, exchangesList.readExchanges
+})
 </script>
 
-<template></template>
+<template>Выберите месяц</template>
 
 <style scoped lang="scss">
 @forward '../assets/scss/global/index.scss';

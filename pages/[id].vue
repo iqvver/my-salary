@@ -8,13 +8,10 @@ const monthList = useMonthCatalogStore()
 definePageMeta({ layout: 'default' })
 
 watchEffect(() => {
-    exchangesList.filterExchange(monthList.selectedNumMonth), 
-    exchangesList.addExchanges,
-    exchangesList.readExchanges
+    exchangesList.filterExchange(monthList.selectedNumMonth), exchangesList.addExchanges, exchangesList.readExchanges
 })
-
 </script>
 <template>
-    <primitives-table :exchangesList="exchangesList" />
+    <primitives-table :exchangesList="exchangesList" :monthList="monthList" />
 </template>
 <style scoped lang="scss"></style>

@@ -35,7 +35,7 @@ export const useMonthCatalogStore = defineStore({
     actions: {
         async createMonth(payload: MonthModel) {
             try {
-                ;(this.$state.month = [...this.$state.month, payload]),
+                (this.$state.month = [...this.$state.month, payload]),
                     ElNotification({
                         title: 'Успех',
                         message: 'Месяц добавлен',
@@ -50,6 +50,28 @@ export const useMonthCatalogStore = defineStore({
             } finally {
                 this.isLoading = false
             }
+        },
+
+        async deleteMonth(payload: number) {
+            console.log(payload)
+            // try {
+            //     this.$state.exchanges = this.$state.exchanges.filter(
+            //         (exchange) => exchange.id!== payload.id
+            //     )
+            //     ElNotification({
+            //         title: 'Успех',
+            //         message: 'Смена удалена',
+            //         type:'success',
+            //     })
+            // } catch (error) {
+            //     ElNotification({
+            //         title: 'Ошибка получения каталога',
+            //         message: 'Error',
+            //         type: 'error',
+            //     })
+            // } finally {
+            //     this.isLoading = false
+            // }
         },
     },
 })

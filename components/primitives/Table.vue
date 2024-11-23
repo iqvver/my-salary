@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ExchangeModel } from '~/types'
+import { Delete, Edit } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 
 const { exchangesList } = defineProps<{
@@ -20,7 +21,6 @@ const template: ExchangeModel = {
     amount: 11,
     sum: 357,
 }
-
 </script>
 <template>
     <el-table :data="exchangesList.filterExchanges" height="75vh" :default-sort="{ prop: 'date', order: 'descending' }">
@@ -31,7 +31,8 @@ const template: ExchangeModel = {
         <el-table-column prop="sum" label="Сумма" sortable width="120" />
         <el-table-column fixed="right" label="" min-width="120">
             <template #default="scope">
-                <el-button size="small" type="danger"> Delete </el-button>
+                <el-button size="default" type="primary" :icon="Edit" circle @click="exchangesList.deleteExchange(1)" />
+                <el-button size="default" type="danger" :icon="Delete" circle  @click="exchangesList.deleteExchange(1)" />
             </template>
         </el-table-column>
     </el-table>

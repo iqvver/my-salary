@@ -44,12 +44,12 @@ export const useExchangesStore = defineStore({
         }
     },
     getters: {
-        readExchanges(state) {
+        async readExchanges(state) {
             return (state.exchanges = initialExchanges), (state.isLoading = false)
         },
     },
     actions: {
-        addExchanges(payload: ExchangeModel) {
+        async addExchanges(payload: ExchangeModel) {
             try {
                 this.$state.exchanges = [...this.$state.exchanges, payload]
                 ElNotification({
@@ -68,7 +68,8 @@ export const useExchangesStore = defineStore({
             }
         },
 
-        deleteExchange(payload: ExchangeModel) {
+        async deleteExchange(payload: number) {
+            console.log(payload)
             // try {
             //     this.$state.exchanges = this.$state.exchanges.filter(
             //         (exchange) => exchange.id!== payload.id
@@ -89,7 +90,7 @@ export const useExchangesStore = defineStore({
             // }
         },
 
-        filterExchange(payload: number) {
+        async filterExchange(payload: number) {
             this.$state.filterExchanges = this.$state.exchanges?.filter(
                 (item: { monthId: number }) => item.monthId === payload
             )
