@@ -6,16 +6,23 @@ const { monthList } = defineProps<{
     monthList: any
 }>()
 
+const router = useRouter()
+const route = useRoute()
+const active = ref(monthList.selectedNumMonth)
+
 watchEffect(() => {
     monthList.readMonth
+    monthList.selectedNumMonth = +route.path.replace('/', '')
 })
 
-const router = useRouter()
+onMounted(() => {
+    active.value = monthList.month.find((item: { num: number }) => item.num == monthList.selectedNumMonth)
+})
 
 const template: MonthModel = {
     id: 3,
     title: 'rrrr',
-    num: 88,
+    num: 10,
 }
 
 const selectMonth = (month: number) => {
@@ -32,9 +39,11 @@ const selectMonth = (month: number) => {
                     class="button__add"
                     type="success"
                     :icon="Plus"
-                    size="large" />
+                    size="large">
+                    Добавить месяц</el-button
+                >
             </el-header>
-            <el-menu default-active="1">
+            <el-menu :default-active="active.id">
                 <el-menu-item class="menu__item" v-for="month in monthList.month" :index="month.id?.toString()">
                     <template #title>
                         <NuxtLink @click="selectMonth(month.num)">
@@ -76,12 +85,15 @@ const selectMonth = (month: number) => {
     &__header {
         position: fixed;
         top: 0;
-        width: 100%;
+        width: 250px;
         z-index: 9;
         display: flex;
         align-items: center;
-        background-color: #fff;
-        border-bottom: 1px dashed #aeaeae;
+        padding: 1px;
+
+        & button {
+            width: 100%;
+        }
     }
 }
 </style>

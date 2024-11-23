@@ -27,7 +27,6 @@ export const useMonthCatalogStore = defineStore({
         readMonth(state) {
             return (
                 (state.month = initialMonth), (state.isLoading = false)
-                //(state.selectedNumMonth = state.month.at(-1)?.num!)
             )
         },
     },
