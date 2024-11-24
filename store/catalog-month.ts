@@ -2,12 +2,12 @@
 
 const initialMonth: MonthsModel = [
     {
-        id: 1,
+        id: '1',
         title: 'Август',
         num: 8,
     },
     {
-        id: 2,
+        id: '2',
         title: 'Сентябрь',
         num: 9,
     },

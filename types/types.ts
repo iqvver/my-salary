@@ -2,7 +2,7 @@
  * Отображение месяцев в каталоге
  */
 export type MonthModel = {
-    readonly id?: number
+    readonly id?: string
     /**
      * Название месяцев
      */
@@ -17,7 +17,7 @@ export type MonthModel = {
  * Отображение смены в каталоге
  */
 export type ExchangeModel = {
-    readonly id?: number | undefined;
+    readonly id?: string
     /**
      * Дата
      */

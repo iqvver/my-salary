@@ -2,7 +2,7 @@
 
 const initialExchanges: ExchangesModel = [
     {
-        id: 1,
+        id: '1',
         date: '2016-05-02',
         monthId: 8,
         designation: 'Рама',
@@ -10,7 +10,7 @@ const initialExchanges: ExchangesModel = [
         sum: 357,
     },
     {
-        id: 2,
+        id: '2',
         /**
          * Дата
          */
