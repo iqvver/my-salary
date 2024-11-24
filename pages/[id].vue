@@ -8,7 +8,7 @@ const monthList = useMonthCatalogStore()
 definePageMeta({ layout: 'default' })
 
 watchEffect(() => {
-    exchangesList.filterExchange(monthList.selectedNumMonth), exchangesList.addExchanges, exchangesList.readExchanges
+    exchangesList.filterExchange(monthList.selectedMonth), exchangesList.addExchanges, exchangesList.readExchanges
 })
 </script>
 <template>

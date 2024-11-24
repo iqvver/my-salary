@@ -4,12 +4,14 @@ const initialMonth: MonthsModel = [
     {
         id: '1',
         title: 'Август',
-        num: 8,
+        transcriptionInMonth: 'august',
+        numInMonth: 8
     },
     {
         id: '2',
         title: 'Сентябрь',
-        num: 9,
+        transcriptionInMonth: 'september',
+        numInMonth: 9
     },
 ]
 
@@ -18,23 +20,21 @@ export const useMonthCatalogStore = defineStore({
     state: () => {
         return {
             month: [] as MonthModel[],
-            selectedNumMonth: 0,
+            selectedMonth: ' ',
             isLoading: true,
         }
     },
 
     getters: {
         readMonth(state) {
-            return (
-                (state.month = initialMonth), (state.isLoading = false)
-            )
+            return (state.month = initialMonth), (state.isLoading = false)
         },
     },
 
     actions: {
         async createMonth(payload: MonthModel) {
             try {
-                (this.$state.month = [...this.$state.month, payload]),
+                ;(this.$state.month = [...this.$state.month, payload]),
                     ElNotification({
                         title: 'Успех',
                         message: 'Месяц добавлен',

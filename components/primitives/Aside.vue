@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar, Plus, Expand, DArrowRight, DArrowLeft } from '@element-plus/icons-vue'
+import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 
 const { monthList } = defineProps<{
@@ -8,27 +8,28 @@ const { monthList } = defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-const active = ref(monthList.selectedNumMonth)
+const active = ref(monthList.selectedMonth)
 const menuIsOpen = ref(false)
 
 watchEffect(() => {
     monthList.readMonth
-    monthList.selectedNumMonth = +route.path.replace('/', '')
+    monthList.selectedMonth = route.path.replace('/', '')
 })
 
 onMounted(() => {
-    active.value = monthList.month.find((item: { num: number }) => item.num === monthList.selectedNumMonth)
+    active.value = monthList.month.find((item: { transcriptionInMonth: string }) => item.transcriptionInMonth === monthList.selectedMonth)
 })
 
 const template: MonthModel = {
     id: '3',
     title: 'rrrr',
-    num: 10,
+    transcriptionInMonth: 'september',
+    numInMonth: 10,
 }
 
-const selectMonth = (month: number) => {
-    router.push(`${month}`)
-    monthList.selectedNumMonth = month
+const selectMonth = (month: MonthModel) => {
+    router.push(`${month.transcriptionInMonth}`)
+    monthList.selectedMonth = month.transcriptionInMonth
 }
 </script>
 <template>
@@ -57,7 +58,7 @@ const selectMonth = (month: number) => {
                         <NuxtLink
                             class="menu__item__link"
                             :class="{ open: menuIsOpen }"
-                            @click="selectMonth(month.num)">
+                            @click="selectMonth(month)">
                             <el-icon><Calendar /></el-icon>{{ month.title }}
                         </NuxtLink>
                     </template>

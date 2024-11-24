@@ -17,6 +17,7 @@ const template: ExchangeModel = {
     id: '1',
     date: dayjs(myDate.value).format('YYYY-MM-DD'),
     monthId: 8,
+    monthTranscription: 'september',
     designation: 'Рrrereама',
     amount: 11,
     sum: 357,

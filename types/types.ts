@@ -8,9 +8,13 @@ export type MonthModel = {
      */
     title: string
     /**
+     * Транскрипция месяца
+     */
+    transcriptionInMonth: string
+    /**
      * Номер месяца
      */
-    num: number
+    numInMonth: number
 }
 
 /**
@@ -22,6 +26,8 @@ export type ExchangeModel = {
      * Дата
      */
     date: string
+    
+    monthTranscription: string
     /**
      * Номер месяца
      */

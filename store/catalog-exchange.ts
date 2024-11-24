@@ -5,6 +5,7 @@ const initialExchanges: ExchangesModel = [
         id: '1',
         date: '2016-05-02',
         monthId: 8,
+        monthTranscription: 'august',
         designation: 'Рама',
         amount: 11,
         sum: 357,
@@ -19,6 +20,10 @@ const initialExchanges: ExchangesModel = [
          * К какому месяцу привязана смена
          */
         monthId: 9,
+           /**
+         * Транскрипция месяца
+         */
+        monthTranscription: 'september',
         /**
          * Название профиля
          */
@@ -90,9 +95,9 @@ export const useExchangesStore = defineStore({
             // }
         },
 
-        async filterExchange(payload: number) {
+        async filterExchange(payload: string) {
             this.$state.filterExchanges = this.$state.exchanges?.filter(
-                (item: { monthId: number }) => item.monthId === payload
+                (item: { monthTranscription: string }) => item.monthTranscription === payload
             )
             return this.$state.filterExchanges
         },
