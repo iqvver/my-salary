@@ -16,7 +16,7 @@ watchEffect(() => {
 })
 
 onMounted(() => {
-    active.value = monthList.month.find((item: { num: number }) => item.num == monthList.selectedNumMonth)
+    active.value = monthList.month.find((item: { num: number }) => item.num === monthList.selectedNumMonth)
 })
 
 const template: MonthModel = {
@@ -43,7 +43,7 @@ const selectMonth = (month: number) => {
                     Добавить месяц</el-button
                 >
             </el-header>
-            <el-menu :default-active="active.id">
+            <el-menu :default-active="active.id || monthList.month.at(-1)?.id + ''">
                 <el-menu-item class="menu__item" v-for="month in monthList.month" :index="month.id?.toString()">
                     <template #title>
                         <NuxtLink @click="selectMonth(month.num)">

@@ -14,6 +14,7 @@ const { name } = defineProps<{
                 </el-icon>
                 <template #dropdown>
                     <el-dropdown-menu>
+                        <el-dropdown-item>Настройки</el-dropdown-item>
                         <el-dropdown-item>Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>

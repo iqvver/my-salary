@@ -36,6 +36,6 @@ const template: ExchangeModel = {
             </template>
         </el-table-column>
     </el-table>
-    <el-button style="width: 100%" @click="exchangesList.addExchanges(template)"> Add Item </el-button>
+    <el-button style="width: 100%" @click="exchangesList.addExchanges(template)"> Добавить смену </el-button>
 </template>
 <style scoped lang="scss"></style>
