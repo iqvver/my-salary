@@ -2,22 +2,24 @@
 import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 
-const { monthList } = defineProps<{
-    monthList: any
+const { monthStore } = defineProps<{
+    monthStore: any
 }>()
 
 const router = useRouter()
 const route = useRoute()
-const active = ref(monthList.selectedMonth)
+const active = ref(monthStore.selectedMonth)
 const menuIsOpen = ref(false)
 
 watchEffect(() => {
-    monthList.readMonth
-    monthList.selectedMonth = route.path.replace('/', '')
+    monthStore.readMonth
+    monthStore.selectedMonth = route.path.replace('/', '')
 })
 
 onMounted(() => {
-    active.value = monthList.month.find((item: { transcriptionInMonth: string }) => item.transcriptionInMonth === monthList.selectedMonth)
+    active.value = monthStore.month.find(
+        (item: { transcriptionInMonth: string }) => item.transcriptionInMonth === monthStore.selectedMonth
+    )
 })
 
 const template: MonthModel = {
@@ -29,13 +31,13 @@ const template: MonthModel = {
 
 const selectMonth = (month: MonthModel) => {
     router.push(`${month.transcriptionInMonth}`)
-    monthList.selectedMonth = month.transcriptionInMonth
+    monthStore.selectedMonth = month.transcriptionInMonth
 }
 </script>
 <template>
     <el-header class="aside__header">
         <el-button
-            @click="monthList.createMonth(template)"
+            @click="monthStore.createMonth(template)"
             class="button__add"
             type="success"
             :icon="Plus"
@@ -45,7 +47,7 @@ const selectMonth = (month: MonthModel) => {
     </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
-            <el-menu :default-active="active.id || monthList.month.at(-1)?.id">
+            <el-menu :default-active="active.id || monthStore.month.at(-1)?.id">
                 <el-button
                     class="menu__item__icon_arrow"
                     :class="{ open: menuIsOpen }"
@@ -53,12 +55,9 @@ const selectMonth = (month: MonthModel) => {
                     circle
                     :icon="DArrowLeft"
                     @click="menuIsOpen = !menuIsOpen" />
-                <el-menu-item class="menu__item" v-for="month in monthList.month" :index="month.id">
+                <el-menu-item class="menu__item" v-for="month in monthStore.month" :index="month.id">
                     <template #title>
-                        <NuxtLink
-                            class="menu__item__link"
-                            :class="{ open: menuIsOpen }"
-                            @click="selectMonth(month)">
+                        <NuxtLink class="menu__item__link" :class="{ open: menuIsOpen }" @click="selectMonth(month)">
                             <el-icon><Calendar /></el-icon>{{ month.title }}
                         </NuxtLink>
                     </template>
@@ -69,7 +68,7 @@ const selectMonth = (month: MonthModel) => {
                         <template #dropdown>
                             <el-dropdown-menu>
                                 <el-dropdown-item disabled>Редактировать</el-dropdown-item>
-                                <el-dropdown-item @click="monthList.deleteMonth(2)">Удалить</el-dropdown-item>
+                                <el-dropdown-item @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -108,7 +107,7 @@ const selectMonth = (month: MonthModel) => {
     &__link {
         width: 100%;
         &.open {
-            animation: hide .5s forwards;
+            animation: hide 0.5s forwards;
         }
     }
 

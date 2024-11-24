@@ -20,7 +20,7 @@ const initialExchanges: ExchangesModel = [
          * К какому месяцу привязана смена
          */
         monthId: 9,
-           /**
+        /**
          * Транскрипция месяца
          */
         monthTranscription: 'september',
@@ -73,26 +73,23 @@ export const useExchangesStore = defineStore({
             }
         },
 
-        async deleteExchange(payload: number) {
-            console.log(payload)
-            // try {
-            //     this.$state.exchanges = this.$state.exchanges.filter(
-            //         (exchange) => exchange.id!== payload.id
-            //     )
-            //     ElNotification({
-            //         title: 'Успех',
-            //         message: 'Смена удалена',
-            //         type:'success',
-            //     })
-            // } catch (error) {
-            //     ElNotification({
-            //         title: 'Ошибка получения каталога',
-            //         message: 'Error',
-            //         type: 'error',
-            //     })
-            // } finally {
-            //     this.isLoading = false
-            // }
+        async deleteExchange(payload: ExchangeModel) {
+            try {
+                this.$state.exchanges = this.$state.exchanges.filter((exchange) => exchange.id !== payload.id)
+                ElNotification({
+                    title: 'Успех',
+                    message: 'Смена удалена',
+                    type: 'success',
+                })
+            } catch (error) {
+                ElNotification({
+                    title: 'Ошибка удаления',
+                    message: 'Error',
+                    type: 'error',
+                })
+            } finally {
+                this.isLoading = false
+            }
         },
 
         async filterExchange(payload: string) {

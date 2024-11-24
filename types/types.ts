@@ -1,50 +1,25 @@
-﻿/**
- * Отображение месяцев в каталоге
- */
-export type MonthModel = {
-    readonly id?: string
-    /**
-     * Название месяцев
-     */
-    title: string
-    /**
-     * Транскрипция месяца
-     */
-    transcriptionInMonth: string
-    /**
-     * Номер месяца
-     */
-    numInMonth: number
-}
-
-/**
- * Отображение смены в каталоге
- */
-export type ExchangeModel = {
-    readonly id?: string
-    /**
-     * Дата
-     */
-    date: string
-    
-    monthTranscription: string
-    /**
-     * Номер месяца
-     */
-    monthId: number
-    /**
-     * Название профиля
-     */
-    designation: string
-    /**
-     * Количество
-     */
-    amount: number
-    /**
-     * Сумма
-     */
-    sum: number
-}
+﻿import type { ExchangeModel, MonthModel } from '.'
 
 export interface MonthsModel extends Array<MonthModel> {}
 export interface ExchangesModel extends Array<ExchangeModel> {}
+
+//Разобраться
+export type ExtendedMonthSoreModel = {
+    month: MonthModel[]
+    selectedMonth: string
+    isLoading: boolean
+    // TODO: типизовать
+    readMonth: any
+    createMonth: any
+    deleteMonth: any
+}
+
+export type ExtendedExchangeSoreModel = {
+    exchanges: ExchangeModel[]
+    filterExchanges: ExchangeModel[]
+    isLoading: true
+    // TODO: типизовать
+    readExchanges: any
+    addExchanges: any
+    deleteExchange: any
+}

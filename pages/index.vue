@@ -2,8 +2,8 @@
 import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 
-const exchangesList = useExchangesStore()
-const monthList = useMonthCatalogStore()
+const exchangesStore = useExchangesStore()
+const monthStore = useMonthCatalogStore()
 
 const router = useRouter()
 const route = useRoute()
@@ -11,11 +11,11 @@ const route = useRoute()
 definePageMeta({ layout: 'default' })
 
 watchEffect(() => {
-    exchangesList.filterExchange(monthList.selectedMonth), exchangesList.addExchanges, exchangesList.readExchanges
+    exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges
 })
 onMounted(() => {
     if (route.path === '/') {
-        router.push(monthList.month.at(-1)?.transcriptionInMonth + '')
+        router.push(monthStore.month.at(-1)?.transcriptionInMonth + '')
     }
 })
 </script>

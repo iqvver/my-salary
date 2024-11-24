@@ -3,7 +3,7 @@ import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
-const monthList = useMonthCatalogStore()
+const monthStore = useMonthCatalogStore()
 
 useHead({
     title: 'Моя З/П',
@@ -13,7 +13,7 @@ useHead({
 <template>
     <PrimitivesHeader :name="auth.name" />
     <el-container class="container">
-        <PrimitivesAside :monthList="monthList" />
+        <PrimitivesAside :monthStore="monthStore" />
         <el-main>
             <slot />
         </el-main>

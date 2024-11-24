@@ -2,16 +2,16 @@
 import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 
-const exchangesList = useExchangesStore()
-const monthList = useMonthCatalogStore()
+const exchangesStore = useExchangesStore()
+const monthStore = useMonthCatalogStore()
 
 definePageMeta({ layout: 'default' })
 
 watchEffect(() => {
-    exchangesList.filterExchange(monthList.selectedMonth), exchangesList.addExchanges, exchangesList.readExchanges
+    exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges
 })
 </script>
 <template>
-    <primitives-table :exchangesList="exchangesList" :monthList="monthList" />
+    <primitives-table :exchangesStore="exchangesStore" :monthStore="monthStore" />
 </template>
 <style scoped lang="scss"></style>

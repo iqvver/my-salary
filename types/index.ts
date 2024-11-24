@@ -1,1 +1,3 @@
-export type { MonthModel, MonthsModel, ExchangeModel, ExchangesModel } from './types'
+export type { MonthsModel, ExchangesModel } from './types'
+export type { MonthModel } from './models/MonthModel'
+export type { ExchangeModel } from './models/ExchangeModel'
