@@ -52,7 +52,6 @@ export const useMonthCatalogStore = defineStore({
         },
 
         async deleteMonth(payload: MonthModel) {
-            console.log(payload)
             try {
                 this.$state.month = this.$state.month.filter((month) => month.id !== payload.id)
                 ElNotification({

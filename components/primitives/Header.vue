@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Setting } from '@element-plus/icons-vue'
+import { useAuthStore } from '~/store/auth'
 
-const { name } = defineProps<{
-    name: string
-}>()
+const auth = useAuthStore()
 </script>
 <template>
     <el-header class="header">
@@ -19,7 +18,7 @@ const { name } = defineProps<{
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-            <span>{{ name }}</span>
+            <span>{{ auth.name }}</span>
         </div>
     </el-header>
 </template>

@@ -8,7 +8,7 @@ const monthStore = useMonthCatalogStore()
 const router = useRouter()
 const route = useRoute()
 
-definePageMeta({ layout: 'default' })
+definePageMeta({ layout: 'table' })
 
 watchEffect(() => {
     exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges

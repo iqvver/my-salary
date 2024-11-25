@@ -3,7 +3,7 @@
     state: () => {
         return {
             name: 'Eduardo' as string,
-            password: '' as string,
+            myJob : '' as string,
         }
     },
     actions: {

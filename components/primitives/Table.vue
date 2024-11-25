@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { ExchangeModel } from '~/types'
+import { useExchangesStore } from '~/store/catalog-exchange'
+import { useMonthCatalogStore } from '~/store/catalog-month'
 import { Delete, Edit } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 
-const { exchangesStore } = defineProps<{
-    exchangesStore: any
-}>()
+const exchangesStore = useExchangesStore()
+const monthStore = useMonthCatalogStore()
+const myDate = ref(Date.now())
 
-const myDate = ref()
-
-onMounted(() => {
-    myDate.value = Date.now()
+watchEffect(() => {
+    exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges
 })
 
 const template: ExchangeModel = {
@@ -40,7 +40,7 @@ const template: ExchangeModel = {
                     type="primary"
                     :icon="Edit"
                     circle
-                    @click="exchangesStore.deleteExchange(1)" />
+                    @click="exchangesStore.deleteExchange(scope.row)" />
                 <el-button
                     size="default"
                     type="danger"

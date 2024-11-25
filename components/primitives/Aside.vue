@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
+import { useMonthCatalogStore } from '~/store/catalog-month'
 
-const { monthStore } = defineProps<{
-    monthStore: any
-}>()
-
+const monthStore = useMonthCatalogStore()
 const router = useRouter()
 const route = useRoute()
-const active = ref(monthStore.selectedMonth)
+const active: any = ref(monthStore.selectedMonth)
 const menuIsOpen = ref(false)
 
 watchEffect(() => {
