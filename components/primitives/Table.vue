@@ -22,6 +22,15 @@ const template: ExchangeModel = {
     amount: 11,
     sum: 357,
 }
+const template2: ExchangeModel = {
+    id: '100',
+    date: dayjs(myDate.value).format('YYYY-MM-DD'),
+    monthId: 9,
+    monthTranscription: 'august',
+    designation: 'Рrrer45454545454eама',
+    amount: 11111,
+    sum: 3588887,
+}
 </script>
 <template>
     <el-table
@@ -40,7 +49,7 @@ const template: ExchangeModel = {
                     type="primary"
                     :icon="Edit"
                     circle
-                    @click="exchangesStore.deleteExchange(scope.row)" />
+                    @click="exchangesStore.updateExchange(scope.row, template2)" />
                 <el-button
                     size="default"
                     type="danger"

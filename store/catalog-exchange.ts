@@ -48,11 +48,13 @@ export const useExchangesStore = defineStore({
             isLoading: true,
         }
     },
+
     getters: {
         async readExchanges(state) {
             return (state.exchanges = initialExchanges), (state.isLoading = false)
         },
     },
+
     actions: {
         async addExchanges(payload: ExchangeModel) {
             try {
@@ -97,6 +99,28 @@ export const useExchangesStore = defineStore({
                 (item: { monthTranscription: string }) => item.monthTranscription === payload
             )
             return this.$state.filterExchanges
+        },
+
+        async updateExchange(payload: ExchangeModel, template: ExchangeModel) {
+            try {
+                const index = this.$state.exchanges.findIndex((exchange) => exchange.id === payload.id)
+                if (index > -1) {
+                    this.$state.exchanges[index] = { ...template }
+                    ElNotification({
+                        title: 'Успех',
+                        message: 'Смена изменена',
+                        type: 'success',
+                    })
+                }
+            } catch (error) {
+                ElNotification({
+                    title: 'Ошибка изменения',
+                    message: 'Error',
+                    type: 'error',
+                })
+            } finally {
+                this.isLoading = false
+            }
         },
     },
 })

@@ -2,7 +2,7 @@
  * Отображение смены в каталоге
  */
 export type ExchangeModel = {
-    readonly id?: string
+    id?: string
     /**
      * Дата
      */

@@ -13,6 +13,7 @@ definePageMeta({ layout: 'table' })
 watchEffect(() => {
     exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges
 })
+
 onMounted(() => {
     if (route.path === '/') {
         router.push(monthStore.month.at(-1)?.transcriptionInMonth + '')
