@@ -1,7 +1,8 @@
-﻿import type { ExchangeModel, MonthModel } from '.'
+﻿import type { ExchangeModel, MonthModel, UserModel } from '.'
 
 export interface MonthsModel extends Array<MonthModel> {}
 export interface ExchangesModel extends Array<ExchangeModel> {}
+export interface UsersModel extends Array<UserModel> {}
 
 //Разобраться
 export type ExtendedMonthSoreModel = {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
-
 const exchangesStore = useExchangesStore()
 const monthStore = useMonthCatalogStore()
 

@@ -14,11 +14,11 @@ const auth = useAuthStore()
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>Настройки</el-dropdown-item>
-                        <el-dropdown-item>Выйти</el-dropdown-item>
+                        <el-dropdown-item @click="auth.logout()">Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-            <span>{{ auth.name }}</span>
+            <span>{{ auth.authUser }}({{ auth.authJob }})</span>
         </div>
     </el-header>
 </template>
