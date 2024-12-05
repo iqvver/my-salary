@@ -3,7 +3,7 @@ import { useAuthStore } from '~/store/auth'
 import { Message } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import * as form from '~/types/login-form'
-import { PositionEnum, type PositionValueType } from '~/types/types'
+import * as options from '~/types/types'
 
 const isLoading = ref(false)
 const authStore = useAuthStore()
@@ -17,22 +17,6 @@ const submitForm = async () => {
     authStore.registration(ruleForm)
     ruleForm.loginName = ''
     ruleForm.loginJob = ''
-}
-
-type OptionsInfo = {
-    title: PositionValueType
-    summa: number
-}
-
-const options: Record<PositionEnum, OptionsInfo> = {
-    operator: {
-        title: 'Оператор',
-        summa: 40000,
-    },
-    assistant: {
-        title: 'Помощник',
-        summa: 30000,
-    },
 }
 </script>
 <template>
@@ -51,7 +35,7 @@ const options: Record<PositionEnum, OptionsInfo> = {
         </el-form-item>
         <el-form-item label="" prop="loginJob" :type="'email'">
             <el-select v-model="ruleForm.loginJob" placeholder="Оператор" prop="loginJob" :prefix-icon="Message">
-                <el-option v-for="item in options" :key="item.title" :label="item.title" :value="item.title" />
+                <el-option v-for="item in options.options" :key="item.title" :label="item.title" :value="item.title" />
             </el-select>
         </el-form-item>
         <el-form-item>

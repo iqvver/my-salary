@@ -3,6 +3,12 @@ import { Setting } from '@element-plus/icons-vue'
 import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
+const router = useRouter()
+
+const handleCardClick = () => {
+    router.push('/personal')
+}
+
 </script>
 <template>
     <el-header class="header">
@@ -13,7 +19,7 @@ const auth = useAuthStore()
                 </el-icon>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>Настройки</el-dropdown-item>
+                        <el-dropdown-item  @click="handleCardClick">Профиль</el-dropdown-item>
                         <el-dropdown-item @click="auth.logout()">Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>

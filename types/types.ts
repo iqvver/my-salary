@@ -26,8 +26,24 @@ export type ExtendedExchangeSoreModel = {
 }
 
 export enum PositionEnum {
-    OPERATOR = 'operator',
-    ASSISTANT = 'assistant',
+    OPERATOR = 'Оператор',
+    ASSISTANT = 'Помощник',
 }
 
-export type PositionValueType = 'Оператор' | 'Помощник'
+type PositionValueType = 'Оператор' | 'Помощник'
+
+type OptionsInfo = {
+    title: PositionValueType
+    summa: number
+}
+
+export const options: Record<PositionEnum, OptionsInfo> = {
+    Оператор: {
+        title: 'Оператор',
+        summa: 40000,
+    },
+    Помощник: {
+        title: 'Помощник',
+        summa: 30000,
+    },
+}

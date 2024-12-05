@@ -19,6 +19,7 @@ export const useAuthStore = defineStore({
         return {
             user: [] as UserModel[],
             isAuth: false,
+            authUserId: 0,
             authUser: 'Какое-то имя',
             authJob: 'Должность',
             isLoading: true,
@@ -60,16 +61,36 @@ export const useAuthStore = defineStore({
             this.authUser = ''
             this.authJob = ''
             this.isAuth = false
+            const router = useRouter()
+            router.push('/login')
         },
         login(payload: UserModel) {
+            this.authUserId = payload.id // Получаем id пользователя
             this.authUser = payload.loginName
             this.authJob = payload.loginJob
             this.isAuth = true
         },
         logout() {
             this.clear()
-            const router = useRouter()
-            router.push('/login')
+        },
+        async deleteUser(payload: number) {
+            try {
+                this.$state.user = this.$state.user.filter((user) => user.id !== payload)
+                this.clear()
+                ElNotification({
+                    title: 'Успех',
+                    message: 'Профиль удален',
+                    type: 'success',
+                })
+            } catch (error) {
+                ElNotification({
+                    title: 'Ошибка удаления',
+                    message: 'Error',
+                    type: 'error',
+                })
+            } finally {
+                this.isLoading = false
+            }
         },
     },
 })

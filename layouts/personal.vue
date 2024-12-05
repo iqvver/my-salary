@@ -1,7 +1,6 @@
 <script setup lang="ts">
-useHead({
-    title: 'Моя З/П',
-})
+
+useHead({ title: 'Профиль' })
 </script>
 
 <template>
