@@ -1,6 +1,6 @@
 ﻿<script lang="ts" setup>
 import { useAuthStore } from '~/store/auth'
-import { Message } from '@element-plus/icons-vue'
+import { User } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import * as form from '~/types/login-form'
 import * as options from '~/types/types'
@@ -31,10 +31,10 @@ const submitForm = async () => {
         size="default"
         status-icon>
         <el-form-item label="" prop="loginName" :type="'email'">
-            <el-input v-model="ruleForm.loginName" placeholder="Васёк" :prefix-icon="Message" />
+            <el-input v-model="ruleForm.loginName" placeholder="Васёк" :prefix-icon="User" />
         </el-form-item>
         <el-form-item label="" prop="loginJob" :type="'email'">
-            <el-select v-model="ruleForm.loginJob" placeholder="Оператор" prop="loginJob" :prefix-icon="Message">
+            <el-select v-model="ruleForm.loginJob" placeholder="Оператор" prop="loginJob">
                 <el-option v-for="item in options.options" :key="item.title" :label="item.title" :value="item.title" />
             </el-select>
         </el-form-item>

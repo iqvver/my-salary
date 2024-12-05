@@ -3,13 +3,13 @@
 const initialUser: UsersModel = [
     {
         id: 1,
-        loginName: 'Август',
-        loginJob: 'august',
+        loginName: 'Писун',
+        loginJob: 'Помощник',
     },
     {
         id: 2,
-        loginName: 'Сентябрь',
-        loginJob: 'september',
+        loginName: 'Писька',
+        loginJob: 'Оператор',
     },
 ]
 

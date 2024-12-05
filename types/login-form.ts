@@ -1,11 +1,13 @@
 ﻿import type { FormRules } from 'element-plus'
 
 export type FormValues = {
+    id: number
     loginName: string
     loginJob: string
 }
 
 export const initialValues = {
+    id: 0,
     loginName: '',
     loginJob: '',
 } as FormValues

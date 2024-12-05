@@ -1,6 +1,6 @@
 ﻿<script lang="ts" setup>
 import { useAuthStore } from '~/store/auth'
-import { Edit, Message } from '@element-plus/icons-vue'
+import { Select } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const isLoading = ref(false)
@@ -31,7 +31,7 @@ const logIn = async (user: any) => {
 <template>
     <div label="" v-for="user in authStore.user" class="login-form__item">
         <div>{{ user.loginName }}</div>
-        <el-button size="default" type="primary" plain :icon="Edit" :loading="isLoading" @click="logIn(user)" />
+        <el-button size="default" type="success" plain :icon="Select" :loading="isLoading" @click="logIn(user)" />
     </div>
     <div class="login-form__footer">
         <span class="login-form__footer__descr_link">Нет аккаунта?</span>
