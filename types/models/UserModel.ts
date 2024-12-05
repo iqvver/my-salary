@@ -6,9 +6,9 @@ export type UserModel = {
     /**
      * Имя
      */
-    myName: string
+    loginName: string
     /**
 
      */
-    myJob: string
+    loginJob: string
 }

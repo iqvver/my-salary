@@ -24,3 +24,10 @@ export type ExtendedExchangeSoreModel = {
     addExchanges: any
     deleteExchange: any
 }
+
+export enum PositionEnum {
+    OPERATOR = 'operator',
+    ASSISTANT = 'assistant',
+}
+
+export type PositionValueType = 'Оператор' | 'Помощник'

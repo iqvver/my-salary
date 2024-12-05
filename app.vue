@@ -6,7 +6,7 @@ const router = useRouter()
 
 watchEffect(() => {
     if (!authStore.isAuth) {
-        router.push('/login')
+        //router.push('/login')
     }
 })
 </script>

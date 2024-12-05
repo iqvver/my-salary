@@ -3,13 +3,13 @@
 const initialUser: UsersModel = [
     {
         id: 1,
-        myName: 'Август',
-        myJob: 'august',
+        loginName: 'Август',
+        loginJob: 'august',
     },
     {
         id: 2,
-        myName: 'Сентябрь',
-        myJob: 'september',
+        loginName: 'Сентябрь',
+        loginJob: 'september',
     },
 ]
 
@@ -19,8 +19,9 @@ export const useAuthStore = defineStore({
         return {
             user: [] as UserModel[],
             isAuth: false,
-            authUser: 'ddddd',
-            authJob: '',
+            authUser: 'Какое-то имя',
+            authJob: 'Должность',
+            isLoading: true,
         }
     },
     getters: {
@@ -29,14 +30,40 @@ export const useAuthStore = defineStore({
         },
     },
     actions: {
+        async registration(payload: UserModel) {
+            const newUser = {
+                id: Math.random(),
+                loginName: payload.loginName,
+                loginJob: payload.loginJob,
+            }
+            try {
+                ;(this.$state.user = [...this.$state.user, newUser]),
+                    ElNotification({
+                        title: `Пользователь ${payload.loginName} зарегистрирован`,
+                        message: 'Месяц добавлен',
+                        type: 'success',
+                    })
+                const router = useRouter()
+                router.push('/login')
+            } catch (error) {
+                ElNotification({
+                    title: `${error}`.split(':')[1],
+                    message: 'Что-то пошло не так',
+                    type: 'error',
+                })
+                throw new Error('Registration response error')
+            } finally {
+                this.isLoading = false
+            }
+        },
         clear() {
             this.authUser = ''
             this.authJob = ''
             this.isAuth = false
         },
         login(payload: UserModel) {
-            this.authUser = payload.myName
-            this.authJob = payload.myJob
+            this.authUser = payload.loginName
+            this.authJob = payload.loginJob
             this.isAuth = true
         },
         logout() {

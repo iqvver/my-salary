@@ -30,7 +30,7 @@ const logIn = async (user: any) => {
 </script>
 <template>
     <div label="" v-for="user in authStore.user" class="login-form__item">
-        <div>{{ user.myName }}</div>
+        <div>{{ user.loginName }}</div>
         <el-button size="default" type="primary" plain :icon="Edit" :loading="isLoading" @click="logIn(user)" />
     </div>
     <div class="login-form__footer">
