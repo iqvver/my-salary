@@ -21,13 +21,12 @@ export const useMonthCatalogStore = defineStore({
         return {
             month: [] as MonthModel[],
             selectedMonth: ' ',
-            isLoading: true,
         }
     },
 
     getters: {
         readMonth(state) {
-            return (state.month = initialMonth), (state.isLoading = false)
+            return (state.month = initialMonth)
         },
     },
 
@@ -47,7 +46,6 @@ export const useMonthCatalogStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
             }
         },
 
@@ -66,7 +64,6 @@ export const useMonthCatalogStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
             }
         },
     },

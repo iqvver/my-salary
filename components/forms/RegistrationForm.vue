@@ -17,6 +17,7 @@ const submitForm = async () => {
     authStore.registration(ruleForm)
     ruleForm.loginName = ''
     ruleForm.loginJob = ''
+    isLoading.value = false
 }
 </script>
 <template>
@@ -33,7 +34,7 @@ const submitForm = async () => {
         <el-form-item label="" prop="loginName" :type="'email'">
             <el-input v-model="ruleForm.loginName" placeholder="Васёк" :prefix-icon="User" />
         </el-form-item>
-        <el-form-item label="" prop="loginJob" :type="'email'">
+        <el-form-item>
             <el-select v-model="ruleForm.loginJob" placeholder="Оператор" prop="loginJob">
                 <el-option v-for="item in options.options" :key="item.title" :label="item.title" :value="item.title" />
             </el-select>

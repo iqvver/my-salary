@@ -17,17 +17,16 @@ export const useAuthStore = defineStore({
     id: 'userCatalog',
     state: () => {
         return {
-            user: [] as UserModel[],
+            users: [] as UserModel[],
             isAuth: false,
             authUserId: 0,
             authUser: 'Какое-то имя',
             authJob: 'Должность',
-            isLoading: true,
         }
     },
     getters: {
         readUser(state) {
-            return (state.user = initialUser)
+            return (state.users = initialUser)
         },
     },
     actions: {
@@ -38,7 +37,7 @@ export const useAuthStore = defineStore({
                 loginJob: payload.loginJob,
             }
             try {
-                ;(this.$state.user = [...this.$state.user, newUser]),
+                ;(this.$state.users = [...this.$state.users, newUser]),
                     ElNotification({
                         title: `Пользователь ${payload.loginName} зарегистрирован`,
                         message: 'Месяц добавлен',
@@ -54,7 +53,6 @@ export const useAuthStore = defineStore({
                 })
                 throw new Error('Registration response error')
             } finally {
-                this.isLoading = false
             }
         },
         clear() {
@@ -75,7 +73,7 @@ export const useAuthStore = defineStore({
         },
         async deleteUser(payload: number) {
             try {
-                this.$state.user = this.$state.user.filter((user) => user.id !== payload)
+                this.$state.users = this.$state.users.filter((user) => user.id !== payload)
                 this.clear()
                 ElNotification({
                     title: 'Успех',
@@ -89,7 +87,27 @@ export const useAuthStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
+            }
+        },
+        async updateUser(payload: UserModel) {
+            try {
+                const index = this.$state.users.findIndex((user) => user.id === payload.id)
+                if (index > -1) {
+                    this.$state.users[index] = { ...payload }
+                    ElNotification({
+                        title: 'Успех',
+                        message: 'Профиль изменён',
+                        type: 'success',
+                    })
+                }
+                this.login(payload)
+            } catch (error) {
+                ElNotification({
+                    title: 'Ошибка изменения',
+                    message: 'Error',
+                    type: 'error',
+                })
+            } finally {
             }
         },
     },

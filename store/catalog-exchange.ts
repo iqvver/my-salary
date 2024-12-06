@@ -45,13 +45,12 @@ export const useExchangesStore = defineStore({
         return {
             exchanges: [] as ExchangeModel[],
             filterExchanges: [] as ExchangeModel[],
-            isLoading: true,
         }
     },
 
     getters: {
         async readExchanges(state) {
-            return (state.exchanges = initialExchanges), (state.isLoading = false)
+            return (state.exchanges = initialExchanges)
         },
     },
 
@@ -71,7 +70,6 @@ export const useExchangesStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
             }
         },
 
@@ -90,7 +88,6 @@ export const useExchangesStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
             }
         },
 
@@ -119,7 +116,6 @@ export const useExchangesStore = defineStore({
                     type: 'error',
                 })
             } finally {
-                this.isLoading = false
             }
         },
     },
