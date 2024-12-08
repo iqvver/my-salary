@@ -4,29 +4,35 @@ import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { Delete, Edit } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
+import { useAuthStore } from '~/store/auth'
 
+const authStore = useAuthStore()
 const exchangesStore = useExchangesStore()
 const monthStore = useMonthCatalogStore()
 const myDate = ref(Date.now())
 
 watchEffect(() => {
-    exchangesStore.filterExchange(monthStore.selectedMonth), exchangesStore.addExchanges, exchangesStore.readExchanges
+    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
+        exchangesStore.addExchanges,
+        exchangesStore.readExchanges
 })
 
 const template: ExchangeModel = {
-    id: '1',
-    date: dayjs(myDate.value).format('YYYY-MM-DD'),
+    id: 1,
+    date: dayjs(myDate.value).format('DD-MM-YYYY'),
+    fromUserId: authStore.authUserId,
     monthId: 8,
-    monthTranscription: 'september',
+    monthTranscription: monthStore.selectedMonth,
     designation: 'Рrrereама',
     amount: 11,
     sum: 357,
 }
 const template2: ExchangeModel = {
-    id: '100',
+    id: 100,
     date: dayjs(myDate.value).format('YYYY-MM-DD'),
+    fromUserId: authStore.authUserId,
     monthId: 9,
-    monthTranscription: 'august',
+    monthTranscription: monthStore.selectedMonth,
     designation: 'Рrrer45454545454eама',
     amount: 11111,
     sum: 3588887,

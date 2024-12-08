@@ -2,11 +2,15 @@
  * Отображение смены в каталоге
  */
 export type ExchangeModel = {
-    id?: string
+    readonly id?: number
     /**
      * Дата
      */
     date: string
+    /**
+     * Какому пользователю принадлежит
+     */
+    fromUserId: number
     /**
      * Транскрипция месяца
      */

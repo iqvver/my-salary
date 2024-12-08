@@ -2,16 +2,16 @@
 
 const initialMonth: MonthsModel = [
     {
-        id: '1',
+        id: 1,
         title: 'Август',
-        transcriptionInMonth: 'august',
+        transcriptionInMonth: 'August',
         numInMonth: 8,
         fromUserId: 2
     },
     {
-        id: '2',
+        id: 2,
         title: 'Сентябрь',
-        transcriptionInMonth: 'september',
+        transcriptionInMonth: 'September',
         numInMonth: 9,
         fromUserId: 1
     },

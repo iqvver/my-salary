@@ -2,7 +2,7 @@
  * Отображение месяцев в каталоге
  */
 export type MonthModel = {
-    readonly id?: string
+    readonly id?: number
     /**
      * Название месяцев
      */
@@ -16,7 +16,7 @@ export type MonthModel = {
      */
     numInMonth?: number
     /**
-     * Какому пользователю принадлежит месяц
+     * Какому пользователю принадлежит
      */
     fromUserId: number
 }
