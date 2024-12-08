@@ -6,12 +6,14 @@ const initialMonth: MonthsModel = [
         title: 'Август',
         transcriptionInMonth: 'august',
         numInMonth: 8,
+        fromUserId: 2
     },
     {
         id: '2',
         title: 'Сентябрь',
         transcriptionInMonth: 'september',
         numInMonth: 9,
+        fromUserId: 1
     },
 ]
 
@@ -21,6 +23,7 @@ export const useMonthCatalogStore = defineStore({
         return {
             month: [] as MonthModel[],
             selectedMonth: ' ',
+            filteringMonth: [] as MonthModel[],
         }
     },
 
@@ -47,6 +50,13 @@ export const useMonthCatalogStore = defineStore({
                 })
             } finally {
             }
+        },
+
+        async filterMonth(payload: number) {
+            this.$state.filteringMonth = this.$state.month?.filter(
+                (item: { fromUserId: number }) => item.fromUserId === payload
+            )
+            return this.$state.filteringMonth
         },
 
         async deleteMonth(payload: MonthModel) {

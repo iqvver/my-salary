@@ -2,8 +2,10 @@
 import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
+import { useAuthStore } from '~/store/auth'
 
 const monthStore = useMonthCatalogStore()
+const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
 const active: any = ref(monthStore.selectedMonth)
@@ -11,6 +13,7 @@ const menuIsOpen = ref(false)
 
 watchEffect(() => {
     monthStore.readMonth
+    monthStore.filterMonth(authStore.authUserId)
     monthStore.selectedMonth = route.path.replace('/', '')
 })
 
@@ -25,6 +28,7 @@ const template: MonthModel = {
     title: 'rrrr',
     transcriptionInMonth: 'september',
     numInMonth: 10,
+    fromUserId: 1,
 }
 
 const selectMonth = (month: MonthModel) => {
@@ -53,7 +57,7 @@ const selectMonth = (month: MonthModel) => {
                     circle
                     :icon="DArrowLeft"
                     @click="menuIsOpen = !menuIsOpen" />
-                <el-menu-item class="menu__item" v-for="month in monthStore.month" :index="month.id">
+                <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :index="month.id">
                     <template #title>
                         <NuxtLink class="menu__item__link" :class="{ open: menuIsOpen }" @click="selectMonth(month)">
                             <el-icon><Calendar /></el-icon>{{ month.title }}
@@ -125,7 +129,7 @@ const selectMonth = (month: MonthModel) => {
     }
 }
 .aside {
-    width: 200px;
+    width: 250px;
     z-index: 5;
     height: 75vh;
     height: calc(75vh + 55px);
@@ -141,7 +145,7 @@ const selectMonth = (month: MonthModel) => {
     &__header {
         position: fixed;
         top: 0;
-        width: 200px;
+        width: 250px;
         display: flex;
         align-items: center;
         padding: 0;

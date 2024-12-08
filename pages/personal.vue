@@ -80,8 +80,8 @@ const submitForm = () => {
 </template>
 <style scoped lang="scss">
 .profile {
-    width: 50%;
-    height: 70vh;
+    width: 40%;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

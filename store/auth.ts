@@ -63,7 +63,7 @@ export const useAuthStore = defineStore({
             router.push('/login')
         },
         login(payload: UserModel) {
-            this.authUserId = payload.id // Получаем id пользователя
+            this.authUserId = payload.id! // Получаем id пользователя
             this.authUser = payload.loginName
             this.authJob = payload.loginJob
             this.isAuth = true

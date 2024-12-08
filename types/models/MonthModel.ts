@@ -14,5 +14,9 @@ export type MonthModel = {
     /**
      * Номер месяца
      */
-    numInMonth: number
+    numInMonth?: number
+    /**
+     * Какому пользователю принадлежит месяц
+     */
+    fromUserId: number
 }
