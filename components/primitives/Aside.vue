@@ -3,7 +3,6 @@ import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
-import ru from 'element-plus/es/locale/lang/ru'
 
 const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
@@ -41,53 +40,48 @@ const submitMonth = () => {
 }
 </script>
 <template>
-    <el-config-provider :locale="ru">
-        <el-header class="aside__header">
-            <el-date-picker
-                v-model="month"
-                type="month"
-                format="MMMM"
-                value-format="MMMM"
-                :editable="false"
-                :placeholder="month">
-            </el-date-picker>
-            <el-button @click="submitMonth" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
-        </el-header>
-        <el-aside class="aside" :class="{ open: menuIsOpen }">
-            <el-scrollbar>
-                <el-menu :default-active="active.id || monthStore.month.at(-1)?.id">
-                    <el-button
-                        class="menu__item__icon_arrow"
-                        :class="{ open: menuIsOpen }"
-                        type="warning"
-                        circle
-                        :icon="DArrowLeft"
-                        @click="menuIsOpen = !menuIsOpen" />
-                    <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :key="month.id!">
-                        <template #title>
-                            <NuxtLink
-                                class="menu__item__link"
-                                :class="{ open: menuIsOpen }"
-                                @click="selectMonth(month)">
-                                <el-icon><Calendar /></el-icon>{{ month.title }}
-                            </NuxtLink>
+    <el-header class="aside__header">
+        <el-date-picker
+            v-model="month"
+            type="month"
+            format="MMMM"
+            value-format="MMMM"
+            :editable="false"
+            :placeholder="month">
+        </el-date-picker>
+        <el-button @click="submitMonth" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
+    </el-header>
+    <el-aside class="aside" :class="{ open: menuIsOpen }">
+        <el-scrollbar>
+            <el-menu :default-active="active.id || monthStore.month.at(-1)?.id">
+                <el-button
+                    class="menu__item__icon_arrow"
+                    :class="{ open: menuIsOpen }"
+                    type="warning"
+                    circle
+                    :icon="DArrowLeft"
+                    @click="menuIsOpen = !menuIsOpen" />
+                <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :key="month.id!">
+                    <template #title>
+                        <NuxtLink class="menu__item__link" :class="{ open: menuIsOpen }" @click="selectMonth(month)">
+                            <el-icon><Calendar /></el-icon>{{ month.title }}
+                        </NuxtLink>
+                    </template>
+                    <el-dropdown>
+                        <el-icon>
+                            <Expand />
+                        </el-icon>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item disabled>Редактировать</el-dropdown-item>
+                                <el-dropdown-item @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
+                            </el-dropdown-menu>
                         </template>
-                        <el-dropdown>
-                            <el-icon>
-                                <Expand />
-                            </el-icon>
-                            <template #dropdown>
-                                <el-dropdown-menu>
-                                    <el-dropdown-item disabled>Редактировать</el-dropdown-item>
-                                    <el-dropdown-item @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </template>
-                        </el-dropdown>
-                    </el-menu-item>
-                </el-menu>
-            </el-scrollbar>
-        </el-aside>
-    </el-config-provider>
+                    </el-dropdown>
+                </el-menu-item>
+            </el-menu>
+        </el-scrollbar>
+    </el-aside>
 </template>
 <style scoped lang="scss">
 @keyframes icon-rotate {

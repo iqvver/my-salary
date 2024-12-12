@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import ru from 'element-plus/es/locale/lang/ru'
+
 useHead({
     title: 'Моя З/П',
 })
 </script>
 
 <template>
+    <el-config-provider :locale="ru">
     <PrimitivesHeader />
     <el-container class="container">
         <PrimitivesAside />
@@ -12,6 +15,7 @@ useHead({
             <slot />
         </el-main>
     </el-container>
+</el-config-provider>
 </template>
 
 <style scoped lang="scss">

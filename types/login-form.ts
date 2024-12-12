@@ -30,7 +30,7 @@ export const rules = {
     ],
     loginJob: [
         {
-            required: true,
+            required: false,
             message: 'Введите должность',
             trigger: 'change',
         },

@@ -42,8 +42,8 @@ const submitForm = () => {
         <el-button @click="openEditMode" type="primary">Изменить данные</el-button>
         <div>Имя: {{ auth.authUser }}</div>
         <div>Должность: {{ auth.authJob }}</div>
-        <div v-if="auth?.authJob === PositionEnum.OPERATOR">Оклад: 40000</div>
-        <div v-if="auth?.authJob === PositionEnum.ASSISTANT">Оклад: 30000</div>
+        <div v-if="auth?.authJob === PositionEnum.OPERATOR">Оклад: {{options.options[auth.authJob].summa}}</div>
+        <div v-if="auth?.authJob === PositionEnum.ASSISTANT">Оклад: {{options.options[auth.authJob].summa}}</div>
         <el-button v-if="!editMode" @click="userDelete(auth.authUserId)" type="danger" style="width: 200px">
             Удалить профиль
         </el-button>

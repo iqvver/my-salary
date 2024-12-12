@@ -1,4 +1,6 @@
 ﻿import type { ExchangeModel, ExchangesModel } from '~/types'
+import dayjs from 'dayjs'
+import * as nomination from '~/types/const'
 
 const initialExchanges: ExchangesModel = [
     {
@@ -7,7 +9,7 @@ const initialExchanges: ExchangesModel = [
         fromUserId: 1,
         monthId: 8,
         monthTranscription: 'August',
-        designation: 'Рама',
+        title: 103001,
         amount: 11,
         sum: 357,
     },
@@ -32,7 +34,7 @@ const initialExchanges: ExchangesModel = [
         /**
          * Название профиля
          */
-        designation: 'Рама5',
+        title: 105001,
         /**
          * Количество профиля
          */
@@ -61,8 +63,21 @@ export const useExchangesStore = defineStore({
 
     actions: {
         async addExchanges(payload: ExchangeModel) {
+            const myDate = ref(new Date(payload.date))
+            const nom = nomination.nomination[payload.title]
+            const newExchange: ExchangeModel = {
+                id: this.$state.filterExchanges.length + 1,
+                title: payload.title,
+                name: nom.title,
+                fromUserId: payload.fromUserId,
+                date: dayjs(myDate.value).format('DD-MM-YYYY'),
+                monthTranscription: payload.date.toLocaleString('en', { month: 'long' }),
+                monthId: +dayjs(myDate.value).format('M'),
+                amount: payload.amount,
+                sum: payload.amount! * nom.long * nom.price
+            }
             try {
-                this.$state.exchanges = [...this.$state.exchanges, payload]
+                this.$state.exchanges = [...this.$state.exchanges, newExchange]
                 ElNotification({
                     title: 'Успех',
                     message: 'Смена добавлена',
@@ -97,14 +112,10 @@ export const useExchangesStore = defineStore({
         },
 
         async filterExchange(payload: string, userId: number) {
-            console.log(userId)
-            console.log('pay', payload)
             this.$state.filterExchanges = this.$state.exchanges?.filter(
-                (item: { fromUserId: number; monthTranscription: string }) =>
+                (item: { fromUserId: number; monthTranscription?: string }) =>
                     item.monthTranscription === payload && item.fromUserId === userId
             )
-            console.log(this.$state.exchanges)
-            console.log('fil', this.$state.filterExchanges)
             return this.$state.filterExchanges
         },
 

@@ -1,12 +1,14 @@
 /**
  * Отображение смены в каталоге
  */
+
+//TODO переработать типы организовать наследования
 export type ExchangeModel = {
     readonly id?: number
     /**
      * Дата
      */
-    date: string
+    date: Date | string
     /**
      * Какому пользователю принадлежит
      */
@@ -14,21 +16,29 @@ export type ExchangeModel = {
     /**
      * Транскрипция месяца
      */
-    monthTranscription: string
+    monthTranscription?: string
     /**
      * Номер месяца
      */
-    monthId: number
+    monthId?: number
     /**
      * Название профиля
      */
-    designation: string
+    name?: string
+    /**
+     * Название профиля
+     */
+    title: number
     /**
      * Количество
      */
-    amount: number
+    amount?: number
     /**
      * Сумма
      */
-    sum: number
+    sum?: number
+    /**
+     * Объект со всеми свойствами профиля
+     */
+    nom?: {}
 }
