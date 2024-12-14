@@ -32,6 +32,7 @@ const template2: ExchangeModel = {
 const openModal = () => {
     isOpen.value = true
 }
+
 </script>
 <template>
     <modals-add-exchage :isOpen="isOpen" @update:isOpen="(v) => (isOpen = v)" />

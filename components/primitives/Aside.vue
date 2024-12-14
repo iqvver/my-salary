@@ -8,7 +8,7 @@ const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
-const active: any = ref(monthStore.selectedMonth)
+const active: any = ref('')
 const menuIsOpen = ref(false)
 const month = ref(new Date().toLocaleString('en-EN', { month: 'long' }))
 
@@ -27,15 +27,17 @@ onMounted(() => {
 const selectMonth = (month: MonthModel) => {
     router.push(`${month.transcriptionInMonth}`)
     monthStore.selectedMonth = month.transcriptionInMonth
+    active.value = month.id?.toString()
 }
 
 const submitMonth = () => {
     const newMonth: MonthModel = {
-        id: monthStore.filteringMonth.length + 1,
+        id: monthStore.filteringMonth.length.toString(),
         title: month.value,
         transcriptionInMonth: month.value,
         fromUserId: authStore.authUserId,
     }
+   // console.log(newMonth)
     monthStore.createMonth(newMonth)
 }
 </script>
@@ -53,7 +55,7 @@ const submitMonth = () => {
     </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
-            <el-menu :default-active="active.id || monthStore.month.at(-1)?.id">
+            <el-menu  :default-active="active.id || monthStore.filteringMonth.at(-1)?.id">
                 <el-button
                     class="menu__item__icon_arrow"
                     :class="{ open: menuIsOpen }"
@@ -61,7 +63,7 @@ const submitMonth = () => {
                     circle
                     :icon="DArrowLeft"
                     @click="menuIsOpen = !menuIsOpen" />
-                <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :key="month.id!">
+                <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :key="month.id!" :index="month.id">
                     <template #title>
                         <NuxtLink class="menu__item__link" :class="{ open: menuIsOpen }" @click="selectMonth(month)">
                             <el-icon><Calendar /></el-icon>{{ month.title }}

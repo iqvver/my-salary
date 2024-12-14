@@ -12,11 +12,9 @@ const { exchangeForm, loading, onSubmitForm } = defineProps<{
     <el-form class="form" :model="exchangeForm" :label-position="'top'" @submit.prevent="onSubmitForm">
         <el-form-item label="Название">
             <el-select
-                change=""
                 class="form__item"
                 v-model="exchangeForm.title"
-                placeholder="Выберите профиль"
-                clearable>
+                placeholder="Выберите профиль">
                 <el-option
                     v-for="item in nomination.nomination"
                     :index="item.nom"

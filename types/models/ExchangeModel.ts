@@ -28,7 +28,7 @@ export type ExchangeModel = {
     /**
      * Название профиля
      */
-    title: number
+    title: number | string
     /**
      * Количество
      */

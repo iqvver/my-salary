@@ -22,10 +22,10 @@ watch(
 )
 
 const exchangeForm: ExchangeModel = reactive({
-    title: 0,
+    title: '',
     fromUserId: authStore.authUserId,
     date: '' as unknown as Date,
-    amount: 0,
+    amount: 1,
 })
 
 const submitForm = () => {

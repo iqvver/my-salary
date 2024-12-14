@@ -2,7 +2,7 @@
  * Отображение месяцев в каталоге
  */
 export type MonthModel = {
-    readonly id?: number
+    readonly id?: string
     /**
      * Название месяцев
      */
