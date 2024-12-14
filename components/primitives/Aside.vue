@@ -3,6 +3,7 @@ import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
+import dayjs from 'dayjs'
 
 const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
@@ -31,31 +32,27 @@ const selectMonth = (month: MonthModel) => {
 }
 
 const submitMonth = () => {
+    //переработать типы
     const newMonth: MonthModel = {
         id: monthStore.filteringMonth.length.toString(),
-        title: month.value,
-        transcriptionInMonth: month.value,
+        date: month.value,
+        transcriptionInMonth: month.value!.toString(),
         fromUserId: authStore.authUserId,
     }
-   // console.log(newMonth)
     monthStore.createMonth(newMonth)
+    active.value = newMonth.id
+    router.push(dayjs(newMonth.transcriptionInMonth).format('MMMM'))
 }
 </script>
 <template>
     <el-header class="aside__header">
-        <el-date-picker
-            v-model="month"
-            type="month"
-            format="MMMM"
-            value-format="MMMM"
-            :editable="false"
-            :placeholder="month">
+        <el-date-picker v-model="month" type="month" format="MMMM" :editable="false" placeholder="Выберите месяц">
         </el-date-picker>
         <el-button @click="submitMonth" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
     </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
-            <el-menu  :default-active="active.id || monthStore.filteringMonth.at(-1)?.id">
+            <el-menu :default-active="active.id || monthStore.filteringMonth.at(-1)?.id">
                 <el-button
                     class="menu__item__icon_arrow"
                     :class="{ open: menuIsOpen }"
@@ -63,7 +60,11 @@ const submitMonth = () => {
                     circle
                     :icon="DArrowLeft"
                     @click="menuIsOpen = !menuIsOpen" />
-                <el-menu-item class="menu__item" v-for="month in monthStore.filteringMonth" :key="month.id!" :index="month.id">
+                <el-menu-item
+                    class="menu__item"
+                    v-for="month in monthStore.filteringMonth"
+                    :key="month.id!"
+                    :index="month.id">
                     <template #title>
                         <NuxtLink class="menu__item__link" :class="{ open: menuIsOpen }" @click="selectMonth(month)">
                             <el-icon><Calendar /></el-icon>{{ month.title }}

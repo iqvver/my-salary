@@ -1,12 +1,17 @@
 /**
  * Отображение месяцев в каталоге
  */
+//TODO переработать типы организовать наследования
 export type MonthModel = {
     readonly id?: string
     /**
+     * Дата
+     */
+    date?: Date | string
+    /**
      * Название месяцев
      */
-    title: string
+    title?: string
     /**
      * Транскрипция месяца
      */

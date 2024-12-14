@@ -11,7 +11,7 @@ watchEffect(() => {
         router.push('/login')
     } else {
         const path = monthStore.filteringMonth.at(-1)?.transcriptionInMonth
-        router.push(`/${path}`)
+       // router.push(`/${path}`)
     }
 })
 </script>

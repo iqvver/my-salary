@@ -1,4 +1,5 @@
 ﻿import type { MonthsModel, MonthModel } from '~/types'
+import dayjs from 'dayjs'
 
 const initialMonth: MonthsModel = [
     {
@@ -6,14 +7,14 @@ const initialMonth: MonthsModel = [
         title: 'Август',
         transcriptionInMonth: 'August',
         numInMonth: 8,
-        fromUserId: 2
+        fromUserId: 2,
     },
     {
         id: '2',
         title: 'Сентябрь',
         transcriptionInMonth: 'September',
         numInMonth: 9,
-        fromUserId: 1
+        fromUserId: 1,
     },
 ]
 
@@ -35,8 +36,15 @@ export const useMonthCatalogStore = defineStore({
 
     actions: {
         async createMonth(payload: MonthModel) {
+            const myDate = ref(new Date(payload.transcriptionInMonth))
+            const newMonth = {
+                id: payload.id,
+                title: new Date(myDate.value).toLocaleString('ru', { month: 'long' }).toUpperCase(),
+                transcriptionInMonth: dayjs(myDate.value).format('MMMM'),
+                fromUserId: payload.fromUserId,
+            }
             try {
-                ;(this.$state.month = [...this.$state.month, payload]),
+                ;(this.$state.month = [...this.$state.month, newMonth]),
                     ElNotification({
                         title: 'Успех',
                         message: 'Месяц добавлен',
