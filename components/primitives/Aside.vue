@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
+import { MONTH_MASK } from '~/types/const'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
 import dayjs from 'dayjs'
@@ -35,18 +36,18 @@ const submitMonth = () => {
     //переработать типы
     const newMonth: MonthModel = {
         id: monthStore.filteringMonth.length.toString(),
-        date: month.value,
+        date: month.value!.toString(),
         transcriptionInMonth: month.value!.toString(),
         fromUserId: authStore.authUserId,
     }
     monthStore.createMonth(newMonth)
     active.value = newMonth.id
-    router.push(dayjs(newMonth.transcriptionInMonth).format('MMMM'))
+    router.push(dayjs(newMonth.transcriptionInMonth).format(MONTH_MASK))
 }
 </script>
 <template>
     <el-header class="aside__header">
-        <el-date-picker v-model="month" type="month" format="MMMM" :editable="false" placeholder="Выберите месяц">
+        <el-date-picker v-model="month" type="month" :format="MONTH_MASK" :editable="false" placeholder="Выберите месяц">
         </el-date-picker>
         <el-button @click="submitMonth" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
     </el-header>

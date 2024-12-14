@@ -1,6 +1,6 @@
-﻿//TODO: сделать даты через маски
-export const MIN_RATING_AMOUNT = -100
-export const DATE_FILTER_MASK = 'YYYY-MM-DD'
+﻿export const MIN_AMOUNT = 1
+export const MONTH_MASK = 'MMMM'
+export const DATE_MASK = 'DD-MM-YYYY'
 
 export enum NominationEnum {
     RAMA3 = '103001',

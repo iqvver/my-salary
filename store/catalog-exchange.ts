@@ -1,6 +1,7 @@
 ﻿import type { ExchangeModel, ExchangesModel } from '~/types'
 import dayjs from 'dayjs'
 import * as nomination from '~/types/const'
+import { DATE_MASK } from '~/types/const'
 
 const initialExchanges: ExchangesModel = [
     {
@@ -70,8 +71,8 @@ export const useExchangesStore = defineStore({
                 title: payload.title,
                 name: nom.title,
                 fromUserId: payload.fromUserId,
-                date: dayjs(myDate.value).format('DD-MM-YYYY'),
-                monthTranscription: payload.date.toLocaleString('en', { month: 'long' }),
+                date: dayjs(myDate.value).format(DATE_MASK),
+                monthTranscription: payload.date.toLocaleString('en-EN', { month: 'long' }),
                 monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: payload.amount! * nom.long * nom.price

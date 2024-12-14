@@ -1,5 +1,6 @@
 ﻿import type { MonthsModel, MonthModel } from '~/types'
 import dayjs from 'dayjs'
+import { MONTH_MASK } from '~/types/const'
 
 const initialMonth: MonthsModel = [
     {
@@ -7,6 +8,7 @@ const initialMonth: MonthsModel = [
         title: 'Август',
         transcriptionInMonth: 'August',
         numInMonth: 8,
+        date: '156165',
         fromUserId: 2,
     },
     {
@@ -15,8 +17,11 @@ const initialMonth: MonthsModel = [
         transcriptionInMonth: 'September',
         numInMonth: 9,
         fromUserId: 1,
+        date: '157783'
     },
 ]
+
+//TODO: добавить мутации
 
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',
@@ -39,8 +44,9 @@ export const useMonthCatalogStore = defineStore({
             const myDate = ref(new Date(payload.transcriptionInMonth))
             const newMonth = {
                 id: payload.id,
+                date: payload.date,
                 title: new Date(myDate.value).toLocaleString('ru', { month: 'long' }).toUpperCase(),
-                transcriptionInMonth: dayjs(myDate.value).format('MMMM'),
+                transcriptionInMonth: dayjs(myDate.value).format(MONTH_MASK),
                 fromUserId: payload.fromUserId,
             }
             try {

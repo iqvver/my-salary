@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ExchangeModel } from '~/types'
+import { MIN_AMOUNT } from '~/types/const'
 import * as nomination from '~/types/const'
 
 const { exchangeForm, loading, onSubmitForm } = defineProps<{
@@ -27,7 +28,7 @@ const { exchangeForm, loading, onSubmitForm } = defineProps<{
                 class="form__item"
                 v-model="exchangeForm.amount"
                 placeholder="Укажите количество"
-                :min="1"
+                :min="MIN_AMOUNT"
                 clearable>
                 <template #suffix>
                     <span>ШТ</span>
