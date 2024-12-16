@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
-import { MONTH_MASK } from '~/types/const'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
-import dayjs from 'dayjs'
+import AddMonth from '../modals/AddMonth.vue'
 
 const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
@@ -12,7 +11,7 @@ const router = useRouter()
 const route = useRoute()
 const active: any = ref('')
 const menuIsOpen = ref(false)
-const month = ref(new Date().toLocaleString('en-EN', { month: 'long' }))
+const menuAddIsOpen = ref(false)
 
 watchEffect(() => {
     monthStore.readMonth
@@ -22,34 +21,22 @@ watchEffect(() => {
 
 onMounted(() => {
     active.value = monthStore.month.find(
-        (item: { transcriptionInMonth: string }) => item.transcriptionInMonth === monthStore.selectedMonth
+        (item: { transcriptionInMonth?: string }) => item.transcriptionInMonth === monthStore.selectedMonth
     )
 })
 
 const selectMonth = (month: MonthModel) => {
     router.push(`${month.transcriptionInMonth}`)
-    monthStore.selectedMonth = month.transcriptionInMonth
+    monthStore.selectedMonth = month.transcriptionInMonth!
     active.value = month.id?.toString()
 }
-
-const submitMonth = () => {
-    //переработать типы
-    const newMonth: MonthModel = {
-        id: monthStore.filteringMonth.length.toString(),
-        date: month.value!.toString(),
-        transcriptionInMonth: month.value!.toString(),
-        fromUserId: authStore.authUserId,
-    }
-    monthStore.createMonth(newMonth)
-    active.value = newMonth.id
-    router.push(dayjs(newMonth.transcriptionInMonth).format(MONTH_MASK))
+const showAddMenu = () => {
+    menuAddIsOpen.value = !menuAddIsOpen.value
 }
 </script>
 <template>
     <el-header class="aside__header">
-        <el-date-picker v-model="month" type="month" :format="MONTH_MASK" :editable="false" placeholder="Выберите месяц">
-        </el-date-picker>
-        <el-button @click="submitMonth" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
+        <el-button @click="showAddMenu" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
     </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
@@ -62,6 +49,7 @@ const submitMonth = () => {
                     :icon="DArrowLeft"
                     @click="menuIsOpen = !menuIsOpen" />
                 <el-menu-item
+                    v-if="!menuAddIsOpen"
                     class="menu__item"
                     v-for="month in monthStore.filteringMonth"
                     :key="month.id!"
@@ -83,11 +71,20 @@ const submitMonth = () => {
                         </template>
                     </el-dropdown>
                 </el-menu-item>
+                <el-menu-item class="add-month" v-else>
+                    <AddMonth @update:isOpen="(v) => (menuAddIsOpen = v)" />
+                </el-menu-item>
             </el-menu>
         </el-scrollbar>
     </el-aside>
 </template>
 <style scoped lang="scss">
+.add-month {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+}
+
 @keyframes icon-rotate {
     100% {
         rotate: 360deg;
@@ -109,7 +106,7 @@ const submitMonth = () => {
 .menu__item {
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;
+    // align-items: center;
     justify-content: space-between;
     gap: 20px;
     padding: 10px;
@@ -153,7 +150,7 @@ const submitMonth = () => {
     &__header {
         position: fixed;
         top: 0;
-        width: 350px;
+        width: 250px;
         display: flex;
         align-items: center;
         gap: 10px;

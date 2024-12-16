@@ -2,6 +2,7 @@
 import { useAuthStore } from '~/store/auth'
 import { useExchangesStore } from '~/store/catalog-exchange'
 import type { ExchangeModel } from '~/types'
+import AddExchangeForm from '../forms/AddExchangeForm.vue'
 
 const props = defineProps<{ isOpen: boolean }>()
 const emit = defineEmits<{
@@ -33,6 +34,7 @@ const submitForm = () => {
     exchangesStore.addExchanges(exchangeForm)
     setTimeout(() => {
         loading.value = false
+        open.value = false
     }, 400)
 }
 </script>
@@ -44,7 +46,7 @@ const submitForm = () => {
         title="Вы хотите добавить смену в выбранный месяц?"
         direction="ttb"
         size="85%">
-        <FormsExchangeForm :exchangeForm="exchangeForm" :loading="loading" :onSubmitForm="submitForm" />
+        <AddExchangeForm :exchangeForm="exchangeForm" :loading="loading" :onSubmitForm="submitForm" />
         <el-button @click="$emit('update:isOpen', false)">Отмена</el-button>
     </el-drawer>
 </template>

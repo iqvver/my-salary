@@ -17,7 +17,7 @@ const initialMonth: MonthsModel = [
         transcriptionInMonth: 'September',
         numInMonth: 9,
         fromUserId: 1,
-        date: '157783'
+        date: '157783',
     },
 ]
 
@@ -41,12 +41,12 @@ export const useMonthCatalogStore = defineStore({
 
     actions: {
         async createMonth(payload: MonthModel) {
-            const myDate = ref(new Date(payload.transcriptionInMonth))
+            console.log(payload)
             const newMonth = {
                 id: payload.id,
                 date: payload.date,
-                title: new Date(myDate.value).toLocaleString('ru', { month: 'long' }).toUpperCase(),
-                transcriptionInMonth: dayjs(myDate.value).format(MONTH_MASK),
+                title: new Date(payload.date).toLocaleString('ru', { month: 'long' }).toUpperCase(),
+                transcriptionInMonth: dayjs(payload.date).format(MONTH_MASK),
                 fromUserId: payload.fromUserId,
             }
             try {

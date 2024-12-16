@@ -32,18 +32,18 @@ const template2: ExchangeModel = {
 const openModal = () => {
     isOpen.value = true
 }
-
 </script>
 <template>
-    <modals-add-exchage :isOpen="isOpen" @update:isOpen="(v) => (isOpen = v)" />
+    <modals-add-exchange :isOpen="isOpen" @update:isOpen="(v: boolean) => (isOpen = v)" />
     <el-table
         :data="exchangesStore.filterExchanges"
         height="75vh"
+        show-summary
         :default-sort="{ prop: 'date', order: 'descending' }">
         <el-table-column prop="id" label="Смена №" width="120" sortable />
         <el-table-column prop="date" label="Дата" width="180" sortable />
         <el-table-column prop="name" sortable label="Название" width="150" />
-        <el-table-column prop="amount" sortable label="Кол-во" width="120" />
+        <el-table-column prop="amount" sortable label="Кол-во (ШТ)" width="150" />
         <el-table-column prop="sum" label="Сумма" sortable width="120" />
         <el-table-column width="100">
             <template #default="scope">

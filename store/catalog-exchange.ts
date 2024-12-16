@@ -75,7 +75,7 @@ export const useExchangesStore = defineStore({
                 monthTranscription: payload.date.toLocaleString('en-EN', { month: 'long' }),
                 monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
-                sum: payload.amount! * nom.long * nom.price
+                sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
             }
             try {
                 this.$state.exchanges = [...this.$state.exchanges, newExchange]

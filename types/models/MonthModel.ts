@@ -7,7 +7,7 @@ export type MonthModel = {
     /**
      * Дата
      */
-    date: string
+    date: Date | string
     /**
      * Название месяцев
      */
@@ -15,7 +15,7 @@ export type MonthModel = {
     /**
      * Транскрипция месяца
      */
-    transcriptionInMonth: string
+    transcriptionInMonth?: string
     /**
      * Номер месяца
      */
