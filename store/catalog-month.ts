@@ -41,7 +41,6 @@ export const useMonthCatalogStore = defineStore({
 
     actions: {
         async createMonth(payload: MonthModel) {
-            console.log(payload)
             const newMonth = {
                 id: payload.id,
                 date: payload.date,

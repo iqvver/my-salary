@@ -12,10 +12,7 @@ const { exchangeForm, loading, onSubmitForm } = defineProps<{
 <template>
     <el-form class="form" :model="exchangeForm" :label-position="'top'" @submit.prevent="onSubmitForm">
         <el-form-item label="Название">
-            <el-select
-                class="form__item"
-                v-model="exchangeForm.title"
-                placeholder="Выберите профиль">
+            <el-select class="form__item" v-model="exchangeForm.title" placeholder="Выберите профиль">
                 <el-option
                     v-for="item in nomination.nomination"
                     :index="item.nom"
@@ -38,14 +35,14 @@ const { exchangeForm, loading, onSubmitForm } = defineProps<{
         <el-form-item class="form__item" label="Дата">
             <el-date-picker
                 class="form__item"
-                v-model="exchangeForm.date"
+                v-model="exchangeForm.fullDate"
                 type="date"
                 placeholder="Выберите дату"
                 clearable />
         </el-form-item>
         <el-form-item>
             <el-button class="form__item" type="primary" native-type="submit">
-                {{ loading ? 'Добавление ...' : 'Добавить' }}
+                {{ loading ? 'Сохранение ...' : 'Сохранить' }}
             </el-button>
         </el-form-item>
     </el-form>

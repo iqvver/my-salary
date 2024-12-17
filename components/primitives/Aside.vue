@@ -33,6 +33,8 @@ const selectMonth = (month: MonthModel) => {
 const showAddMenu = () => {
     menuAddIsOpen.value = !menuAddIsOpen.value
 }
+
+//TODO: разделить на два компонента
 </script>
 <template>
     <el-header class="aside__header">
@@ -40,7 +42,7 @@ const showAddMenu = () => {
     </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
-            <el-menu :default-active="active.id || monthStore.filteringMonth.at(-1)?.id">
+            <el-menu :default-active="monthStore.filteringMonth.at(-1)?.id">
                 <el-button
                     class="menu__item__icon_arrow"
                     :class="{ open: menuIsOpen }"

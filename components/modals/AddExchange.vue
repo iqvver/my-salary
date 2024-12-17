@@ -4,11 +4,16 @@ import { useExchangesStore } from '~/store/catalog-exchange'
 import type { ExchangeModel } from '~/types'
 import AddExchangeForm from '../forms/AddExchangeForm.vue'
 
-const props = defineProps<{ isOpen: boolean }>()
+const { exchangeEditForm, isOpen, isEdit } = defineProps<{
+    exchangeEditForm: ExchangeModel
+    isEdit: boolean
+    isOpen: boolean
+}>()
 const emit = defineEmits<{
     (event: 'update:isOpen', payload: boolean): void
 }>()
-const open = ref(props.isOpen)
+
+const open = ref(isOpen)
 const loading = ref(false)
 const authStore = useAuthStore()
 const exchangesStore = useExchangesStore()
@@ -18,19 +23,29 @@ watch(
     (cur) => emit('update:isOpen', cur)
 )
 watch(
-    () => props.isOpen,
+    () => isOpen,
     (cur) => (open.value = cur)
 )
 
-const exchangeForm: ExchangeModel = reactive({
+//TODO: сделать что-бы дата вставлялась из активного месяца
+let exchangeForm: ExchangeModel = reactive({
     title: '',
     fromUserId: authStore.authUserId,
-    date: '' as unknown as Date,
+    date: '',
+    fullDate: '',
     amount: 1,
+})
+
+//TODO: в форме визуально на меняются данные хотя все работает и внутри все норм
+watchEffect(() => {
+    isEdit
+        ? (exchangeForm = exchangeEditForm)
+        : (exchangeForm = { title: '', fromUserId: authStore.authUserId, date: '', amount: 1,  fullDate: '' })
 })
 
 const submitForm = () => {
     loading.value = true
+    isEdit ? exchangesStore.updateExchange(exchangeForm) :
     exchangesStore.addExchanges(exchangeForm)
     setTimeout(() => {
         loading.value = false
@@ -43,7 +58,7 @@ const submitForm = () => {
         v-model="open"
         @closed="open = false"
         :destroy-on-close="true"
-        title="Вы хотите добавить смену в выбранный месяц?"
+        :title="`${isEdit ? 'Редактирование' : 'Добавление'} смены!`"
         direction="ttb"
         size="85%">
         <AddExchangeForm :exchangeForm="exchangeForm" :loading="loading" :onSubmitForm="submitForm" />

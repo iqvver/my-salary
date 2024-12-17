@@ -9,8 +9,8 @@ import { useAuthStore } from '~/store/auth'
 const authStore = useAuthStore()
 const exchangesStore = useExchangesStore()
 const monthStore = useMonthCatalogStore()
-const myDate = ref(Date.now())
 let isOpen = ref(false)
+let isEditOpen = ref(false)
 
 watchEffect(() => {
     exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
@@ -18,23 +18,28 @@ watchEffect(() => {
         exchangesStore.readExchanges
 })
 
-const template2: ExchangeModel = {
-    id: 100,
-    date: dayjs(myDate.value).format('YYYY-MM-DD'),
-    fromUserId: authStore.authUserId,
-    monthId: 9,
-    monthTranscription: monthStore.selectedMonth,
-    title: 103005,
-    amount: 11111,
-    sum: 3588887,
-}
+let exchangeEditForm = {}
 
-const openModal = () => {
+const openAddForm = () => {
     isOpen.value = true
 }
+
+const openEditForm = (template: ExchangeModel) => {
+    isEditOpen.value = true
+    isOpen.value = true
+    exchangeEditForm = { ...template, date: new Date(template.date) }
+}
+
+watchEffect(() => {
+    if (!isOpen.value) isEditOpen.value = false
+})
 </script>
 <template>
-    <modals-add-exchange :isOpen="isOpen" @update:isOpen="(v: boolean) => (isOpen = v)" />
+    <modals-add-exchange
+        :isOpen="isOpen"
+        :exchangeEditForm="exchangeEditForm"
+        :isEdit="isEditOpen"
+        @update:isOpen="(v: boolean) => (isOpen = v)" />
     <el-table
         :data="exchangesStore.filterExchanges"
         height="75vh"
@@ -45,14 +50,9 @@ const openModal = () => {
         <el-table-column prop="name" sortable label="Название" width="150" />
         <el-table-column prop="amount" sortable label="Кол-во (ШТ)" width="150" />
         <el-table-column prop="sum" label="Сумма" sortable width="120" />
-        <el-table-column width="100">
+        <el-table-column>
             <template #default="scope">
-                <el-button
-                    size="default"
-                    type="primary"
-                    :icon="Edit"
-                    circle
-                    @click="exchangesStore.updateExchange(scope.row, template2)" />
+                <el-button size="default" type="primary" :icon="Edit" circle @click="openEditForm(scope.row)" />
                 <el-button
                     size="default"
                     type="danger"
@@ -62,6 +62,6 @@ const openModal = () => {
             </template>
         </el-table-column>
     </el-table>
-    <el-button style="width: 100%" @click="openModal"> Добавить смену </el-button>
+    <el-button style="width: 100%" @click="openAddForm"> Добавить смену </el-button>
 </template>
 <style scoped lang="scss"></style>

@@ -7,6 +7,7 @@ const initialExchanges: ExchangesModel = [
     {
         id: 1,
         date: '2016-05-02',
+        fullDate: '2016-05-02',
         fromUserId: 1,
         monthId: 8,
         monthTranscription: 'August',
@@ -20,6 +21,7 @@ const initialExchanges: ExchangesModel = [
          * Дата
          */
         date: '2016-08-02',
+        fullDate: '2016-05-02',
         /**
          * К какому профилю привязана смена
          */
@@ -63,16 +65,18 @@ export const useExchangesStore = defineStore({
     },
 
     actions: {
+        //TODO: навести порядок (как-то много всего)
         async addExchanges(payload: ExchangeModel) {
-            const myDate = ref(new Date(payload.date))
+            const myDate = ref(new Date(payload.fullDate))
             const nom = nomination.nomination[payload.title]
             const newExchange: ExchangeModel = {
-                id: this.$state.filterExchanges.length + 1,
+                id: this.$state.filterExchanges.length,
+                fullDate: payload.fullDate,
                 title: payload.title,
                 name: nom.title,
                 fromUserId: payload.fromUserId,
                 date: dayjs(myDate.value).format(DATE_MASK),
-                monthTranscription: payload.date.toLocaleString('en-EN', { month: 'long' }),
+                monthTranscription: payload.fullDate.toLocaleString('en-EN', { month: 'long' }),
                 monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
@@ -120,11 +124,26 @@ export const useExchangesStore = defineStore({
             return this.$state.filterExchanges
         },
 
-        async updateExchange(payload: ExchangeModel, template: ExchangeModel) {
+        //TODO: навести порядок (как-то много всего)
+        async updateExchange(payload: ExchangeModel) {
+            const myDate = ref(new Date(payload.fullDate))
+            const nom = nomination.nomination[payload.title]
+            const newExchange: ExchangeModel = {
+                id: payload.id,
+                fullDate: payload.fullDate,
+                title: payload.title,
+                name: nom.title,
+                fromUserId: payload.fromUserId,
+                date: dayjs(myDate.value).format(DATE_MASK),
+                monthTranscription: payload.fullDate.toLocaleString('en-EN', { month: 'long' }),
+                monthId: +dayjs(myDate.value).format('M'),
+                amount: payload.amount,
+                sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
+            }
             try {
                 const index = this.$state.exchanges.findIndex((exchange) => exchange.id === payload.id)
                 if (index > -1) {
-                    this.$state.exchanges[index] = { ...template }
+                    this.$state.exchanges[index] = { ...newExchange }
                     ElNotification({
                         title: 'Успех',
                         message: 'Смена изменена',

@@ -10,6 +10,10 @@ export type ExchangeModel = {
      */
     date: Date | string
     /**
+     * Дата полностью
+     */
+    fullDate: Date | string
+    /**
      * Какому пользователю принадлежит
      */
     fromUserId: number
