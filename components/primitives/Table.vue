@@ -3,7 +3,6 @@ import type { ExchangeModel } from '~/types'
 import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { Delete, Edit } from '@element-plus/icons-vue'
-import dayjs from 'dayjs'
 import { useAuthStore } from '~/store/auth'
 
 const authStore = useAuthStore()
@@ -27,12 +26,14 @@ const openAddForm = () => {
 const openEditForm = (template: ExchangeModel) => {
     isEditOpen.value = true
     isOpen.value = true
-    exchangeEditForm = { ...template, date: new Date(template.date) }
+    exchangeEditForm = { ...template }
 }
 
 watchEffect(() => {
     if (!isOpen.value) isEditOpen.value = false
 })
+
+//TODO: добавить в суммирование значки
 </script>
 <template>
     <modals-add-exchange

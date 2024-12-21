@@ -22,6 +22,7 @@ const initialMonth: MonthsModel = [
 ]
 
 //TODO: добавить мутации
+//TODO: сделать что бы не можно было добавлять два одинаковых месяца
 
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',

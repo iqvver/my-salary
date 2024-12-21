@@ -3,6 +3,8 @@ import { useAuthStore } from '~/store/auth'
 import { useExchangesStore } from '~/store/catalog-exchange'
 import type { ExchangeModel } from '~/types'
 import AddExchangeForm from '../forms/AddExchangeForm.vue'
+import type { FormInstance } from 'element-plus'
+import * as form from '~/types/exchanges-form'
 
 const { exchangeEditForm, isOpen, isEdit } = defineProps<{
     exchangeEditForm: ExchangeModel
@@ -13,10 +15,14 @@ const emit = defineEmits<{
     (event: 'update:isOpen', payload: boolean): void
 }>()
 
+const exchangesStore = useExchangesStore()
 const open = ref(isOpen)
 const loading = ref(false)
 const authStore = useAuthStore()
-const exchangesStore = useExchangesStore()
+const ruleForm = reactive<form.ExchangeModel>({
+    ...form.initialValues,
+    fromUserId: authStore.authUserId,
+})
 
 watch(
     () => open.value,
@@ -28,25 +34,22 @@ watch(
 )
 
 //TODO: сделать что-бы дата вставлялась из активного месяца
-let exchangeForm: ExchangeModel = reactive({
+let defaultValues = reactive<form.ExchangeModel>({
     title: '',
     fromUserId: authStore.authUserId,
-    date: '',
-    fullDate: '',
-    amount: 1,
+    date: new Date(),
+    fullDate: new Date(),
+    amount: NaN,
 })
 
 //TODO: в форме визуально на меняются данные хотя все работает и внутри все норм
 watchEffect(() => {
-    isEdit
-        ? (exchangeForm = exchangeEditForm)
-        : (exchangeForm = { title: '', fromUserId: authStore.authUserId, date: '', amount: 1,  fullDate: '' })
+    isEdit ? (defaultValues = exchangeEditForm) : (defaultValues = ruleForm)
 })
 
-const submitForm = () => {
+const submitForm = (ruleForm: ExchangeModel) => {
     loading.value = true
-    isEdit ? exchangesStore.updateExchange(exchangeForm) :
-    exchangesStore.addExchanges(exchangeForm)
+    isEdit ? exchangesStore.updateExchange(ruleForm) : exchangesStore.addExchanges(ruleForm)
     setTimeout(() => {
         loading.value = false
         open.value = false
@@ -61,7 +64,7 @@ const submitForm = () => {
         :title="`${isEdit ? 'Редактирование' : 'Добавление'} смены!`"
         direction="ttb"
         size="85%">
-        <AddExchangeForm :exchangeForm="exchangeForm" :loading="loading" :onSubmitForm="submitForm" />
+        <AddExchangeForm :defaultValues="defaultValues" :loading="loading" @submit="submitForm" />
         <el-button @click="$emit('update:isOpen', false)">Отмена</el-button>
     </el-drawer>
 </template>

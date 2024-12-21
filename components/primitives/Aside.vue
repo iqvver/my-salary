@@ -19,6 +19,8 @@ watchEffect(() => {
     monthStore.selectedMonth = route.path.replace('/', '')
 })
 
+//TODO: что-то месяцами при первой загрузке
+
 onMounted(() => {
     active.value = monthStore.month.find(
         (item: { transcriptionInMonth?: string }) => item.transcriptionInMonth === monthStore.selectedMonth
