@@ -4,7 +4,7 @@ import { PositionEnum } from '~/types/types'
 import type { FormInstance, FormRules } from 'element-plus'
 import { User } from '@element-plus/icons-vue'
 import * as form from '~/types/login-form'
-import * as options from '~/types/types'
+import { options } from '~/types/types'
 
 definePageMeta({ layout: 'personal' })
 useHead({ title: 'Профиль' })
@@ -42,8 +42,8 @@ const submitForm = () => {
         <el-button @click="openEditMode" type="primary">Изменить данные</el-button>
         <div>Имя: {{ auth.authUser }}</div>
         <div>Должность: {{ auth.authJob }}</div>
-        <div v-if="auth?.authJob === PositionEnum.OPERATOR">Оклад: {{options.options[auth.authJob].summa}}</div>
-        <div v-if="auth?.authJob === PositionEnum.ASSISTANT">Оклад: {{options.options[auth.authJob].summa}}</div>
+        <div v-if="auth?.authJob === PositionEnum.OPERATOR">Оклад: {{ options[auth.authJob].summa }}</div>
+        <div v-if="auth?.authJob === PositionEnum.ASSISTANT">Оклад: {{ options[auth.authJob].summa }}</div>
         <el-button v-if="!editMode" @click="userDelete(auth.authUserId)" type="danger" style="width: 200px">
             Удалить профиль
         </el-button>
@@ -63,11 +63,7 @@ const submitForm = () => {
             </el-form-item>
             <el-form-item>
                 <el-select v-model="ruleForm.loginJob" :placeholder="auth.authJob" prop="loginJob">
-                    <el-option
-                        v-for="item in options.options"
-                        :key="item.title"
-                        :label="item.title"
-                        :value="item.title" />
+                    <el-option v-for="item in options" :key="item.title" :label="item.title" :value="item.title" />
                 </el-select>
             </el-form-item>
             <el-form-item>

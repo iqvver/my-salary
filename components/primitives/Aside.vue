@@ -19,8 +19,6 @@ watchEffect(() => {
     monthStore.selectedMonth = route.path.replace('/', '')
 })
 
-//TODO: что-то месяцами при первой загрузке
-
 onMounted(() => {
     active.value = monthStore.month.find(
         (item: { transcriptionInMonth?: string }) => item.transcriptionInMonth === monthStore.selectedMonth
@@ -35,8 +33,6 @@ const selectMonth = (month: MonthModel) => {
 const showAddMenu = () => {
     menuAddIsOpen.value = !menuAddIsOpen.value
 }
-
-//TODO: разделить на два компонента
 </script>
 <template>
     <el-header class="aside__header">
@@ -110,7 +106,6 @@ const showAddMenu = () => {
 .menu__item {
     display: flex;
     flex-direction: row-reverse;
-    // align-items: center;
     justify-content: space-between;
     gap: 20px;
     padding: 10px;

@@ -3,7 +3,7 @@ import { useAuthStore } from '~/store/auth'
 import { User } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import * as form from '~/types/login-form'
-import * as options from '~/types/types'
+import { options } from '~/types/types'
 
 const isLoading = ref(false)
 const authStore = useAuthStore()
@@ -36,7 +36,7 @@ const submitForm = async () => {
         </el-form-item>
         <el-form-item>
             <el-select v-model="ruleForm.loginJob" placeholder="Оператор" prop="loginJob">
-                <el-option v-for="item in options.options" :key="item.title" :label="item.title" :value="item.title" />
+                <el-option v-for="item in options" :key="item.title" :label="item.title" :value="item.title" />
             </el-select>
         </el-form-item>
         <el-form-item>

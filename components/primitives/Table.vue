@@ -9,6 +9,7 @@ import { useAuthStore } from '~/store/auth'
 const authStore = useAuthStore()
 const exchangesStore = useExchangesStore()
 const monthStore = useMonthCatalogStore()
+const router = useRouter()
 let isOpen = ref(false)
 let isEditOpen = ref(false)
 
@@ -64,6 +65,11 @@ const getSummaries = (param: SummaryMethodProps) => {
 
     return sums
 }
+watchEffect(() => {
+    if (!authStore.isAuth) {
+        router.push('/login')
+    }
+})
 </script>
 <template>
     <modals-add-exchange

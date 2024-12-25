@@ -40,7 +40,7 @@ export const useAuthStore = defineStore({
                 ;(this.$state.users = [...this.$state.users, newUser]),
                     ElNotification({
                         title: `Пользователь ${payload.loginName} зарегистрирован`,
-                        message: 'Месяц добавлен',
+                        message: 'Пользователь добавлен',
                         type: 'success',
                     })
                 const router = useRouter()
@@ -71,7 +71,7 @@ export const useAuthStore = defineStore({
         logout() {
             this.clear()
         },
-        async deleteUser(payload: number) {
+        deleteUser(payload: number) {
             try {
                 this.$state.users = this.$state.users.filter((user) => user.id !== payload)
                 this.clear()
