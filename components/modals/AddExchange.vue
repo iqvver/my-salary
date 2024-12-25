@@ -32,8 +32,6 @@ watch(
     () => isOpen,
     (cur) => (open.value = cur)
 )
-
-//TODO: сделать что-бы дата вставлялась из активного месяца
 let defaultValues = reactive<form.ExchangeModel>({
     title: '',
     fromUserId: authStore.authUserId,
@@ -41,8 +39,6 @@ let defaultValues = reactive<form.ExchangeModel>({
     fullDate: new Date(),
     amount: NaN,
 })
-
-//TODO: в форме визуально на меняются данные хотя все работает и внутри все норм
 watchEffect(() => {
     isEdit ? (defaultValues = exchangeEditForm) : (defaultValues = ruleForm)
 })

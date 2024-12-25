@@ -3,6 +3,7 @@ import type { ExchangeModel } from '~/types'
 import { useExchangesStore } from '~/store/catalog-exchange'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { Delete, Edit } from '@element-plus/icons-vue'
+import type { TableColumnCtx } from 'element-plus'
 import { useAuthStore } from '~/store/auth'
 
 const authStore = useAuthStore()
@@ -33,7 +34,36 @@ watchEffect(() => {
     if (!isOpen.value) isEditOpen.value = false
 })
 
-//TODO: добавить в суммирование значки
+interface SummaryMethodProps<T = ExchangeModel> {
+    columns: TableColumnCtx<T>[]
+    data: T[]
+}
+
+const getSummaries = (param: SummaryMethodProps) => {
+    const { columns, data } = param
+    const sums: (string | VNode)[] = []
+    columns.forEach((column, index) => {
+        if (index === 0) {
+            sums[index] = h('div', { style: { textDecoration: 'underline' } }, ['Итого'])
+            return
+        }
+        const values = data.map((item: any) => Number(item[column.property]))
+        if (!values.every((value) => Number.isNaN(value))) {
+            sums[index] = `${values.reduce((prev, curr) => {
+                const value = Number(curr)
+                if (!Number.isNaN(value)) {
+                    return prev + curr
+                } else {
+                    return prev
+                }
+            }, 0)} ₽`
+        } else {
+            sums[index] = ''
+        }
+    })
+
+    return sums
+}
 </script>
 <template>
     <modals-add-exchange
@@ -44,13 +74,14 @@ watchEffect(() => {
     <el-table
         :data="exchangesStore.filterExchanges"
         height="75vh"
+        :summary-method="getSummaries"
         show-summary
         :default-sort="{ prop: 'date', order: 'descending' }">
-        <el-table-column prop="id" label="Смена №" width="120" sortable />
-        <el-table-column prop="date" label="Дата" width="180" sortable />
-        <el-table-column prop="name" sortable label="Название" width="150" />
-        <el-table-column prop="amount" sortable label="Кол-во (ШТ)" width="150" />
-        <el-table-column prop="sum" label="Сумма" sortable width="120" />
+        <el-table-column prop="id" label="Смена №" width="150" sortable />
+        <el-table-column prop="date" label="Дата" sortable />
+        <el-table-column prop="name" sortable label="Название" />
+        <el-table-column prop="amount" sortable label="Кол-во (ШТ)" />
+        <el-table-column prop="sum" label="Сумма (₽)" sortable />
         <el-table-column>
             <template #default="scope">
                 <el-button size="default" type="primary" :icon="Edit" circle @click="openEditForm(scope.row)" />

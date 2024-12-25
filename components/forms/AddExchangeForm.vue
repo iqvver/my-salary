@@ -24,6 +24,28 @@ const submitForm = () => {
 }
 </script>
 <template>
+    <!-- <el-form
+        ref="ruleFormRef"
+        style="max-width: 600px"
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        label-width="auto"
+        class="demo-ruleForm">
+        <el-form-item label="Password" prop="pass">
+            <el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Confirm" prop="checkPass">
+            <el-input v-model="ruleForm.checkPass" type="password" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Age" prop="age">
+            <el-input v-model.number="ruleForm.age" />
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="submitForm(ruleFormRef)"> Submit </el-button>
+            <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+        </el-form-item>
+    </el-form> -->
     <el-form
         class="form"
         ref="ruleFormRef"
@@ -31,7 +53,7 @@ const submitForm = () => {
         :rules="rules"
         :label-position="'top'"
         @submit.prevent="submitForm">
-        <el-form-item label="Название">
+        <el-form-item label="Название" prop="title">
             <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль">
                 <el-option
                     v-for="item in nomination.nomination"
@@ -40,7 +62,7 @@ const submitForm = () => {
                     :value="item.nom" />
             </el-select>
         </el-form-item>
-        <el-form-item label="Количество">
+        <el-form-item label="Количество" prop="amount">
             <el-input-number
                 class="form__item"
                 v-model="ruleForm.amount"
@@ -52,7 +74,7 @@ const submitForm = () => {
                 </template>
             </el-input-number>
         </el-form-item>
-        <el-form-item class="form__item" label="Дата">
+        <el-form-item class="form__item" label="Дата" prop="fullDate">
             <el-date-picker
                 class="form__item"
                 v-model="ruleForm.fullDate"

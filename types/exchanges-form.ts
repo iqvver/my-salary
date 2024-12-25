@@ -11,35 +11,46 @@ export const initialValues = {
     amount: NaN,
 } as ExchangeModel
 
-//TODO: Настроить
+const checkValue = (rule: any, value: any, callback: any) => {
+    if (!value) {
+        return callback(new Error('Please input the value'))
+    }
+}
+
 export const rules: FormRules<ExchangeModel> = {
     title: [
         {
             required: true,
-            message: 'Введите имя',
-            trigger: 'change',
+            message: 'Выберите профиль',
+            trigger: 'blur',
         },
         {
-            validator: (rule, value, callback, source, options) => {
-                const v = value || ''
-                return v.length >= 4
-            },
-            message: 'Введите минимум 4 символа',
+            validator: checkValue,
+            message: 'Выберите профиль',
             trigger: 'change',
         },
     ],
     amount: [
         {
-            required: false,
-            message: 'Введите должность',
+            required: true,
+            message: 'Введите количество',
             trigger: 'change',
         },
         {
-            validator: (rule, value, callback, source, options) => {
-                const v = value || ''
-                return v >= 4
-            },
-            message: 'Введите минимум 4 символа',
+            validator: checkValue,
+            message: 'Введите количество',
+            trigger: 'blur',
+        },
+    ],
+    fullDate: [
+        {
+            required: true,
+            message: 'Выберите дату',
+            trigger: 'change',
+        },
+        {
+            validator: checkValue,
+            message: 'Выберите дату',
             trigger: 'change',
         },
     ],
