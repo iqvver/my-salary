@@ -3,8 +3,8 @@ import { useAuthStore } from '~/store/auth'
 import { useExchangesStore } from '~/store/catalog-exchange'
 import type { ExchangeModel } from '~/types'
 import AddExchangeForm from '../forms/AddExchangeForm.vue'
-import type { FormInstance } from 'element-plus'
 import * as form from '~/types/exchanges-form'
+
 
 const { exchangeEditForm, isOpen, isEdit } = defineProps<{
     exchangeEditForm: ExchangeModel
@@ -42,7 +42,6 @@ let defaultValues = reactive<form.ExchangeModel>({
 watchEffect(() => {
     isEdit ? (defaultValues = exchangeEditForm) : (defaultValues = ruleForm)
 })
-
 const submitForm = (ruleForm: ExchangeModel) => {
     loading.value = true
     isEdit ? exchangesStore.updateExchange(ruleForm) : exchangesStore.addExchanges(ruleForm)

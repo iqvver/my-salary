@@ -17,11 +17,10 @@ const checkValue = (rule: any, value: any, callback: any) => {
     }
 }
 
-//TODO: попробовать сделать шаги
-
 export const rules: FormRules<ExchangeModel> = {
     title: [
         {
+            type: 'string',
             required: true,
             message: 'Выберите профиль',
             trigger: 'blur',
@@ -34,26 +33,16 @@ export const rules: FormRules<ExchangeModel> = {
     ],
     amount: [
         {
+            type: 'number',
             required: true,
             message: 'Введите количество',
-            trigger: 'change',
-        },
-        {
-            validator: checkValue,
-            message: 'Введите количество',
-            trigger: 'blur',
         },
     ],
     fullDate: [
         {
+            type: 'date',
             required: true,
             message: 'Выберите дату',
-            trigger: 'change',
-        },
-        {
-            validator: checkValue,
-            message: 'Выберите дату',
-            trigger: 'change',
         },
     ],
 }
