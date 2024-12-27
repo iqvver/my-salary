@@ -22,7 +22,6 @@ const initialMonth: MonthsModel = [
 ]
 
 //TODO: добавить мутации
-//TODO: сделать что бы не можно было добавлять два одинаковых месяца
 
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',
@@ -50,6 +49,17 @@ export const useMonthCatalogStore = defineStore({
                 fromUserId: payload.fromUserId,
             }
             try {
+                if (
+                    this.$state.filteringMonth.find(
+                        (month) => month.transcriptionInMonth === newMonth.transcriptionInMonth
+                    )
+                ) {
+                    return ElNotification({
+                        title: 'Ошибка Добавления',
+                        message: 'Данный месяц уже добавлен в каталог',
+                        type: 'error',
+                    })
+                }
                 ;(this.$state.month = [...this.$state.month, newMonth]),
                     ElNotification({
                         title: 'Успех',

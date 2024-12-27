@@ -17,6 +17,8 @@ const checkValue = (rule: any, value: any, callback: any) => {
     }
 }
 
+//TODO: попробовать сделать шаги
+
 export const rules: FormRules<ExchangeModel> = {
     title: [
         {
