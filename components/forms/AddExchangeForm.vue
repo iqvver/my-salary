@@ -3,6 +3,7 @@ import type { ExchangeModel } from '~/types'
 import { MIN_AMOUNT, MONTH_MASK } from '~/types/const'
 import * as nomination from '~/types/const'
 import type { FormInstance, FormRules } from 'element-plus'
+import { List, Calendar, Coin } from '@element-plus/icons-vue'
 import * as form from '~/types/exchanges-form'
 import dayjs from 'dayjs'
 
@@ -33,10 +34,12 @@ watchEffect(() => {
     if (ruleForm.title && ruleForm.amount) {
         step.value = 2
     }
-    if (ruleForm.title && ruleForm.amount && dayjs(ruleForm.date).format(MONTH_MASK)) {
+    if (ruleForm.title && ruleForm.amount && ruleForm.fullDate) {
         step.value = 3
     }
 })
+
+//TODO: сделать что-бы вставлялся выбранный месяц
 </script>
 <template>
     <div class="container">
@@ -48,7 +51,7 @@ watchEffect(() => {
             :label-position="'top'"
             @submit.prevent="submitForm">
             <el-form-item label="Название" prop="title">
-                <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль">
+                <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль" clearable>
                     <el-option
                         v-for="item in nomination.nomination"
                         :index="item.nom"
@@ -84,9 +87,9 @@ watchEffect(() => {
         </el-form>
 
         <el-steps class="step" :active="step" finish-status="success" direction="vertical">
-            <el-step title="Вид профиля" />
-            <el-step title="Количество профиля" />
-            <el-step title="Дата" />
+            <el-step title="Вид профиля" :icon="List" />
+            <el-step title="Количество профиля" :icon="Coin" />
+            <el-step title="Дата" :icon="Calendar" />
         </el-steps>
     </div>
 </template>
@@ -97,7 +100,7 @@ watchEffect(() => {
 }
 .step {
     max-width: 500px;
-    height: auto;
+    height: 280px;
 }
 .form {
     padding-left: 10px;
