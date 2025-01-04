@@ -1,4 +1,4 @@
-﻿import type { MonthsModel, MonthModel } from '~/types'
+﻿import type { MonthPreviewModel, MonthsModel, MonthModel } from '~/types'
 import dayjs from 'dayjs'
 import { MONTH_MASK } from '~/types/const'
 
@@ -7,7 +7,6 @@ const initialMonth: MonthsModel = [
         id: '1',
         title: 'Август',
         transcriptionInMonth: 'August',
-        numInMonth: 8,
         date: '156165',
         fromUserId: 2,
     },
@@ -15,7 +14,6 @@ const initialMonth: MonthsModel = [
         id: '2',
         title: 'Сентябрь',
         transcriptionInMonth: 'September',
-        numInMonth: 9,
         fromUserId: 1,
         date: '157783',
     },
@@ -40,13 +38,13 @@ export const useMonthCatalogStore = defineStore({
     },
 
     actions: {
-        async createMonth(payload: MonthModel) {
-            const newMonth = {
+        async createMonth(payload: MonthPreviewModel) {
+            const newMonth: MonthModel = {
                 id: payload.id,
+                fromUserId: payload.fromUserId,
                 date: payload.date,
                 title: new Date(payload.date).toLocaleString('ru', { month: 'long' }).toUpperCase(),
                 transcriptionInMonth: dayjs(payload.date).format(MONTH_MASK),
-                fromUserId: payload.fromUserId,
             }
             try {
                 if (

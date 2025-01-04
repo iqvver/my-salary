@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { MonthModel } from '~/types'
 import { MONTH_MASK } from '~/types/const'
+import type { MonthPreviewModel } from '~/types/models/MonthModel';
 
 const { monthForm, loading, onSubmitForm } = defineProps<{
-    monthForm: MonthModel
+    monthForm: MonthPreviewModel
     loading: boolean
     onSubmitForm: () => void
 }>()

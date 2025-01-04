@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { ExchangeModel } from '~/types'
-import { MIN_AMOUNT, MONTH_MASK } from '~/types/const'
-import * as nomination from '~/types/const'
+import { nomination, MIN_AMOUNT } from '~/types/const'
 import type { FormInstance, FormRules } from 'element-plus'
 import { List, Calendar, Coin } from '@element-plus/icons-vue'
 import * as form from '~/types/exchanges-form'
-import dayjs from 'dayjs'
 
 const { defaultValues, loading } = defineProps<{
     defaultValues: ExchangeModel
@@ -52,11 +50,7 @@ watchEffect(() => {
             @submit.prevent="submitForm">
             <el-form-item label="Название" prop="title">
                 <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль" clearable>
-                    <el-option
-                        v-for="item in nomination.nomination"
-                        :index="item.nom"
-                        :label="item.title"
-                        :value="item.nom" />
+                    <el-option v-for="item in nomination" :index="item.nom" :label="item.title" :value="item.nom" />
                 </el-select>
             </el-form-item>
             <el-form-item label="Количество" prop="amount">

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/auth'
 import { useMonthCatalogStore } from '~/store/catalog-month'
-import type { MonthModel } from '~/types'
 import { MONTH_MASK } from '~/types/const'
 import dayjs from 'dayjs'
+import type { MonthPreviewModel } from '~/types/models/MonthModel'
 
 const emit = defineEmits<{
     (event: 'update:isOpen', payload: boolean): void
@@ -15,7 +15,7 @@ const authStore = useAuthStore()
 const monthStore = useMonthCatalogStore()
 const router = useRouter()
 
-const monthForm: MonthModel = reactive({
+const monthForm: MonthPreviewModel = reactive({
     id: monthStore.filteringMonth.length.toString(),
     fromUserId: authStore.authUserId,
     date: new Date(),

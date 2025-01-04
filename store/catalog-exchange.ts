@@ -71,12 +71,12 @@ export const useExchangesStore = defineStore({
             const nom = nomination.nomination[payload.title]
             const newExchange: ExchangeModel = {
                 id: this.$state.filterExchanges.length,
-                fullDate: payload.fullDate,
+                fullDate: myDate.value,
                 title: payload.title,
                 name: nom.title,
                 fromUserId: payload.fromUserId,
                 date: dayjs(myDate.value).format(DATE_MASK),
-                monthTranscription: payload.fullDate.toLocaleString('en-EN', { month: 'long' }),
+                monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
                 monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
@@ -130,12 +130,12 @@ export const useExchangesStore = defineStore({
             const nom = nomination.nomination[payload.title]
             const newExchange: ExchangeModel = {
                 id: payload.id,
-                fullDate: payload.fullDate,
+                fullDate: myDate.value,
                 title: payload.title,
                 name: nom.title,
                 fromUserId: payload.fromUserId,
                 date: dayjs(myDate.value).format(DATE_MASK),
-                monthTranscription: payload.fullDate.toLocaleString('en-EN', { month: 'long' }),
+                monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
                 monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: +(payload.amount! * nom.long * nom.price).toFixed(2),

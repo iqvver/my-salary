@@ -1,27 +1,29 @@
 /**
  * Отображение месяцев в каталоге
  */
-//TODO переработать типы организовать наследования
-export type MonthModel = {
-    readonly id?: string
+
+export type MonthPreviewModel = {
     /**
-     * Дата
+     * id месяца
      */
-    date: Date | string
-    /**
-     * Название месяцев
-     */
-    title?: string
-    /**
-     * Транскрипция месяца
-     */
-    transcriptionInMonth?: string
-    /**
-     * Номер месяца
-     */
-    numInMonth?: number
+    readonly id: string
     /**
      * Какому пользователю принадлежит
      */
     fromUserId: number
+    /**
+     * Месяц
+     */
+    date: Date | string
+}
+
+export type MonthModel = MonthPreviewModel & {
+    /**
+     * Название месяцев
+     */
+    title: string
+    /**
+     * Транскрипция месяца
+     */
+    transcriptionInMonth: string
 }
