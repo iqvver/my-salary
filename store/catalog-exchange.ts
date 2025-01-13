@@ -60,8 +60,8 @@ export const useExchangesStore = defineStore({
 
     actions: {
         //TODO: навести порядок (как-то много всего)
+        //TODO: разобраться с id
         async addExchanges(payload: ExchangeModel) {
-            console.log(payload)
             const myDate = ref(new Date(payload.fullDate))
             const nom = nomination[payload.title]
             const newExchange: ExchangeModel = {

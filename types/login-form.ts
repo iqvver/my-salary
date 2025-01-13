@@ -1,16 +1,13 @@
 ﻿import type { FormRules } from 'element-plus'
+import type { UserModel } from '.'
 
-export type FormValues = {
-    id: number
-    loginName: string
-    loginJob: string
-}
+export type { UserModel } from '.'
 
 export const initialValues = {
     id: 0,
     loginName: '',
     loginJob: '',
-} as FormValues
+} as UserModel
 
 export const rules = {
     loginName: [
@@ -43,4 +40,4 @@ export const rules = {
             trigger: 'change',
         },
     ],
-} as FormRules<FormValues>
+} as FormRules<UserModel>

@@ -8,10 +8,10 @@ import { options } from '~/types/types'
 const isLoading = ref(false)
 const authStore = useAuthStore()
 const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive<form.FormValues>({
+const ruleForm = reactive<form.UserModel>({
     ...form.initialValues,
 })
-const rules = reactive<FormRules<form.FormValues>>(form.rules)
+const rules = reactive<FormRules<form.UserModel>>(form.rules)
 const submitForm = async () => {
     isLoading.value = true
     authStore.registration(ruleForm)

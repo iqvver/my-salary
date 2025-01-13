@@ -1,31 +1,13 @@
 ﻿<script lang="ts" setup>
 import { useAuthStore } from '~/store/auth'
 import { Select } from '@element-plus/icons-vue'
+import type { UserModel } from '~/types'
 
-const router = useRouter()
 const isLoading = ref(false)
 const authStore = useAuthStore()
 
-const logIn = async (user: any) => {
-    try {
-        isLoading.value = true
-        authStore.login(user)
-        router.push('/')
-        ElNotification({
-            title: 'Вход выполнен',
-            type: 'success',
-        })
-    } catch (error) {
-        console.log(error)
-        ElNotification({
-            title: `${error}`.split(':')[1],
-            message: 'Что-то пошло не так',
-            type: 'error',
-        })
-        throw new Error('Registration response error')
-    } finally {
-        isLoading.value = false
-    }
+const logIn = async (user: UserModel) => {
+    authStore.login(user)
 }
 </script>
 <template>

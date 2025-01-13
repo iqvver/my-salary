@@ -6,7 +6,7 @@ export type { ExchangePayloadModel, ExchangeModel } from '.'
 export const initialValues = {
     title: '',
     amount: NaN,
-    fullDate: new Date(),
+    fullDate: '',
 } as ExchangeInitialModel
 
 const checkValue = (rule: any, value: any, callback: any) => {

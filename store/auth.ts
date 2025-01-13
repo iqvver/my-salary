@@ -13,6 +13,8 @@ const initialUser: UsersModel = [
     },
 ]
 
+//TODO: добавить мутации
+
 export const useAuthStore = defineStore({
     id: 'userCatalog',
     state: () => {
@@ -63,11 +65,29 @@ export const useAuthStore = defineStore({
             router.push('/login')
         },
         login(payload: UserModel) {
-            this.authUserId = payload.id! // Получаем id пользователя
-            this.authUser = payload.loginName
-            this.authJob = payload.loginJob
-            this.isAuth = true
+            const router = useRouter()
+            try {
+                this.authUserId = payload.id! // Получаем id пользователя
+                this.authUser = payload.loginName
+                this.authJob = payload.loginJob
+                this.isAuth = true
+                router.push('/')
+                ElNotification({
+                    title: 'Вход выполнен',
+                    type: 'success',
+                })
+            } catch (error) {
+                console.log(error)
+                ElNotification({
+                    title: `${error}`.split(':')[1],
+                    message: 'Что-то пошло не так',
+                    type: 'error',
+                })
+                throw new Error('Registration response error')
+            } finally {
+            }
         },
+
         logout() {
             this.clear()
         },

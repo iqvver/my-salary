@@ -27,7 +27,6 @@ export type ExchangePayloadModel = ExchangeInitialModel & {
     fromUserId: number
 }
 
-//TODO переработать типы организовать наследования
 export type ExchangeModel = ExchangePayloadModel & {
     /**
      * Дата нужном формате

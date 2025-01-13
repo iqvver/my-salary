@@ -36,8 +36,6 @@ watchEffect(() => {
         step.value = 3
     }
 })
-
-//TODO: сделать что-бы вставлялся выбранный месяц
 </script>
 <template>
     <div class="container">

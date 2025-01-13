@@ -15,8 +15,6 @@ const authStore = useAuthStore()
 const monthStore = useMonthCatalogStore()
 const router = useRouter()
 
-//TODO: сравнить  формы что бы одинаково было
-
 const monthForm: MonthPreviewModel = reactive({
     id: monthStore.filteringMonth.length.toString(),
     fromUserId: authStore.authUserId,
