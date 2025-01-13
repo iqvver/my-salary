@@ -2,47 +2,47 @@
  * Отображение смены в каталоге
  */
 
-//TODO переработать типы организовать наследования
-export type ExchangeModel = {
+export type ExchangeInitialModel = {
+    /**
+     * id Смены
+     */
     readonly id?: number
     /**
-     * Дата
+     * Код профиля
      */
-    date: Date | string
+    title: number | string
+    /**
+     * Количество профиля
+     */
+    amount: number
     /**
      * Дата полностью
      */
     fullDate: Date | string
+}
+export type ExchangePayloadModel = ExchangeInitialModel & {
     /**
      * Какому пользователю принадлежит
      */
     fromUserId: number
+}
+
+//TODO переработать типы организовать наследования
+export type ExchangeModel = ExchangePayloadModel & {
+    /**
+     * Дата нужном формате
+     */
+    date?: Date | string
     /**
      * Транскрипция месяца
      */
     monthTranscription?: string
     /**
-     * Номер месяца
-     */
-    monthId?: number
-    /**
      * Название профиля
      */
     name?: string
     /**
-     * Название профиля
-     */
-    title: number | string
-    /**
-     * Количество
-     */
-    amount?: number
-    /**
-     * Сумма
+     * Сумма (количество * длинна * цена за м2)
      */
     sum?: number
-    /**
-     * Объект со всеми свойствами профиля
-     */
-    nom?: {}
 }

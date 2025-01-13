@@ -1,15 +1,13 @@
 ﻿import type { FormRules } from 'element-plus'
-import type { ExchangeModel } from './models/ExchangeModel'
+import type { ExchangeInitialModel } from '.'
 
-export type { ExchangeModel } from './models/ExchangeModel'
+export type { ExchangePayloadModel, ExchangeModel } from '.'
 
 export const initialValues = {
     title: '',
-    fromUserId: NaN,
-    date: new Date(),
-    fullDate: new Date(),
     amount: NaN,
-} as ExchangeModel
+    fullDate: new Date(),
+} as ExchangeInitialModel
 
 const checkValue = (rule: any, value: any, callback: any) => {
     if (!value) {
@@ -17,7 +15,7 @@ const checkValue = (rule: any, value: any, callback: any) => {
     }
 }
 
-export const rules: FormRules<ExchangeModel> = {
+export const rules: FormRules<ExchangeInitialModel> = {
     title: [
         {
             type: 'string',

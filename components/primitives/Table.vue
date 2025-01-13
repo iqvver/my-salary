@@ -19,7 +19,16 @@ watchEffect(() => {
         exchangesStore.readExchanges
 })
 
-let exchangeEditForm = {}
+let exchangeEditForm: ExchangeModel = {
+    id: NaN,
+    fromUserId: NaN,
+    date: '',
+    fullDate: '',
+    monthTranscription: '',
+    title: NaN,
+    amount: NaN,
+    sum: NaN,
+}
 
 const openAddForm = () => {
     isOpen.value = true

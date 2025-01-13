@@ -4,7 +4,7 @@ export interface MonthsModel extends Array<MonthModel> {}
 export interface ExchangesModel extends Array<ExchangeModel> {}
 export interface UsersModel extends Array<UserModel> {}
 
-//Разобраться
+//TODO:Разобраться
 export type ExtendedMonthSoreModel = {
     month: MonthModel[]
     selectedMonth: string

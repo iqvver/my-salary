@@ -19,7 +19,7 @@ const exchangesStore = useExchangesStore()
 const open = ref(isOpen)
 const loading = ref(false)
 const authStore = useAuthStore()
-const ruleForm = reactive<form.ExchangeModel>({
+const ruleForm = reactive<form.ExchangePayloadModel>({
     ...form.initialValues,
     fromUserId: authStore.authUserId,
 })
@@ -32,10 +32,9 @@ watch(
     () => isOpen,
     (cur) => (open.value = cur)
 )
-let defaultValues = reactive<form.ExchangeModel>({
+let defaultValues = reactive<form.ExchangePayloadModel>({
     title: '',
     fromUserId: authStore.authUserId,
-    date: new Date(),
     fullDate: new Date(),
     amount: NaN,
 })

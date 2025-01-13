@@ -1,7 +1,6 @@
 ﻿import type { ExchangeModel, ExchangesModel } from '~/types'
 import dayjs from 'dayjs'
-import * as nomination from '~/types/const'
-import { DATE_MASK } from '~/types/const'
+import { DATE_MASK, nomination } from '~/types/const'
 
 const initialExchanges: ExchangesModel = [
     {
@@ -9,7 +8,6 @@ const initialExchanges: ExchangesModel = [
         date: '2016-05-02',
         fullDate: '2016-05-02',
         fromUserId: 1,
-        monthId: 8,
         monthTranscription: 'August',
         title: 103001,
         amount: 11,
@@ -26,10 +24,6 @@ const initialExchanges: ExchangesModel = [
          * К какому профилю привязана смена
          */
         fromUserId: 2,
-        /**
-         * К какому месяцу привязана смена
-         */
-        monthId: 9,
         /**
          * Транскрипция месяца
          */
@@ -67,8 +61,9 @@ export const useExchangesStore = defineStore({
     actions: {
         //TODO: навести порядок (как-то много всего)
         async addExchanges(payload: ExchangeModel) {
+            console.log(payload)
             const myDate = ref(new Date(payload.fullDate))
-            const nom = nomination.nomination[payload.title]
+            const nom = nomination[payload.title]
             const newExchange: ExchangeModel = {
                 id: this.$state.filterExchanges.length,
                 fullDate: myDate.value,
@@ -77,7 +72,6 @@ export const useExchangesStore = defineStore({
                 fromUserId: payload.fromUserId,
                 date: dayjs(myDate.value).format(DATE_MASK),
                 monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
-                monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
             }
@@ -127,7 +121,7 @@ export const useExchangesStore = defineStore({
         //TODO: навести порядок (как-то много всего)
         async updateExchange(payload: ExchangeModel) {
             const myDate = ref(new Date(payload.fullDate))
-            const nom = nomination.nomination[payload.title]
+            const nom = nomination[payload.title]
             const newExchange: ExchangeModel = {
                 id: payload.id,
                 fullDate: myDate.value,
@@ -136,7 +130,6 @@ export const useExchangesStore = defineStore({
                 fromUserId: payload.fromUserId,
                 date: dayjs(myDate.value).format(DATE_MASK),
                 monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
-                monthId: +dayjs(myDate.value).format('M'),
                 amount: payload.amount,
                 sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
             }
