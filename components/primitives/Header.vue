@@ -35,6 +35,12 @@ const handleCardClick = () => {
     -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 
+    @media (max-width: 440px) {
+        height: 100px;
+        align-items: start;
+        padding-top: 10px;
+    }
+
     &__wrapper {
         display: flex;
         align-items: center;

@@ -34,8 +34,10 @@ const logIn = async (user: UserModel) => {
 
     &__footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 0.5em;
         width: 100%;
+        flex-wrap: wrap;
     }
 }
 </style>

@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete } from '@element-plus/icons-vue'
+import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete, View } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
+import { useMetaStore } from '~/store/meta'
 import AddMonth from '../modals/AddMonth.vue'
 
 const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
+const meta = useMetaStore()
 const router = useRouter()
 const route = useRoute()
 const active: any = ref('')
@@ -32,6 +34,11 @@ const selectMonth = (month: MonthModel) => {
 }
 const showAddMenu = () => {
     menuAddIsOpen.value = !menuAddIsOpen.value
+    if (menuAddIsOpen.value) menuIsOpen.value = false
+}
+const showMenu = () => {
+    menuIsOpen.value = !menuIsOpen.value
+    if (menuIsOpen.value) menuAddIsOpen.value = false
 }
 </script>
 <template>
@@ -47,7 +54,7 @@ const showAddMenu = () => {
                     type="warning"
                     circle
                     :icon="DArrowLeft"
-                    @click="menuIsOpen = !menuIsOpen" />
+                    @click="showMenu" />
                 <el-menu-item
                     v-if="!menuAddIsOpen"
                     class="menu__item"
@@ -59,17 +66,22 @@ const showAddMenu = () => {
                             <el-icon><Calendar /></el-icon>{{ month.title }}
                         </NuxtLink>
                     </template>
-                    <el-dropdown>
+                    <el-dropdown v-if="!menuIsOpen">
                         <el-icon>
                             <Expand />
                         </el-icon>
                         <template #dropdown>
                             <el-dropdown-menu>
                                 <el-dropdown-item :icon="Edit" disabled>Редактировать</el-dropdown-item>
-                                <el-dropdown-item :icon="Delete" @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
+                                <el-dropdown-item :icon="Delete" @click="monthStore.deleteMonth(month)"
+                                    >Удалить</el-dropdown-item
+                                >
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
+                    <el-icon v-else>
+                        <View />
+                    </el-icon>
                 </el-menu-item>
                 <el-menu-item class="add-month" v-else>
                     <AddMonth @update:isOpen="(v) => (menuAddIsOpen = v)" />
@@ -142,6 +154,10 @@ const showAddMenu = () => {
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     transition: 1s;
 
+    @media (max-width: 500px) {
+        width: 100%;
+    }
+
     &.open {
         width: 55px;
     }
@@ -154,6 +170,10 @@ const showAddMenu = () => {
         align-items: center;
         gap: 10px;
         padding: 0;
+
+        @media (max-width: 440px) {
+            top: 50px;
+        }
 
         & button {
             margin-right: 10px;
