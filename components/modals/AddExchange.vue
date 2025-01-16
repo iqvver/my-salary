@@ -5,7 +5,6 @@ import type { ExchangeModel } from '~/types'
 import AddExchangeForm from '../forms/AddExchangeForm.vue'
 import * as form from '~/types/exchanges-form'
 
-
 const { exchangeEditForm, isOpen, isEdit } = defineProps<{
     exchangeEditForm: ExchangeModel
     isEdit: boolean

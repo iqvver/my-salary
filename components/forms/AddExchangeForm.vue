@@ -72,7 +72,7 @@ watchEffect(() => {
                     clearable />
             </el-form-item>
             <el-form-item>
-                <el-button class="form__item" type="primary" native-type="submit">
+                <el-button :disabled="step < 3" class="form__item" type="primary" native-type="submit">
                     {{ loading ? 'Сохранение ...' : 'Сохранить' }}
                 </el-button>
             </el-form-item>
@@ -88,15 +88,14 @@ watchEffect(() => {
 <style scoped lang="scss">
 .container {
     display: flex;
-    gap: 100px;
+    gap: 50px;
 }
 .step {
     max-width: 500px;
     height: 280px;
 }
 .form {
-    padding-left: 10px;
-    width: 300px;
+    max-width: 300px;
 
     &__item {
         width: 100%;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar, Plus, Expand, DArrowLeft } from '@element-plus/icons-vue'
+import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
@@ -65,8 +65,8 @@ const showAddMenu = () => {
                         </el-icon>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item disabled>Редактировать</el-dropdown-item>
-                                <el-dropdown-item @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
+                                <el-dropdown-item :icon="Edit" disabled>Редактировать</el-dropdown-item>
+                                <el-dropdown-item :icon="Delete" @click="monthStore.deleteMonth(month)">Удалить</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>

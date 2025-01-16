@@ -18,11 +18,11 @@ const userDelete = (user: number) => {
 }
 
 const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive<form.FormValues>({
+const ruleForm = reactive<form.UserModel>({
     ...form.initialValues,
     id: auth.authUserId,
 })
-const rules = reactive<FormRules<form.FormValues>>(form.rules)
+const rules = reactive<FormRules<form.UserModel>>(form.rules)
 const openEditMode = () => {
     editMode.value = true
 }

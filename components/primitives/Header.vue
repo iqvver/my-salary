@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Setting } from '@element-plus/icons-vue'
+import { Setting, User, Close } from '@element-plus/icons-vue'
 import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
@@ -18,8 +18,8 @@ const handleCardClick = () => {
                 </el-icon>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item @click="handleCardClick">Профиль</el-dropdown-item>
-                        <el-dropdown-item @click="auth.logout()">Выйти</el-dropdown-item>
+                        <el-dropdown-item @click="handleCardClick" :icon="User">Профиль</el-dropdown-item>
+                        <el-dropdown-item @click="auth.logout()" :icon="Close">Выйти</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
