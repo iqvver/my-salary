@@ -13,8 +13,6 @@ const initialUser: UsersModel = [
     },
 ]
 
-//TODO: добавить мутации
-
 export const useAuthStore = defineStore({
     id: 'userCatalog',
     state: () => {
@@ -26,20 +24,17 @@ export const useAuthStore = defineStore({
             authJob: 'Должность',
         }
     },
+
     getters: {
         readUser(state) {
             return (state.users = initialUser)
         },
     },
+
     actions: {
         async registration(payload: UserModel) {
-            const newUser = {
-                id: Math.random(),
-                loginName: payload.loginName,
-                loginJob: payload.loginJob,
-            }
             try {
-                ;(this.$state.users = [...this.$state.users, newUser]),
+                ;(this.$state.users = [...this.$state.users, convertingNewUser(payload)]),
                     ElNotification({
                         title: `Пользователь ${payload.loginName} зарегистрирован`,
                         message: 'Пользователь добавлен',
@@ -57,6 +52,7 @@ export const useAuthStore = defineStore({
             } finally {
             }
         },
+
         clear() {
             this.authUser = ''
             this.authJob = ''
@@ -64,6 +60,7 @@ export const useAuthStore = defineStore({
             const router = useRouter()
             router.push('/login')
         },
+
         login(payload: UserModel) {
             const router = useRouter()
             try {
@@ -91,6 +88,7 @@ export const useAuthStore = defineStore({
         logout() {
             this.clear()
         },
+
         deleteUser(payload: number) {
             try {
                 this.$state.users = this.$state.users.filter((user) => user.id !== payload)
@@ -109,6 +107,7 @@ export const useAuthStore = defineStore({
             } finally {
             }
         },
+
         async updateUser(payload: UserModel) {
             try {
                 const index = this.$state.users.findIndex((user) => user.id === payload.id)

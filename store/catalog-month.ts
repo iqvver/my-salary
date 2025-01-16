@@ -19,8 +19,6 @@ const initialMonth: MonthsModel = [
     },
 ]
 
-//TODO: добавить мутации
-
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',
     state: () => {
@@ -39,17 +37,10 @@ export const useMonthCatalogStore = defineStore({
 
     actions: {
         async createMonth(payload: MonthPreviewModel) {
-            const newMonth: MonthModel = {
-                id: payload.id,
-                fromUserId: payload.fromUserId,
-                date: payload.date,
-                title: new Date(payload.date).toLocaleString('ru', { month: 'long' }).toUpperCase(),
-                transcriptionInMonth: dayjs(payload.date).format(MONTH_MASK),
-            }
             try {
                 if (
                     this.$state.filteringMonth.find(
-                        (month) => month.transcriptionInMonth === newMonth.transcriptionInMonth
+                        (month) => month.transcriptionInMonth === dayjs(payload.date).format(MONTH_MASK)
                     )
                 ) {
                     return ElNotification({
@@ -58,7 +49,7 @@ export const useMonthCatalogStore = defineStore({
                         type: 'error',
                     })
                 }
-                ;(this.$state.month = [...this.$state.month, newMonth]),
+                ;(this.$state.month = [...this.$state.month, convertingNewMonth(payload)]),
                     ElNotification({
                         title: 'Успех',
                         message: 'Месяц добавлен',

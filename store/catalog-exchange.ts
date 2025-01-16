@@ -1,6 +1,4 @@
 ﻿import type { ExchangeModel, ExchangesModel } from '~/types'
-import dayjs from 'dayjs'
-import { DATE_MASK, nomination } from '~/types/const'
 
 const initialExchanges: ExchangesModel = [
     {
@@ -59,24 +57,12 @@ export const useExchangesStore = defineStore({
     },
 
     actions: {
-        //TODO: навести порядок (как-то много всего)
-        //TODO: разобраться с id
         async addExchanges(payload: ExchangeModel) {
-            const myDate = ref(new Date(payload.fullDate))
-            const nom = nomination[payload.title]
-            const newExchange: ExchangeModel = {
-                id: this.$state.filterExchanges.length,
-                fullDate: myDate.value,
-                title: payload.title,
-                name: nom.title,
-                fromUserId: payload.fromUserId,
-                date: dayjs(myDate.value).format(DATE_MASK),
-                monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
-                amount: payload.amount,
-                sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
-            }
             try {
-                this.$state.exchanges = [...this.$state.exchanges, newExchange]
+                this.$state.exchanges = [
+                    ...this.$state.exchanges,
+                    convertingNewExchanges(payload, this.$state.filterExchanges.length),
+                ]
                 ElNotification({
                     title: 'Успех',
                     message: 'Смена добавлена',
@@ -118,25 +104,11 @@ export const useExchangesStore = defineStore({
             return this.$state.filterExchanges
         },
 
-        //TODO: навести порядок (как-то много всего)
         async updateExchange(payload: ExchangeModel) {
-            const myDate = ref(new Date(payload.fullDate))
-            const nom = nomination[payload.title]
-            const newExchange: ExchangeModel = {
-                id: payload.id,
-                fullDate: myDate.value,
-                title: payload.title,
-                name: nom.title,
-                fromUserId: payload.fromUserId,
-                date: dayjs(myDate.value).format(DATE_MASK),
-                monthTranscription: myDate.value.toLocaleString('en-EN', { month: 'long' }),
-                amount: payload.amount,
-                sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
-            }
             try {
                 const index = this.$state.exchanges.findIndex((exchange) => exchange.id === payload.id)
                 if (index > -1) {
-                    this.$state.exchanges[index] = { ...newExchange }
+                    this.$state.exchanges[index] = { ...convertingNewExchanges(payload, payload.id!) }
                     ElNotification({
                         title: 'Успех',
                         message: 'Смена изменена',
