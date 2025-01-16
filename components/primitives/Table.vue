@@ -5,6 +5,7 @@ import { useMonthCatalogStore } from '~/store/catalog-month'
 import { Delete, Edit } from '@element-plus/icons-vue'
 import type { TableColumnCtx } from 'element-plus'
 import { useAuthStore } from '~/store/auth'
+import ExchangeCard from '../cards/ExchangeCard.vue'
 
 const authStore = useAuthStore()
 const exchangesStore = useExchangesStore()
@@ -86,13 +87,15 @@ watchEffect(() => {
         :exchangeEditForm="exchangeEditForm"
         :isEdit="isEditOpen"
         @update:isOpen="(v: boolean) => (isOpen = v)" />
+        <div class="wrapper-card">Сумма за месяц</div>
     <el-table
+        class="table"
         :data="exchangesStore.filterExchanges"
         height="75vh"
         :summary-method="getSummaries"
         show-summary
         :default-sort="{ prop: 'date', order: 'descending' }">
-        <el-table-column prop="id" label="Смена №" width="150" sortable />
+        <el-table-column prop="id" label="Смена №" sortable />
         <el-table-column prop="date" label="Дата" sortable />
         <el-table-column prop="name" sortable label="Название" />
         <el-table-column prop="amount" sortable label="Кол-во (ШТ)" />
@@ -109,6 +112,19 @@ watchEffect(() => {
             </template>
         </el-table-column>
     </el-table>
+    <ExchangeCard class="wrapper-card" />
     <el-button style="width: 100%" @click="openAddForm"> Добавить смену </el-button>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.table {
+    @media (max-width: 550px) {
+        display: none;
+    }
+}
+.wrapper-card {
+    display: none;
+    @media (max-width: 550px) {
+        display: flex;
+    }
+}
+</style>

@@ -3,12 +3,10 @@ import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete, View } from '@element
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
-import { useMetaStore } from '~/store/meta'
 import AddMonth from '../modals/AddMonth.vue'
 
 const monthStore = useMonthCatalogStore()
 const authStore = useAuthStore()
-const meta = useMetaStore()
 const router = useRouter()
 const route = useRoute()
 const active: any = ref('')

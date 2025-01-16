@@ -26,12 +26,7 @@ const {} = defineProps<{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: calc(100vh - 84px);
-
-    @media (max-width: 500px) {
-        padding: 20px;
-    }
 
     &__wrap {
         margin-top: 70px;
@@ -46,7 +41,6 @@ const {} = defineProps<{
 
         @media (max-width: 500px) {
             width: 90%;
-            margin-top: 20px;
         }
 
         @media (max-width: 330px) {

@@ -23,7 +23,7 @@ const handleCardClick = () => {
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-            <span>{{ auth.authUser }}({{ auth.authJob }})</span>
+            <span>{{ auth.authUser }} ({{ auth.authJob }})</span>
         </div>
     </el-header>
 </template>
