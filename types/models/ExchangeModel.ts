@@ -6,7 +6,7 @@ export type ExchangeInitialModel = {
     /**
      * id Смены
      */
-    readonly id?: number
+    id?: number
     /**
      * Код профиля
      */

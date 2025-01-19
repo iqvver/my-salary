@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 //TODO: LocalStorage
-//TODO: Вынести цвета и шрифты в отдельный файл
-//TODO: Баг с номерами смен при удалении
+//TODO: Баг с номерами (id) смен при удалении
 import MobileDetect from 'mobile-detect'
 import { useMetaStore } from '~/store/meta'
 

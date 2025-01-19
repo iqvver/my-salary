@@ -103,10 +103,12 @@ export const useExchangesStore = defineStore({
         },
 
         async filterExchange(payload: string, userId: number) {
-            this.$state.filterExchanges = this.$state.exchanges?.filter(
-                (item: { fromUserId: number; monthTranscription?: string }) =>
-                    item.monthTranscription === payload && item.fromUserId === userId
-            )
+            this.$state.filterExchanges = this.$state.exchanges
+                ?.filter(
+                    (item: { fromUserId: number; monthTranscription?: string }) =>
+                        item.monthTranscription === payload && item.fromUserId === userId
+                )
+                .sort((a: any, b: any) => a.fullDate - b.fullDate)
             return this.$state.filterExchanges
         },
 

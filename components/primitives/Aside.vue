@@ -78,7 +78,7 @@ const showMenu = () => {
                         </template>
                     </el-dropdown>
                     <el-icon v-else @click="selectMonth(month)">
-                        <View />
+                        {{ month.title.substring(0, 3) }}
                     </el-icon>
                 </el-menu-item>
                 <el-menu-item class="add-month" v-else>
