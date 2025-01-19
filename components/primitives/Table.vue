@@ -15,7 +15,8 @@ let isEditOpen = ref(false)
 watchEffect(() => {
     exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
         exchangesStore.addExchanges,
-        exchangesStore.readExchanges
+        exchangesStore.readExchanges,
+        exchangesStore.getTotalSummary
 })
 
 let exchangeEditForm: ExchangeModel = {
@@ -59,7 +60,7 @@ watchEffect(() => {
         :exchangeEditForm="exchangeEditForm"
         :isEdit="isEditOpen"
         @update:isOpen="(v: boolean) => (isOpen = v)" />
-    <h4>Сумма за месяц</h4>
+    <h4>Сумма за месяц: {{ exchangesStore.totalSummary }}</h4>
     <div class="wrapper-card">
         <ExchangeCard
             v-for="card in exchangesStore.filterExchanges"

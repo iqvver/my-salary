@@ -10,7 +10,7 @@ const initialExchanges: ExchangesModel = [
         title: 103001,
         amount: 11,
         sum: 357,
-        name: "Рама 3"
+        name: 'Рама 3',
     },
     {
         id: 2,
@@ -39,7 +39,7 @@ const initialExchanges: ExchangesModel = [
          * Сумма amount * 6.5 * 0.6
          */
         sum: 357,
-        name: "Рама 3"
+        name: 'Рама 3',
     },
 ]
 
@@ -49,12 +49,16 @@ export const useExchangesStore = defineStore({
         return {
             exchanges: [] as ExchangeModel[],
             filterExchanges: [] as ExchangeModel[],
+            totalSummary: 0,
         }
     },
 
     getters: {
         async readExchanges(state) {
             return (state.exchanges = initialExchanges)
+        },
+        async getTotalSummary(state) {
+            return (state.totalSummary = state.filterExchanges.reduce((a, exchange) => a + exchange.sum!, 0))
         },
     },
 
