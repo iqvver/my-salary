@@ -38,67 +38,60 @@ watchEffect(() => {
 })
 </script>
 <template>
-    <div class="container">
-        <el-form
-            class="form"
-            ref="ruleFormRef"
-            :model="ruleForm"
-            :rules="rules"
-            :label-position="'top'"
-            @submit.prevent="submitForm">
-            <el-form-item label="Название" prop="title">
-                <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль" clearable>
-                    <el-option v-for="item in nomination" :index="item.nom" :label="item.title" :value="item.nom" />
-                </el-select>
-            </el-form-item>
-            <el-form-item label="Количество" prop="amount">
-                <el-input-number
-                    class="form__item"
-                    v-model="ruleForm.amount"
-                    placeholder="Укажите количество"
-                    :min="MIN_AMOUNT"
-                    clearable>
-                    <template #suffix>
-                        <span>ШТ</span>
-                    </template>
-                </el-input-number>
-            </el-form-item>
-            <el-form-item class="form__item" label="Дата" prop="fullDate">
-                <el-date-picker
-                    class="form__item"
-                    v-model="ruleForm.fullDate"
-                    type="date"
-                    placeholder="Выберите дату"
-                    clearable />
-            </el-form-item>
-            <el-form-item>
-                <el-button :disabled="step < 3" class="form__item" type="primary" native-type="submit">
-                    {{ loading ? 'Сохранение ...' : 'Сохранить' }}
-                </el-button>
-            </el-form-item>
-        </el-form>
-
-        <el-steps class="step" :active="step" finish-status="success" direction="vertical">
-            <el-step title="Вид профиля" :icon="List" />
-            <el-step title="Количество профиля" :icon="Coin" />
-            <el-step title="Дата" :icon="Calendar" />
-        </el-steps>
-    </div>
+    <el-form
+        class="form"
+        ref="ruleFormRef"
+        :model="ruleForm"
+        :rules="rules"
+        :label-position="'top'"
+        @submit.prevent="submitForm">
+        <el-form-item label="Название" prop="title">
+            <el-select class="form__item" v-model="ruleForm.title" placeholder="Выберите профиль" clearable>
+                <el-option v-for="item in nomination" :index="item.nom" :label="item.title" :value="item.nom" />
+            </el-select>
+        </el-form-item>
+        <el-form-item label="Количество" prop="amount">
+            <el-input-number
+                class="form__item"
+                v-model="ruleForm.amount"
+                placeholder="Укажите количество"
+                :min="MIN_AMOUNT"
+                clearable>
+                <template #suffix>
+                    <span>ШТ</span>
+                </template>
+            </el-input-number>
+        </el-form-item>
+        <el-form-item class="form__item" label="Дата" prop="fullDate">
+            <el-date-picker
+                class="form__item"
+                v-model="ruleForm.fullDate"
+                type="date"
+                placeholder="Выберите дату"
+                clearable />
+        </el-form-item>
+        <el-form-item class="form__item">
+            <el-steps class="form__item" :active="step" finish-status="success" direction="horizontal">
+                <el-step title="Вид профиля" :icon="List" />
+                <el-step title="Количество профиля" :icon="Coin" />
+                <el-step title="Дата" :icon="Calendar" />
+            </el-steps>
+        </el-form-item>
+        <el-form-item>
+            <el-button :disabled="step < 3" class="form__item" type="primary" native-type="submit">
+                {{ loading ? 'Сохранение ...' : 'Сохранить' }}
+            </el-button>
+        </el-form-item>
+    </el-form>
 </template>
 <style scoped lang="scss">
-.container {
-    display: flex;
-    gap: 50px;
-}
-.step {
-    max-width: 500px;
-    height: 280px;
-}
 .form {
-    max-width: 300px;
-
     &__item {
-        width: 100%;
+        width: 500px;
+
+        @media (max-width: 660px) {
+            width: 100%;
+        }
     }
 }
 </style>

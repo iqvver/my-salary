@@ -68,6 +68,7 @@ watchEffect(() => {
             @delete="exchangeDelete"
             @edit="openEditForm" />
     </div>
+    <PrimitivesNoContentWarning v-if="!exchangesStore.filterExchanges.length" />
     <el-button style="width: 100%" @click="openAddForm"> Добавить смену </el-button>
 </template>
 <style scoped lang="scss">
