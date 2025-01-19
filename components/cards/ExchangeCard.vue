@@ -38,7 +38,7 @@ const emit = defineEmits<{
     width: 45%;
     min-width: 300px;
     min-height: 150px;
-    background-color: #f1f1f1;
+    background-color: var(--color-bg-card);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -52,9 +52,9 @@ const emit = defineEmits<{
     }
 
     &__id {
-        font-size: 12px;
+        font-size: var(--fs-xs);
         margin-bottom: 5px;
-        color: rgba(144, 147, 153, 1);
+        color: var(--color-gray);
     }
 
     &__header,
@@ -65,12 +65,13 @@ const emit = defineEmits<{
         align-items: center;
         padding: 5px;
         font-size: 14px;
+        font-size: var(--fs-sm);
     }
 
     &__divider {
         width: 100%;
         height: 1px;
-        background-color: rgba(144, 147, 153, 1);
+        background-color: var(--color-divider);
         margin: 5px 0;
     }
 }

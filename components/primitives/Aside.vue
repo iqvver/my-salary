@@ -136,7 +136,7 @@ const showMenu = () => {
         }
         &_del {
             &:hover {
-                color: #000;
+                color: var(--color-black);
                 opacity: 0.5;
             }
         }

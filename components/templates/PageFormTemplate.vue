@@ -31,13 +31,13 @@ const {} = defineProps<{
     &__wrap {
         margin-top: 70px;
         padding: 24px;
-        background-color: rgba(250, 250, 250, 1);
+        background-color: var(--color-white);
         width: 416px;
         max-height: 382px;
         border-radius: 16px;
-        -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-        -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        -webkit-box-shadow: 0px 5px 10px 2px var(--color-shadow);
+        -moz-box-shadow: 0px 5px 10px 2px var(--color-shadow);
+        box-shadow: 0px 5px 10px 2px var(--color-shadow);
 
         @media (max-width: 500px) {
             width: 90%;
@@ -69,14 +69,14 @@ const {} = defineProps<{
     display: flex;
     align-items: center;
     &_line {
-        background-color: rgba(220, 223, 230, 1);
+        background-color: var(--color-divider);
         height: 1px;
         width: 100%;
     }
 
     &_text {
         margin: 0 12px;
-        color: rgba(205, 208, 214, 1);
+        color: var(--color-divider);
     }
 }
 </style>

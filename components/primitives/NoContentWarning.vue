@@ -13,7 +13,6 @@ import Warning from './Warning.vue'
 <style scoped lang="scss">
 .warning {
     padding: 14px 20px;
-    color: #555;
     width: fit-content;
     margin: 10px auto;
 }

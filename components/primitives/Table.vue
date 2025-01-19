@@ -60,7 +60,7 @@ watchEffect(() => {
         :exchangeEditForm="exchangeEditForm"
         :isEdit="isEditOpen"
         @update:isOpen="(v: boolean) => (isOpen = v)" />
-    <h4>Сумма за месяц: {{ exchangesStore.totalSummary }}</h4>
+    <h4>Сумма за месяц: {{ exchangesStore.totalSummary }} рублей</h4>
     <div class="wrapper-card">
         <ExchangeCard
             v-for="card in exchangesStore.filterExchanges"

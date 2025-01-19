@@ -5,7 +5,7 @@ import { WarnTriangleFilled } from '@element-plus/icons-vue'
 <template>
     <div class="warning">
         <el-icon :size="30">
-            <WarnTriangleFilled :size="100" color="#E6A23C" />
+            <WarnTriangleFilled :size="100" color="var( --warning)" />
         </el-icon>
         <div>
             <slot></slot>
@@ -14,13 +14,12 @@ import { WarnTriangleFilled } from '@element-plus/icons-vue'
 </template>
 <style scoped lang="scss">
 .warning {
-    border: 1.5px solid #E6A23C;
-    background-color: #e6a23c2d;
+    border: 1.5px solid var( --warning);
+    background-color: var(--color-bg-warning);
     display: flex;
     align-items: center;
-    padding: 14px 20px;
-    border-radius: 20px;
-    color: #555;
+    padding: 15px 20px;
+    border-radius: 10px;
     margin: 0 auto;
 
     & i {
