@@ -2,8 +2,9 @@
 import { Delete, Edit } from '@element-plus/icons-vue'
 import type { ExchangeModel } from '~/types'
 
-const { card } = defineProps<{
+const { card, index } = defineProps<{
     card: ExchangeModel
+    index: number
 }>()
 
 const emit = defineEmits<{
@@ -13,7 +14,7 @@ const emit = defineEmits<{
 </script>
 <template>
     <div class="card">
-        <div class="card__id">{{ card.id }}</div>
+        <div class="card__id">{{ `${index +1} ` }}</div>
         <div class="card__header">
             <div>{{ card.name }}/{{ card.title }}</div>
             <div>{{ card.date }}</div>

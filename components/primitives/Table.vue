@@ -63,8 +63,9 @@ watchEffect(() => {
     <h4>Сумма за месяц: {{ exchangesStore.totalSummary }} рублей</h4>
     <div class="wrapper-card">
         <ExchangeCard
-            v-for="card in exchangesStore.filterExchanges"
+            v-for="(card, index) in exchangesStore.filterExchanges"
             :card="card"
+            :index="index"
             @delete="exchangeDelete"
             @edit="openEditForm" />
     </div>
