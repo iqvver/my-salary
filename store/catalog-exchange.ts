@@ -10,6 +10,7 @@ const initialExchanges: ExchangesModel = [
         title: 103001,
         amount: 11,
         sum: 357,
+        name: "Рама 3"
     },
     {
         id: 2,
@@ -38,6 +39,7 @@ const initialExchanges: ExchangesModel = [
          * Сумма amount * 6.5 * 0.6
          */
         sum: 357,
+        name: "Рама 3"
     },
 ]
 
