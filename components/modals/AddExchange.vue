@@ -32,6 +32,7 @@ watch(
     (cur) => (open.value = cur)
 )
 let defaultValues = reactive<form.ExchangePayloadModel>({
+    id: '',
     title: '',
     fromUserId: authStore.authUserId,
     fullDate: new Date(),

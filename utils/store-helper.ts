@@ -7,9 +7,9 @@ import Ids from 'ids'
  * Преобразование пользователя для добавления в каталог
  */
 export const convertingNewUser = (payload: UserModel) => {
-    const ids = new Ids()
+    const idUser = new Ids()
     const newUser: UserModel = {
-        id: ids.next(),
+        id: idUser.next(),
         loginName: payload.loginName,
         loginJob: payload.loginJob,
     }
@@ -20,8 +20,9 @@ export const convertingNewUser = (payload: UserModel) => {
  * Преобразование месяца для добавления в каталог
  */
 export const convertingNewMonth = (payload: MonthPreviewModel) => {
+    const idMonth = new Ids()
     const newMonth: MonthModel = {
-        id: payload.id,
+        id: idMonth.next(),
         fromUserId: payload.fromUserId,
         date: payload.date,
         title: new Date(payload.date).toLocaleString('ru', { month: 'long' }).toUpperCase(),
@@ -32,11 +33,12 @@ export const convertingNewMonth = (payload: MonthPreviewModel) => {
 /**
  * Преобразование смены для добавления в каталог
  */
-export const convertingNewExchanges = (payload: ExchangeModel, newId: number) => {
+export const convertingNewExchanges = (payload: ExchangeModel, newId?: string) => {
     const myDate = ref(new Date(payload.fullDate))
     const nom = nomination[payload.title]
+    const idExchanges = new Ids()
     const newExchange: ExchangeModel = {
-        id: ++newId,
+        id: newId || idExchanges.next(),
         fullDate: myDate.value,
         title: payload.title,
         name: nom.title,

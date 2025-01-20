@@ -2,7 +2,7 @@
 
 const initialExchanges: ExchangesModel = [
     {
-        id: 1,
+        id: '1',
         date: '2016-05-02',
         fullDate: '2016-05-02',
         fromUserId: '1',
@@ -13,7 +13,7 @@ const initialExchanges: ExchangesModel = [
         name: 'Рама 3',
     },
     {
-        id: 2,
+        id: '2',
         /**
          * Дата
          */
@@ -67,7 +67,7 @@ export const useExchangesStore = defineStore({
             try {
                 this.$state.exchanges = [
                     ...this.$state.exchanges,
-                    convertingNewExchanges(payload, this.$state.filterExchanges.length),
+                    convertingNewExchanges(payload),
                 ]
                 ElNotification({
                     title: 'Успех',

@@ -20,7 +20,7 @@ watchEffect(() => {
 })
 
 let exchangeEditForm: ExchangeModel = {
-    id: NaN,
+    id: '',
     fromUserId: '',
     date: '',
     fullDate: '',

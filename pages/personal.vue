@@ -9,9 +9,17 @@ import { options } from '~/types/types'
 definePageMeta({ layout: 'personal' })
 useHead({ title: 'Профиль' })
 
+const auth = useAuthStore()
+const router = useRouter()
 const editMode = ref(false)
 const isLoading = ref(false)
-const auth = useAuthStore()
+
+watchEffect(() => {
+    if (!auth.isAuth) {
+        router.push('/login')
+    }
+})
+
 const userDelete = (user: string) => {
     // Вызов функции удаления профиля
     auth.deleteUser(user)
