@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete, View } from '@element-plus/icons-vue'
+import { Calendar, Plus, Expand, DArrowLeft, Edit, Delete, DArrowRight } from '@element-plus/icons-vue'
 import type { MonthModel } from '~/types'
 import { useMonthCatalogStore } from '~/store/catalog-month'
 import { useAuthStore } from '~/store/auth'
@@ -40,18 +40,17 @@ const showMenu = () => {
 }
 </script>
 <template>
-    <el-header class="aside__header">
-        <el-button @click="showAddMenu" class="button__add" type="success" :icon="Plus"> Добавить месяц</el-button>
-    </el-header>
     <el-aside class="aside" :class="{ open: menuIsOpen }">
         <el-scrollbar>
+            <el-button @click="showAddMenu" class="aside__button" size="default" type="success" :icon="Plus">
+                {{ `${!menuIsOpen ? 'Добавить месяц' : ''}` }}</el-button
+            >
             <el-menu :default-active="monthStore.filteringMonth.at(-1)?.id">
                 <el-button
-                    class="menu__item__icon_arrow"
+                    size="default"
                     :class="{ open: menuIsOpen }"
                     type="warning"
-                    circle
-                    :icon="DArrowLeft"
+                    :icon="!menuIsOpen ? DArrowRight : DArrowLeft"
                     @click="showMenu" />
                 <PrimitivesWarning v-if="!monthStore.filteringMonth.length"
                     >Вы не добавили ни одного месяца.<br />Что бы добавить, нажмите "Добавить месяц"!</PrimitivesWarning
@@ -98,17 +97,6 @@ const showMenu = () => {
     height: max-content;
 }
 
-@keyframes icon-rotate {
-    100% {
-        rotate: 360deg;
-    }
-}
-@keyframes icon-in-rotate {
-    100% {
-        rotate: -540deg;
-    }
-}
-
 @keyframes hide {
     100% {
         opacity: 0;
@@ -127,21 +115,6 @@ const showMenu = () => {
         width: 100%;
         &.open {
             animation: hide 0.5s forwards;
-        }
-    }
-
-    &__icon {
-        &_arrow {
-            animation: icon-in-rotate 1s forwards;
-            &.open {
-                animation: icon-rotate 1s forwards;
-            }
-        }
-        &_del {
-            &:hover {
-                color: var(--color-black);
-                opacity: 0.5;
-            }
         }
     }
 }
@@ -163,23 +136,9 @@ const showMenu = () => {
         width: 55px;
     }
 
-    &__header {
-        position: fixed;
-        top: 0;
-        width: 250px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 0;
-
-        @media (max-width: 440px) {
-            top: 50px;
-        }
-
-        & button {
-            margin-right: 10px;
-            width: 100%;
-        }
+    &__button {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 </style>
