@@ -8,13 +8,13 @@ const initialMonth: MonthsModel = [
         title: 'Август',
         transcriptionInMonth: 'August',
         date: '156165',
-        fromUserId: 2,
+        fromUserId: '2',
     },
     {
         id: '2',
         title: 'Сентябрь',
         transcriptionInMonth: 'September',
-        fromUserId: 1,
+        fromUserId: '1',
         date: '157783',
     },
 ]
@@ -65,9 +65,9 @@ export const useMonthCatalogStore = defineStore({
             }
         },
 
-        async filterMonth(payload: number) {
+        async filterMonth(payload: string) {
             this.$state.filteringMonth = this.$state.month?.filter(
-                (item: { fromUserId: number }) => item.fromUserId === payload
+                (item: { fromUserId: string }) => item.fromUserId === payload
             )
             return this.$state.filteringMonth
         },

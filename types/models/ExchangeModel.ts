@@ -24,7 +24,7 @@ export type ExchangePayloadModel = ExchangeInitialModel & {
     /**
      * Какому пользователю принадлежит
      */
-    fromUserId: number
+    fromUserId: string
 }
 
 export type ExchangeModel = ExchangePayloadModel & {

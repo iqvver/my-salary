@@ -2,7 +2,7 @@
  * Модель пользователя
  */
 export type UserModel = {
-    readonly id: number
+    readonly id: string
     /**
      * Имя
      */

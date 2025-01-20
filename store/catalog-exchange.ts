@@ -5,7 +5,7 @@ const initialExchanges: ExchangesModel = [
         id: 1,
         date: '2016-05-02',
         fullDate: '2016-05-02',
-        fromUserId: 1,
+        fromUserId: '1',
         monthTranscription: 'August',
         title: 103001,
         amount: 11,
@@ -22,7 +22,7 @@ const initialExchanges: ExchangesModel = [
         /**
          * К какому профилю привязана смена
          */
-        fromUserId: 2,
+        fromUserId: '2',
         /**
          * Транскрипция месяца
          */
@@ -102,10 +102,10 @@ export const useExchangesStore = defineStore({
             }
         },
 
-        async filterExchange(payload: string, userId: number) {
+        async filterExchange(payload: string, userId: string) {
             this.$state.filterExchanges = this.$state.exchanges
                 ?.filter(
-                    (item: { fromUserId: number; monthTranscription?: string }) =>
+                    (item: { fromUserId: string; monthTranscription?: string }) =>
                         item.monthTranscription === payload && item.fromUserId === userId
                 )
                 .sort((a: any, b: any) => a.fullDate - b.fullDate)

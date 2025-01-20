@@ -21,7 +21,7 @@ watchEffect(() => {
 
 let exchangeEditForm: ExchangeModel = {
     id: NaN,
-    fromUserId: NaN,
+    fromUserId: '',
     date: '',
     fullDate: '',
     monthTranscription: '',
@@ -51,6 +51,9 @@ watchEffect(() => {
 watchEffect(() => {
     if (!authStore.isAuth) {
         router.push('/login')
+    }
+    if (!monthStore.filteringMonth.length) {
+        router.push('/personal')
     }
 })
 </script>

@@ -2,12 +2,12 @@
 
 const initialUser: UsersModel = [
     {
-        id: 1,
+        id: '1',
         loginName: 'Писун',
         loginJob: 'Помощник',
     },
     {
-        id: 2,
+        id: '2',
         loginName: 'Писька',
         loginJob: 'Оператор',
     },
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore({
         return {
             users: [] as UserModel[],
             isAuth: false,
-            authUserId: 0,
+            authUserId: '',
             authUser: 'Какое-то имя',
             authJob: 'Должность',
         }
@@ -89,7 +89,7 @@ export const useAuthStore = defineStore({
             this.clear()
         },
 
-        deleteUser(payload: number) {
+        deleteUser(payload: string) {
             try {
                 this.$state.users = this.$state.users.filter((user) => user.id !== payload)
                 this.clear()

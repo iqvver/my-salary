@@ -1,13 +1,15 @@
 import type { ExchangeModel, MonthModel, MonthPreviewModel, UserModel } from '~/types'
-import dayjs from 'dayjs'
 import { DATE_MASK, MONTH_MASK, nomination } from '~/types/const'
+import dayjs from 'dayjs'
+import Ids from 'ids'
 
 /**
  * Преобразование пользователя для добавления в каталог
  */
 export const convertingNewUser = (payload: UserModel) => {
+    const ids = new Ids()
     const newUser: UserModel = {
-        id: Math.random(),
+        id: ids.next(),
         loginName: payload.loginName,
         loginJob: payload.loginJob,
     }

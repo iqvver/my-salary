@@ -53,6 +53,9 @@ const showMenu = () => {
                     circle
                     :icon="DArrowLeft"
                     @click="showMenu" />
+                <PrimitivesWarning v-if="!monthStore.filteringMonth.length"
+                    >Вы не добавили ни одного месяца.<br />Что бы добавить, нажмите "Добавить месяц"!</PrimitivesWarning
+                >
                 <el-menu-item
                     v-if="!menuAddIsOpen"
                     class="menu__item"

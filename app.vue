@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 //TODO: LocalStorage
-//TODO: Баг с номерами (id) смен при удалении
+//TODO: Переделать id на строки
+//TODO:  Первый пользователь почему-то не добавляется
 import MobileDetect from 'mobile-detect'
 import { useMetaStore } from '~/store/meta'
 

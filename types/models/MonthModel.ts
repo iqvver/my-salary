@@ -10,7 +10,7 @@ export type MonthPreviewModel = {
     /**
      * Какому пользователю принадлежит
      */
-    fromUserId: number
+    fromUserId: string
     /**
      * Месяц
      */

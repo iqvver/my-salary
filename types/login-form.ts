@@ -4,7 +4,7 @@ import type { UserModel } from '.'
 export type { UserModel } from '.'
 
 export const initialValues = {
-    id: 0,
+    id: '',
     loginName: '',
     loginJob: '',
 } as UserModel

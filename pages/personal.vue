@@ -12,7 +12,7 @@ useHead({ title: 'Профиль' })
 const editMode = ref(false)
 const isLoading = ref(false)
 const auth = useAuthStore()
-const userDelete = (user: number) => {
+const userDelete = (user: string) => {
     // Вызов функции удаления профиля
     auth.deleteUser(user)
 }
