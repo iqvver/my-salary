@@ -72,7 +72,9 @@ watchEffect(() => {
             @delete="exchangeDelete"
             @edit="openEditForm" />
     </div>
-    <PrimitivesNoContentWarning v-if="!exchangesStore.filterExchanges.length" />
+    <PrimitivesWarning v-if="!exchangesStore.filterExchanges.length">
+        Вы не добавили ни одной смены в этом месяце.Что бы добавить смену, нажмите "Добавить смену"!
+    </PrimitivesWarning>
     <el-button style="width: 100%" @click="openAddForm"> Добавить смену </el-button>
 </template>
 <style scoped lang="scss">

@@ -1,7 +1,8 @@
-import type { ExchangeModel, MonthModel, MonthPreviewModel, UserModel } from '~/types'
+import type { ExchangeModel, MonthModel, MonthPreviewModel, UserModel, UsersModel } from '~/types'
 import { DATE_MASK, MONTH_MASK, nomination } from '~/types/const'
 import dayjs from 'dayjs'
 import Ids from 'ids'
+import type { AuthorizationUserModel } from '~/types/models/UserModel'
 
 /**
  * Преобразование пользователя для добавления в каталог
@@ -49,4 +50,12 @@ export const convertingNewExchanges = (payload: ExchangeModel, newId?: string) =
         sum: +(payload.amount! * nom.long * nom.price).toFixed(2),
     }
     return newExchange
+}
+
+export const setLSItem = (key: string, payload: UsersModel | AuthorizationUserModel) => {
+    localStorage.setItem(key, JSON.stringify(payload))
+}
+
+export const getLSItem = (key: string) => {
+    return JSON.parse(localStorage.getItem(key) || '[]')
 }

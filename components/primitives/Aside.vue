@@ -52,7 +52,7 @@ const showMenu = () => {
                     type="warning"
                     :icon="!menuIsOpen ? DArrowRight : DArrowLeft"
                     @click="showMenu" />
-                <PrimitivesWarning v-if="!monthStore.filteringMonth.length"
+                <PrimitivesWarning v-if="!monthStore.filteringMonth.length" class="aside__arrow-button"
                     >Вы не добавили ни одного месяца.<br />Что бы добавить, нажмите "Добавить месяц"!</PrimitivesWarning
                 >
                 <el-menu-item
@@ -134,6 +134,10 @@ const showMenu = () => {
 
     &.open {
         width: 55px;
+    }
+
+    &__arrow-button {
+        margin: 3px;
     }
 
     &__button {

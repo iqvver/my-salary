@@ -12,16 +12,17 @@ const route = useRoute()
 
 definePageMeta({ layout: 'table' })
 
-watchEffect(() => {
+onMounted(() => {
+    if (route.path === '/') {
+        router.push(monthStore.filteringMonth.at(-1)?.transcriptionInMonth + '')
+    }
     exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
         exchangesStore.addExchanges,
         exchangesStore.readExchanges
 })
 
-onMounted(() => {
-    if (route.path === '/') {
-        router.push(monthStore.filteringMonth.at(-1)?.transcriptionInMonth + '')
-    }
+watchEffect(() => {
+    authStore.readAuthorizationUser
 })
 </script>
 

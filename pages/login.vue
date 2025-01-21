@@ -3,16 +3,16 @@ import LoginForm from '~/components/forms/LoginForm.vue'
 import PageFormTemplate from '~/components/templates/PageFormTemplate.vue'
 import { useAuthStore } from '~/store/auth'
 
-const authStore = useAuthStore()
-
 definePageMeta({ layout: 'default' })
-const isLoading = ref(true)
-watchEffect(() => {
-    authStore.readUser
 
+const authStore = useAuthStore()
+const isLoading = ref(true)
+
+watchEffect(() => {
     setTimeout(() => {
+        authStore.readUser
         isLoading.value = false
-    }, 4000)
+    }, 3000)
 })
 
 const svg = `

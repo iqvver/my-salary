@@ -12,3 +12,11 @@ export type UserModel = {
      */
     loginJob: string
 }
+
+export type AuthorizationUserModel = UserModel & {
+    /**
+     * Авторизован ли пользователь ?
+     */
+
+    isAuth: boolean
+}

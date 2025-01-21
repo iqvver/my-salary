@@ -1,4 +1,5 @@
 ﻿import type { UserModel, UsersModel } from '~/types'
+import type { AuthorizationUserModel } from '~/types/models/UserModel'
 
 const initialUser: UsersModel = [
     {
@@ -27,7 +28,15 @@ export const useAuthStore = defineStore({
 
     getters: {
         readUser(state) {
-            return (state.users = initialUser)
+            return (state.users = getLSItem('users'))
+        },
+        readAuthorizationUser(state) {
+            // return (
+            //     state.authUserId = payload.id,
+            //     state.authUser = payload.loginName,
+            //     state.authJob = payload.loginJob,
+            //     state.isAuth = true
+            // )
         },
     },
 
@@ -35,11 +44,12 @@ export const useAuthStore = defineStore({
         async registration(payload: UserModel) {
             try {
                 ;(this.$state.users = [...this.$state.users, convertingNewUser(payload)]),
-                    ElNotification({
-                        title: `Пользователь ${payload.loginName} зарегистрирован`,
-                        message: 'Пользователь добавлен',
-                        type: 'success',
-                    })
+                    setLSItem('users', this.$state.users)
+                ElNotification({
+                    title: `Пользователь ${payload.loginName} зарегистрирован`,
+                    message: 'Пользователь добавлен',
+                    type: 'success',
+                })
                 const router = useRouter()
                 router.push('/login')
             } catch (error) {
@@ -61,13 +71,17 @@ export const useAuthStore = defineStore({
             router.push('/login')
         },
 
+        //TODO: переделить в объект 
         login(payload: UserModel) {
             const router = useRouter()
+            const authUser: AuthorizationUserModel = { ...payload, isAuth: true }
+            console.log(authUser)
             try {
-                this.authUserId = payload.id! // Получаем id пользователя
+                this.authUserId = payload.id
                 this.authUser = payload.loginName
                 this.authJob = payload.loginJob
                 this.isAuth = true
+                setLSItem('authUser', authUser)
                 router.push('/')
                 ElNotification({
                     title: 'Вход выполнен',
@@ -92,6 +106,7 @@ export const useAuthStore = defineStore({
         deleteUser(payload: string) {
             try {
                 this.$state.users = this.$state.users.filter((user) => user.id !== payload)
+                setLSItem('users', this.$state.users)
                 this.clear()
                 ElNotification({
                     title: 'Успех',
