@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Моя З/П',
+    title: 'Заводчанин З/П',
 })
 </script>
 

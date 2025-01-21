@@ -13,9 +13,8 @@ let isOpen = ref(false)
 let isEditOpen = ref(false)
 
 watchEffect(() => {
-    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUser.id),
-        exchangesStore.addExchanges,
-        exchangesStore.readExchanges,
+    exchangesStore.readExchanges,
+        exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUser.id),
         exchangesStore.getTotalSummary
 })
 
