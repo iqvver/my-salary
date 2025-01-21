@@ -1,19 +1,6 @@
 ﻿import type { UserModel, UsersModel } from '~/types'
 import type { AuthorizationUserModel } from '~/types/models/UserModel'
 
-const initialUser: UsersModel = [
-    {
-        id: '1',
-        loginName: 'Писун',
-        loginJob: 'Помощник',
-    },
-    {
-        id: '2',
-        loginName: 'Писька',
-        loginJob: 'Оператор',
-    },
-]
-
 export const useAuthStore = defineStore({
     id: 'userCatalog',
     state: () => {
@@ -28,15 +15,14 @@ export const useAuthStore = defineStore({
 
     getters: {
         readUser(state) {
+            const localUser = getLSItem('authUser')
+            if (localUser.isAuth) {
+                this.authUserId = localUser.id
+                this.authUser = localUser.loginName
+                this.authJob = localUser.loginJob
+                this.isAuth = localUser.isAuth
+            }
             return (state.users = getLSItem('users'))
-        },
-        readAuthorizationUser(state) {
-            // return (
-            //     state.authUserId = payload.id,
-            //     state.authUser = payload.loginName,
-            //     state.authJob = payload.loginJob,
-            //     state.isAuth = true
-            // )
         },
     },
 
@@ -64,6 +50,13 @@ export const useAuthStore = defineStore({
         },
 
         clear() {
+            const authUser: AuthorizationUserModel = {
+                id: '',
+                loginName: '',
+                loginJob: '',
+                isAuth: false,
+            }
+            setLSItem('authUser', authUser)
             this.authUser = ''
             this.authJob = ''
             this.isAuth = false
@@ -71,11 +64,10 @@ export const useAuthStore = defineStore({
             router.push('/login')
         },
 
-        //TODO: переделить в объект 
+        //TODO: переделить в объект
         login(payload: UserModel) {
             const router = useRouter()
             const authUser: AuthorizationUserModel = { ...payload, isAuth: true }
-            console.log(authUser)
             try {
                 this.authUserId = payload.id
                 this.authUser = payload.loginName
@@ -128,6 +120,7 @@ export const useAuthStore = defineStore({
                 const index = this.$state.users.findIndex((user) => user.id === payload.id)
                 if (index > -1) {
                     this.$state.users[index] = { ...payload }
+                    setLSItem('users', this.$state.users)
                     ElNotification({
                         title: 'Успех',
                         message: 'Профиль изменён',

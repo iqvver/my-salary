@@ -7,8 +7,12 @@ definePageMeta({ layout: 'default' })
 
 const authStore = useAuthStore()
 const isLoading = ref(true)
+const router = useRouter()
 
 watchEffect(() => {
+    if (authStore.isAuth) {
+        router.push('/personal')
+    }
     setTimeout(() => {
         authStore.readUser
         isLoading.value = false

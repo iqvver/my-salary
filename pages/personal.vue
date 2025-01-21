@@ -85,7 +85,7 @@ const submitForm = () => {
 <style scoped lang="scss">
 .profile {
     width: 40%;
-    height: 50vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

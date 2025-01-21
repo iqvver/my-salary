@@ -20,10 +20,6 @@ onMounted(() => {
         exchangesStore.addExchanges,
         exchangesStore.readExchanges
 })
-
-watchEffect(() => {
-    authStore.readAuthorizationUser
-})
 </script>
 
 <template>Выберите месяц</template>

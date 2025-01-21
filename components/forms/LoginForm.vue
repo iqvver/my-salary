@@ -6,10 +6,6 @@ import type { UserModel } from '~/types'
 const isLoading = ref(false)
 const authStore = useAuthStore()
 
-watchEffect(() => {
-    authStore.readAuthorizationUser
-})
-
 const logIn = async (user: UserModel) => {
     authStore.login(user)
 }
