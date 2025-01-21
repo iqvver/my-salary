@@ -15,7 +15,7 @@ const menuAddIsOpen = ref(false)
 
 watchEffect(() => {
     monthStore.readMonth
-    monthStore.filterMonth(authStore.authUserId)
+    monthStore.filterMonth(authStore.authUser.id)
     monthStore.selectedMonth = route.path.replace('/', '')
 })
 

@@ -10,7 +10,7 @@ const isLoading = ref(true)
 const router = useRouter()
 
 watchEffect(() => {
-    if (authStore.isAuth) {
+    if (authStore.authUser.isAuth) {
         router.push('/personal')
     }
     setTimeout(() => {

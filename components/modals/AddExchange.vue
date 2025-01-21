@@ -20,7 +20,7 @@ const loading = ref(false)
 const authStore = useAuthStore()
 const ruleForm = reactive<form.ExchangePayloadModel>({
     ...form.initialValues,
-    fromUserId: authStore.authUserId,
+    fromUserId: authStore.authUser.id,
 })
 
 watch(
@@ -34,7 +34,7 @@ watch(
 let defaultValues = reactive<form.ExchangePayloadModel>({
     id: '',
     title: '',
-    fromUserId: authStore.authUserId,
+    fromUserId: authStore.authUser.id,
     fullDate: new Date(),
     amount: NaN,
 })

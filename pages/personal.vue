@@ -15,7 +15,7 @@ const editMode = ref(false)
 const isLoading = ref(false)
 
 watchEffect(() => {
-    if (!auth.isAuth) {
+    if (!auth.authUser.isAuth) {
         router.push('/login')
     }
 })
@@ -28,7 +28,7 @@ const userDelete = (user: string) => {
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive<form.UserModel>({
     ...form.initialValues,
-    id: auth.authUserId,
+    id: auth.authUser.id,
 })
 const rules = reactive<FormRules<form.UserModel>>(form.rules)
 const openEditMode = () => {
@@ -48,11 +48,11 @@ const submitForm = () => {
         <p>Здесь вы можете увидеть информацию о вашем профиле:</p>
         <!-- Вывод информации о профиле -->
         <el-button @click="openEditMode" type="primary">Изменить данные</el-button>
-        <div>Имя: {{ auth.authUser }}</div>
-        <div>Должность: {{ auth.authJob }}</div>
-        <div v-if="auth?.authJob === PositionEnum.OPERATOR">Оклад: {{ options[auth.authJob].summa }}</div>
-        <div v-if="auth?.authJob === PositionEnum.ASSISTANT">Оклад: {{ options[auth.authJob].summa }}</div>
-        <el-button v-if="!editMode" @click="userDelete(auth.authUserId)" type="danger" style="width: 200px">
+        <div>Имя: {{ auth.authUser.loginName }}</div>
+        <div>Должность: {{ auth.authUser.loginJob }}</div>
+        <div v-if="auth?.authUser.loginJob === PositionEnum.OPERATOR">Оклад: {{ options[auth.authUser.loginJob].summa }}</div>
+        <div v-if="auth?.authUser.loginJob === PositionEnum.ASSISTANT">Оклад: {{ options[auth.authUser.loginJob].summa }}</div>
+        <el-button v-if="!editMode" @click="userDelete(auth.authUser.id)" type="danger" style="width: 200px">
             Удалить профиль
         </el-button>
 
@@ -67,10 +67,10 @@ const submitForm = () => {
             class="login-form"
             status-icon>
             <el-form-item>
-                <el-input v-model="ruleForm.loginName" :placeholder="auth.authUser" :prefix-icon="User" />
+                <el-input v-model="ruleForm.loginName" :placeholder="auth.authUser.loginName" :prefix-icon="User" />
             </el-form-item>
             <el-form-item>
-                <el-select v-model="ruleForm.loginJob" :placeholder="auth.authJob" prop="loginJob">
+                <el-select v-model="ruleForm.loginJob" :placeholder="auth.authUser.loginJob" prop="loginJob">
                     <el-option v-for="item in options" :key="item.title" :label="item.title" :value="item.title" />
                 </el-select>
             </el-form-item>

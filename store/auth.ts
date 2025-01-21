@@ -1,26 +1,19 @@
-﻿import type { UserModel, UsersModel } from '~/types'
-import type { AuthorizationUserModel } from '~/types/models/UserModel'
+﻿import type { UserModel, AuthorizationUserModel } from '~/types'
 
 export const useAuthStore = defineStore({
     id: 'userCatalog',
     state: () => {
         return {
             users: [] as UserModel[],
-            isAuth: false,
-            authUserId: '',
-            authUser: 'Какое-то имя',
-            authJob: 'Должность',
+            authUser: [] as unknown as AuthorizationUserModel,
         }
     },
 
     getters: {
         readUser(state) {
-            const localUser = getLSItem('authUser')
-            if (localUser.isAuth) {
-                this.authUserId = localUser.id
-                this.authUser = localUser.loginName
-                this.authJob = localUser.loginJob
-                this.isAuth = localUser.isAuth
+            const localAuthUser = getLSItem('authUser')
+            if (localAuthUser.isAuth) {
+                this.authUser = localAuthUser
             }
             return (state.users = getLSItem('users'))
         },
@@ -57,22 +50,15 @@ export const useAuthStore = defineStore({
                 isAuth: false,
             }
             setLSItem('authUser', authUser)
-            this.authUser = ''
-            this.authJob = ''
-            this.isAuth = false
+            this.authUser = authUser
             const router = useRouter()
             router.push('/login')
         },
-
-        //TODO: переделить в объект
         login(payload: UserModel) {
             const router = useRouter()
             const authUser: AuthorizationUserModel = { ...payload, isAuth: true }
             try {
-                this.authUserId = payload.id
-                this.authUser = payload.loginName
-                this.authJob = payload.loginJob
-                this.isAuth = true
+                this.authUser = authUser
                 setLSItem('authUser', authUser)
                 router.push('/')
                 ElNotification({

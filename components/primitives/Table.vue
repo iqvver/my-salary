@@ -13,7 +13,7 @@ let isOpen = ref(false)
 let isEditOpen = ref(false)
 
 watchEffect(() => {
-    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
+    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUser.id),
         exchangesStore.addExchanges,
         exchangesStore.readExchanges,
         exchangesStore.getTotalSummary
@@ -49,7 +49,7 @@ watchEffect(() => {
 })
 
 watchEffect(() => {
-    if (!authStore.isAuth) {
+    if (!authStore.authUser.isAuth) {
         router.push('/login')
     }
     if (!monthStore.filteringMonth.length) {

@@ -51,11 +51,15 @@ export const convertingNewExchanges = (payload: ExchangeModel, newId?: string) =
     }
     return newExchange
 }
-
+/**
+ * Добавление в localStorage
+ */
 export const setLSItem = (key: string, payload: UsersModel | AuthorizationUserModel) => {
     localStorage.setItem(key, JSON.stringify(payload))
 }
-
+/**
+ * Извлечение из localStorage
+ */
 export const getLSItem = (key: string) => {
     return JSON.parse(localStorage.getItem(key) || '[]')
 }

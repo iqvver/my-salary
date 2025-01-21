@@ -17,7 +17,7 @@ const router = useRouter()
 
 const monthForm: MonthPreviewModel = reactive({
     id: monthStore.filteringMonth.length.toString(),
-    fromUserId: authStore.authUserId,
+    fromUserId: authStore.authUser.id,
     date: new Date(),
 })
 
