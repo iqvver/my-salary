@@ -2,36 +2,20 @@
 import dayjs from 'dayjs'
 import { MONTH_MASK } from '~/types/const'
 
-const initialMonth: MonthsModel = [
-    {
-        id: '1',
-        title: 'Август',
-        transcriptionInMonth: 'August',
-        date: '156165',
-        fromUserId: '2',
-    },
-    {
-        id: '2',
-        title: 'Сентябрь',
-        transcriptionInMonth: 'September',
-        fromUserId: '1',
-        date: '157783',
-    },
-]
-
 export const useMonthCatalogStore = defineStore({
     id: 'monthCatalog',
     state: () => {
         return {
             month: [] as MonthModel[],
-            selectedMonth: ' ',
             filteringMonth: [] as MonthModel[],
+            selectedMonth: ' ',
         }
     },
 
     getters: {
         readMonth(state) {
-            return (state.month = initialMonth)
+            if (typeof window === 'undefined') return null
+            return (state.month = getLSItem('months'))
         },
     },
 
@@ -50,11 +34,12 @@ export const useMonthCatalogStore = defineStore({
                     })
                 }
                 ;(this.$state.month = [...this.$state.month, convertingNewMonth(payload)]),
-                    ElNotification({
-                        title: 'Успех',
-                        message: 'Месяц добавлен',
-                        type: 'success',
-                    })
+                    setLSItem('months', this.$state.month)
+                ElNotification({
+                    title: 'Успех',
+                    message: 'Месяц добавлен',
+                    type: 'success',
+                })
             } catch (error) {
                 ElNotification({
                     title: 'Ошибка Добавления',
@@ -75,6 +60,7 @@ export const useMonthCatalogStore = defineStore({
         async deleteMonth(payload: MonthModel) {
             try {
                 this.$state.month = this.$state.month.filter((month) => month.id !== payload.id)
+                setLSItem('months', this.$state.month)
                 ElNotification({
                     title: 'Успех',
                     message: 'Месяц удален',

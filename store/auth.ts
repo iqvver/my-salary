@@ -54,6 +54,7 @@ export const useAuthStore = defineStore({
             const router = useRouter()
             router.push('/login')
         },
+        
         login(payload: UserModel) {
             const router = useRouter()
             const authUser: AuthorizationUserModel = { ...payload, isAuth: true }

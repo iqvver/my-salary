@@ -12,11 +12,12 @@ const route = useRoute()
 
 definePageMeta({ layout: 'table' })
 
+//TODO: вот тут можно попробовать организовать роуты
 onMounted(() => {
     if (route.path === '/') {
-        router.push(monthStore.filteringMonth.at(-1)?.transcriptionInMonth + '')
+        router.push('/login')
     }
-    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUserId),
+    exchangesStore.filterExchange(monthStore.selectedMonth, authStore.authUser.id),
         exchangesStore.addExchanges,
         exchangesStore.readExchanges
 })

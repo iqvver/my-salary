@@ -55,7 +55,8 @@ export const useExchangesStore = defineStore({
 
     getters: {
         async readExchanges(state) {
-            return (state.exchanges = initialExchanges)
+            if (typeof window === 'undefined') return null
+            return (state.exchanges = getLSItem('exchanges'))
         },
         async getTotalSummary(state) {
             return (state.totalSummary = state.filterExchanges.reduce((a, exchange) => a + exchange.sum!, 0))
@@ -65,10 +66,9 @@ export const useExchangesStore = defineStore({
     actions: {
         async addExchanges(payload: ExchangeModel) {
             try {
-                this.$state.exchanges = [
-                    ...this.$state.exchanges,
-                    convertingNewExchanges(payload),
-                ]
+                this.$state.exchanges = [...this.$state.exchanges, convertingNewExchanges(payload)]
+                setLSItem('exchanges', this.$state.exchanges)
+                console.log(this.$state.exchanges)
                 ElNotification({
                     title: 'Успех',
                     message: 'Смена добавлена',
@@ -87,6 +87,7 @@ export const useExchangesStore = defineStore({
         async deleteExchange(payload: ExchangeModel) {
             try {
                 this.$state.exchanges = this.$state.exchanges.filter((exchange) => exchange.id !== payload.id)
+                setLSItem('exchanges', this.$state.exchanges)
                 ElNotification({
                     title: 'Успех',
                     message: 'Смена удалена',
@@ -117,6 +118,7 @@ export const useExchangesStore = defineStore({
                 const index = this.$state.exchanges.findIndex((exchange) => exchange.id === payload.id)
                 if (index > -1) {
                     this.$state.exchanges[index] = { ...convertingNewExchanges(payload, payload.id!) }
+                    setLSItem('exchanges', this.$state.exchanges)
                     ElNotification({
                         title: 'Успех',
                         message: 'Смена изменена',

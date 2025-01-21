@@ -5,11 +5,13 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { User } from '@element-plus/icons-vue'
 import * as form from '~/types/login-form'
 import { options } from '~/types/types'
+import { useMonthCatalogStore } from '~/store/catalog-month'
 
 definePageMeta({ layout: 'personal' })
 useHead({ title: 'Профиль' })
 
 const auth = useAuthStore()
+const monthStore = useMonthCatalogStore()
 const router = useRouter()
 const editMode = ref(false)
 const isLoading = ref(false)
@@ -17,6 +19,8 @@ const isLoading = ref(false)
 watchEffect(() => {
     if (!auth.authUser.isAuth) {
         router.push('/login')
+    } else if (monthStore.filteringMonth.length) {
+        router.push(monthStore.filteringMonth.at(-1)?.transcriptionInMonth + '')
     }
 })
 
@@ -50,8 +54,12 @@ const submitForm = () => {
         <el-button @click="openEditMode" type="primary">Изменить данные</el-button>
         <div>Имя: {{ auth.authUser.loginName }}</div>
         <div>Должность: {{ auth.authUser.loginJob }}</div>
-        <div v-if="auth?.authUser.loginJob === PositionEnum.OPERATOR">Оклад: {{ options[auth.authUser.loginJob].summa }}</div>
-        <div v-if="auth?.authUser.loginJob === PositionEnum.ASSISTANT">Оклад: {{ options[auth.authUser.loginJob].summa }}</div>
+        <div v-if="auth?.authUser.loginJob === PositionEnum.OPERATOR">
+            Оклад: {{ options[auth.authUser.loginJob].summa }}
+        </div>
+        <div v-if="auth?.authUser.loginJob === PositionEnum.ASSISTANT">
+            Оклад: {{ options[auth.authUser.loginJob].summa }}
+        </div>
         <el-button v-if="!editMode" @click="userDelete(auth.authUser.id)" type="danger" style="width: 200px">
             Удалить профиль
         </el-button>

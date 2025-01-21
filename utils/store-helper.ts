@@ -1,4 +1,4 @@
-import type { ExchangeModel, MonthModel, MonthPreviewModel, UserModel, UsersModel } from '~/types'
+import type { ExchangeModel, ExchangesModel, MonthModel, MonthPreviewModel, MonthsModel, UserModel, UsersModel } from '~/types'
 import { DATE_MASK, MONTH_MASK, nomination } from '~/types/const'
 import dayjs from 'dayjs'
 import Ids from 'ids'
@@ -54,7 +54,7 @@ export const convertingNewExchanges = (payload: ExchangeModel, newId?: string) =
 /**
  * Добавление в localStorage
  */
-export const setLSItem = (key: string, payload: UsersModel | AuthorizationUserModel) => {
+export const setLSItem = (key: string, payload: UsersModel | AuthorizationUserModel | MonthsModel | ExchangesModel) => {
     localStorage.setItem(key, JSON.stringify(payload))
 }
 /**
