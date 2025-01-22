@@ -1,29 +1,32 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --host",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@pinia/nuxt": "^0.6.1",
-    "dart-sass": "^1.25.0",
-    "element-plus": "^2.8.6",
-    "ids": "^1.0.5",
-    "mobile-detect": "^1.4.5",
-    "nuxt": "^3.13.2",
-    "pinia": "^2.2.5",
-    "sass-loader": "^16.0.2",
-    "vue": "latest",
-    "vue-router": "^4.4.5"
-  },
-  "devDependencies": {
-    "@element-plus/nuxt": "^1.0.10",
-    "sass": "^1.80.7",
-    "sass-embedded": "^1.80.5"
-  }
+    "name": "nuxt-app",
+    "private": true,
+    "type": "module",
+    "homepage": "https://iqvver.github.io/my-salary/",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev --host",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "deploy": "node ./node_modules/vue-gh-pages/index.js"
+    },
+    "dependencies": {
+        "@pinia/nuxt": "^0.6.1",
+        "dart-sass": "^1.25.0",
+        "element-plus": "^2.8.6",
+        "ids": "^1.0.5",
+        "mobile-detect": "^1.4.5",
+        "nuxt": "^3.13.2",
+        "pinia": "^2.2.5",
+        "sass-loader": "^16.0.2",
+        "vue": "latest",
+        "vue-gh-pages": "^1.19.1",
+        "vue-router": "^4.4.5"
+    },
+    "devDependencies": {
+        "@element-plus/nuxt": "^1.0.10",
+        "sass": "^1.80.7",
+        "sass-embedded": "^1.80.5"
+    }
 }
