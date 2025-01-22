@@ -1,0 +1,7 @@
+{
+    "sshfs.configs": [],
+    "editor.formatOnSave": true,
+    "cSpell.language": "en,ru",
+    "workbench.panel.defaultLocation": "right",
+    "cSpell.words": ["pinia"]
+}
