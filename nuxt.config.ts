@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     pages: true,
     ssr: true,
+    generate: {
+        fallback: "404.html"
+      },
     app: {
         baseURL: '/my-salary',
     },
