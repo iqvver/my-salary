@@ -1,0 +1,1 @@
+import{u as t}from"./_JWf-Sb8.js";import{k as r,r as a}from"./CrbcXb6L.js";const f=r({__name:"default",setup(o){return t({title:"Заводчанин З/П"}),(e,s)=>a(e.$slots,"default")}});export{f as default};
