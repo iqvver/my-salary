@@ -18,4 +18,8 @@ export default defineNuxtConfig({
         },
     ],
     css: ['assets/global.css'],
+    elementPlus: {
+        icon: 'ElIcon',
+        importStyle: 'scss',
+    },
 })
