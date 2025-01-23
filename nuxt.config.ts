@@ -1,8 +1,5 @@
 export default defineNuxtConfig({
     mode: 'static',
-    router: {
-        base: '/iqvver/',
-    },
     compatibilityDate: '2024-04-03',
     devtools: { enabled: true },
     pages: true,

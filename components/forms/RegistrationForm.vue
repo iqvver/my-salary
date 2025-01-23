@@ -41,9 +41,9 @@ const submitForm = async () => {
         </el-form-item>
         <el-form-item>
             <el-button :loading="isLoading" type="primary" native-type="submit"> Зарегистрироваться </el-button>
-            <NuxtLink to="/login"> Войти </NuxtLink>
         </el-form-item>
     </el-form>
+    <NuxtLink to="/login"> Войти </NuxtLink>
 </template>
 <style lang="css">
 .el-form-item__content {
