@@ -5,13 +5,11 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { User } from '@element-plus/icons-vue'
 import * as form from '~/types/login-form'
 import { options } from '~/types/types'
-import { useMonthCatalogStore } from '~/store/catalog-month'
 
 definePageMeta({ layout: 'personal' })
 useHead({ title: 'Профиль' })
 
 const auth = useAuthStore()
-const monthStore = useMonthCatalogStore()
 const router = useRouter()
 const editMode = ref(false)
 const isLoading = ref(false)
@@ -19,8 +17,6 @@ const isLoading = ref(false)
 watchEffect(() => {
     if (!auth.authUser.isAuth) {
         router.push('/login')
-    } else if (monthStore.filteringMonth.length) {
-        router.push(monthStore.filteringMonth.at(-1)?.transcriptionInMonth + '')
     }
 })
 

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     pages: true,
     ssr: true,
     app: {
-        baseURL: '/',
+        baseURL: '/my-salary',
     },
     modules: ['@pinia/nuxt', '@element-plus/nuxt'],
     pinia: {
