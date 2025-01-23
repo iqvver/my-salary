@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import RegistrationForm from '~/components/forms/RegistrationForm.vue'
 import PageFormTemplate from '~/components/templates/PageFormTemplate.vue'
+
+definePageMeta({ documentDriven: { page: false } })
 </script>
 <template>
     <PageFormTemplate title="Регистрация" subtitle="Введите ваше имя и должность" symbol="&#64;">

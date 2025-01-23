@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import MobileDetect from 'mobile-detect'
 import { useMetaStore } from '~/store/meta'
+import 'element-plus/dist/index.css'
 
 const meta = useMetaStore()
 const headers = useRequestHeaders()

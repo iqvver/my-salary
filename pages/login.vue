@@ -3,7 +3,7 @@ import LoginForm from '~/components/forms/LoginForm.vue'
 import PageFormTemplate from '~/components/templates/PageFormTemplate.vue'
 import { useAuthStore } from '~/store/auth'
 
-definePageMeta({ layout: 'default' })
+definePageMeta({ layout: 'default', documentDriven: { page: false } })
 
 const authStore = useAuthStore()
 const isLoading = ref(true)
