@@ -1,1 +1,0 @@
-import{u as t}from"./D96lOxq_.js";import{k as r,r as a}from"./CDRMhqXG.js";const f=r({__name:"default",setup(o){return t({title:"Заводчанин З/П"}),(e,s)=>a(e.$slots,"default")}});export{f as default};
