@@ -2,7 +2,7 @@
 const router = useRouter()
 const route = useRoute()
 
-definePageMeta({ layout: 'table' })
+definePageMeta({ layout: 'table', documentDriven: { page: false } })
 
 //TODO: вот тут можно попробовать организовать роуты
 onMounted(() => {

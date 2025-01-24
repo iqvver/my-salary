@@ -1,10 +1,4 @@
 {
     // https://nuxt.com/docs/guide/concepts/typescript
-    "extends": "./.nuxt/tsconfig.json",
-    "includes": ["types/*.d.ts"],
-    "compilerOptions": {
-        "lib": ["dom"],
-        "allowSyntheticDefaultImports": true,
-        "verbatimModuleSyntax": false
-    }
+    "extends": "./.nuxt/tsconfig.json"
 }

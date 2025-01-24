@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ru from 'element-plus/es/locale/lang/ru'
 
+definePageMeta({ documentDriven: { page: false } })
 useHead({
     title: 'Заводчанин З/П',
 })

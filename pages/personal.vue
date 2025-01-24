@@ -6,7 +6,7 @@ import { User } from '@element-plus/icons-vue'
 import * as form from '~/types/login-form'
 import { options } from '~/types/types'
 
-definePageMeta({ layout: 'personal' })
+definePageMeta({ layout: 'personal', documentDriven: { page: false } })
 useHead({ title: 'Профиль' })
 
 const auth = useAuthStore()

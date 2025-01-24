@@ -1,5 +1,5 @@
 <script setup lang="ts">
-definePageMeta({ layout: 'table' })
+definePageMeta({ layout: 'table', documentDriven: { page: false } })
 </script>
 <template>
     <primitives-table />
