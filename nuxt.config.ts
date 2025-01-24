@@ -4,9 +4,6 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     pages: true,
     ssr: true,
-    generate: {
-        fallback: "404.html"
-      },
     app: {
         baseURL: '/my-salary',
     },
@@ -21,4 +18,8 @@ export default defineNuxtConfig({
         },
     ],
     css: ['assets/global.css'],
+    elementPlus: {
+        icon: 'ElIcon',
+        importStyle: 'scss',
+    },
 })
