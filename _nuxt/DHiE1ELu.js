@@ -1,0 +1,1 @@
+import{e as t,u as s,f as n,g as r}from"./C1-YZNuB.js";import{_ as u}from"./DlAUqK2U.js";const a=t({__name:"index",setup(_){const e=s(),o=n();return r(()=>{o.path==="/"&&e.push("/login")}),(c,p)=>null}}),i=u(a,[["__scopeId","data-v-218d3dec"]]);export{i as default};
