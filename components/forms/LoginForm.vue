@@ -33,6 +33,10 @@ const logIn = async (user: UserModel) => {
         width: 70%;
         margin: 0 auto;
         margin-bottom: 10px;
+
+        @media (max-width: 500px) {
+            width: 95%;
+        }
     }
 
     &__footer {

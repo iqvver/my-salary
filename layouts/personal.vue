@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-definePageMeta({documentDriven: { page: false } })
 useHead({ title: 'Профиль' })
 </script>
 

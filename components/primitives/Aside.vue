@@ -16,7 +16,8 @@ const menuAddIsOpen = ref(false)
 watchEffect(() => {
     monthStore.readMonth
     monthStore.filterMonth(authStore.authUser.id)
-    monthStore.selectedMonth = route.path.replace('/', '')
+    monthStore.selectedMonth = route.fullPath.replace('/months?', '')
+    console.log(route)
 })
 
 onMounted(() => {
@@ -26,7 +27,7 @@ onMounted(() => {
 })
 
 const selectMonth = (month: MonthModel) => {
-    router.push(`${month.transcriptionInMonth}`)
+    router.push(`months?${month.transcriptionInMonth}`)
     monthStore.selectedMonth = month.transcriptionInMonth!
     active.value = month.id?.toString()
 }

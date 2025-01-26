@@ -11,7 +11,7 @@ const router = useRouter()
 
 watchEffect(() => {
     if (authStore.authUser.isAuth) {
-        router.push('/personal')
+        router.push('/months?')
     }
     setTimeout(() => {
         authStore.readUser

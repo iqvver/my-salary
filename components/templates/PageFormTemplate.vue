@@ -30,7 +30,7 @@ const {} = defineProps<{
 
     &__wrap {
         margin-top: 70px;
-        padding: 24px;
+        padding: 10px;
         background-color: var(--color-white);
         width: 416px;
         max-height: 382px;
@@ -40,7 +40,7 @@ const {} = defineProps<{
         box-shadow: 0px 5px 10px 2px var(--color-shadow);
 
         @media (max-width: 500px) {
-            width: 90%;
+            width: 95%;
         }
 
         @media (max-width: 330px) {
