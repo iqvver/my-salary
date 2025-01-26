@@ -2,7 +2,7 @@
     "name": "nuxt-app",
     "private": false,
     "type": "module",
-    "homepage": "https://github.com/iqvver/my-salary",
+    "homepage": "https://iqvver.github.io/my-salary/",
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev --host",
