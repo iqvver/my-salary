@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     app: {
         baseURL: '/my-salary',
     },
+    publicPath: '',
     modules: ['@pinia/nuxt', '@element-plus/nuxt'],
     pinia: {
         autoImports: ['defineStore', ['defineStore', 'definePiniaStore']],
